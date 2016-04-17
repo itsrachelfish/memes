@@ -1,0 +1,9 @@
+{
+  "name": "youtube-junk",
+  "version": "0.0.0",
+  "description": "Miscelaneous things related to my youtube channel",
+  "author": "Rachel Fish <rachel@wetfish.net> (https://wetfish.net)",
+  "dependencies": {
+    "wetfish-basic": "~0.7.9-a"
+  }
+}
