@@ -1,1 +1,5 @@
 node_modules
+
+# Auto-generated files
+public/js/main.js
+public/css/main.css
