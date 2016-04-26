@@ -1,16 +1,10 @@
 var $ = require('wetfish-basic');
+var Webcam = require('./webcam');
 
 $(document).ready(function()
 {
-    setInterval(function()
+    $('.start-webcam').on('click', function()
     {
-        if($('body').hasClass('inverted'))
-        {
-            $('body').removeClass('inverted');
-        }
-        else
-        {
-            $('body').addClass('inverted');
-        }
-    }, 1000);
+        var webcam = new Webcam('.webcam');
+    });
 });
