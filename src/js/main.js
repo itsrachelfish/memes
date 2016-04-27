@@ -1,5 +1,10 @@
-var $ = require('wetfish-basic');
+// Load wetfish basic
+var $ = basic = require('wetfish-basic');
+require('dragondrop');
+
+// Load custom modules
 var Webcam = require('./webcam');
+
 
 $(document).ready(function()
 {
@@ -11,6 +16,11 @@ $(document).ready(function()
     $('.add-image').on('click', function()
     {
         var src = prompt("Enter an image URL");
-        $('.workspace').append('<img src="'+src+'">');
+        var image = document.createElement('img');
+
+        $(image).attr('src', src);
+        $(image).dragondrop();
+
+        $('.workspace').el[0].appendChild(image);
     });
 });
