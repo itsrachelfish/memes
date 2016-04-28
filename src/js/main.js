@@ -1,5 +1,5 @@
 // Load wetfish basic
-var $ = basic = require('wetfish-basic');
+var $ = require('wetfish-basic');
 require('dragondrop');
 
 // Load custom modules
