@@ -23,4 +23,18 @@ $(document).ready(function()
 
         $('.workspace').el[0].appendChild(image);
     });
+
+    $('body').on('mousedown', 'img', function(event)
+    {
+        // If right click was pressed
+        if(event.buttons == 2)
+        {
+            $(this).remove();
+        }
+    });
+
+    $('body').on('contextmenu', 'img', function(event)
+    {
+        event.preventDefault();
+    });
 });
