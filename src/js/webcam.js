@@ -19,7 +19,7 @@ Webcam.prototype.init = function()
         // We have to pass the scope around like this because getUserMedia has to be called as a child of navigator
         var scope = this;
 
-        this.api.call(navigator, {video: true}, function(stream) { scope.success(stream) }, function() { scope.error() });
+        this.api.call(navigator, {video: {width: 1920, height: 1080}}, function(stream) { scope.success(stream) }, function() { scope.error() });
     }
     else
     {
