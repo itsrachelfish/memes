@@ -54,6 +54,10 @@ $(document).ready(function()
             // If the user is holding control while deleting an image
             if(pressed.control)
             {
+                // Save the current size
+                var size = $(this).size();
+                $(this).style({'width': size.width + 'px', 'height': size.height + 'px'});
+
                 // Generate a random explosion
                 var random = helper.random(1, 2);
                 var img = 'img/explosion-' + random + '.gif';
