@@ -29,7 +29,16 @@ Webcam.prototype.init = function()
 
 Webcam.prototype.success = function(stream)
 {
+    this.stream = stream;
     this.element.attr('src', window.URL.createObjectURL(stream));
+}
+
+Webcam.prototype.stop = function()
+{
+    this.stream.getVideoTracks().forEach(function(track)
+    {
+        track.stop();
+    });
 }
 
 Webcam.prototype.error = function()

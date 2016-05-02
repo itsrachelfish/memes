@@ -9,9 +9,13 @@
     height: 100%;
 }
 
-.hidden {
+.preload {
     position: fixed;
     top: -100%;
     left: -100%;
     opacity: 0;
+}
+
+.hidden {
+    display: none !important;
 }

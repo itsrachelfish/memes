@@ -9,11 +9,26 @@ var helper = require('./helper');
 // A map of currently pressed keys
 var pressed = {};
 
+// Global webcam object
+var webcam;
+
 $(document).ready(function()
 {
     $('.start-webcam').on('click', function()
     {
-        var webcam = new Webcam('.webcam');
+        $(this).addClass('hidden');
+        $('.stop-webcam').removeClass('hidden');
+        
+        webcam = new Webcam('.webcam');
+    });
+
+    $('.stop-webcam').on('click', function()
+    {
+        $(this).addClass('hidden');
+        $('.start-webcam').removeClass('hidden');
+
+        webcam.stop();
+        $('.webcam').attr('src', '');
     });
 
     $('.add-image').on('click', function()
