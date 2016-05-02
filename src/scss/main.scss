@@ -13,3 +13,9 @@
     display: block;
 }
 
+.hidden {
+    position: fixed;
+    top: -100%;
+    left: -100%;
+    opacity: 0;
+}
