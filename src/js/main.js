@@ -46,7 +46,29 @@ $(document).ready(function()
         $('.workspace').el[0].appendChild(image);
     });
 
-    $('body').on('mousedown', 'img', function(event)
+    $('.add-sound').on('click', function()
+    {
+        var src = prompt("Enter a sound URL");
+        var sound = document.createElement('audio');
+
+        $(sound).attr('src', src).prop('autoplay', true).prop('controls', true);
+        $(sound).dragondrop();
+
+        $('.workspace').el[0].appendChild(sound);
+    });
+
+    $('.add-video').on('click', function()
+    {
+        var src = prompt("Enter a video URL");
+        var video = document.createElement('video');
+
+        $(video).attr('src', src).prop('autoplay', true).prop('controls', true);
+        $(video).dragondrop();
+
+        $('.workspace').el[0].appendChild(video);
+    });
+
+    $('body').on('mousedown', '.workspace *', function(event)
     {
         // If right click was pressed
         if(event.buttons == 2)
