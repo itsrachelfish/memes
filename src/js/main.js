@@ -9,8 +9,12 @@ var helper = require('./helper');
 // A map of currently pressed keys
 var pressed = {};
 
+// Global timeout cache
+var timeout = {};
+
 // Global webcam object
 var webcam;
+
 
 $(document).ready(function()
 {
@@ -56,7 +60,7 @@ $(document).ready(function()
                 var audio = 'audio/explosion.mp3';
 
                 // The explosion images are different lengths
-                var timeout = (random == 1) ? 750 : 1100;
+                var duration = (random == 1) ? 750 : 1100;
                 
                 // EXPLODE!
                 $(this).attr('src', img);
@@ -67,10 +71,15 @@ $(document).ready(function()
 
                 var image = this;
 
-                setTimeout(function()
+                if(timeout.explosion)
+                {
+                    clearTimeout(timeout.explosion);
+                }
+
+                timeout.explosion = setTimeout(function()
                 {
                     $(image).remove();
-                }, timeout)
+                }, duration)
             }
             else
             {
