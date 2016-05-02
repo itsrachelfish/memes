@@ -12,14 +12,32 @@
     </head>
     <body>
         <div class="workspace">
-            <p>Hello world!</p>
-
             <video autoplay="true" class="webcam"></video>
         </div>
 
-        <div class="buttons">
-            <button class="start-webcam">Preview Webcam</button>
+        <div class="menu">
+            <h1>Menu</h1>
+            
+            <button class="start-webcam">View Webcam</button>
+            <button class="stop-webcam">Stop Webcam</button>
             <button class="add-image">Add an Image</button>
+            <button class="add-sound">Add a Sound</button>
+            <button class="add-video">Add a Video</button>
+            <button class="transform">Free Transform</button>
+            <button class="edit-scripts">Edit Scripts</button>
+            <button class="edit-css">Edit CSS</button>
+            <button class="save">Save Page</button>
+            <button class="load">Load Page</button>
+        </div>
+
+        <div class="overlays">
+            <div class="overlay save">
+                Saving the page will save all elements, styles, and scripts currently in use. The page data will be saved to localstorage and can be loaded even after refreshing the page.
+            </div>
+
+            <div class="overlay load">
+                Select a saved page to load from.
+            </div>
         </div>
 
         <div class="hidden">

@@ -1,0 +1,33 @@
+body.overlay-open {
+    .overlays {
+        z-index: 100;
+        opacity: 1;
+    }
+}
+
+.overlays {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.overlay {
+    display: none;
+    background-color: #fff;
+    width: 50%;
+    height: 50%;
+    padding: 1em;
+
+    &.open {
+        display: block;
+    }
+}
