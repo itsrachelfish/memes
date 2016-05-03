@@ -76,33 +76,52 @@ $(document).ready(function()
             // If the user is holding control while deleting an image
             if(pressed.control)
             {
-                // Save the current size
+                // Save the size and position of the current element
                 var size = $(this).size();
-                $(this).style({'width': size.width + 'px', 'height': size.height + 'px'});
+                var position = $(this).position();
 
-                // Generate a random explosion
+                // Increase the size of the explosion a little bit
+                size.width += 50;
+                size.height += 50;
+                position.top -= 25;
+                position.left -= 25;
+
+                // Create an image to overlay the explosion over the current element
+                var image = document.createElement('img');
+                var options =
+                {
+                    'position': 'absolute',
+                    'top': position.top + 'px',
+                    'left': position.left + 'px',
+                    'width': size.width + 'px',
+                    'height': size.height + 'px',
+                };
+
+                $(image).style(options);
+                $(image).addClass('explosion');
+
+                // Generate a random explosion image
                 var random = helper.random(1, 2);
-                var img = 'img/explosion-' + random + '.gif';
-                var audio = 'audio/explosion.mp3';
+                $(image).attr('src', 'img/explosion-' + random + '.gif');
 
-                // The explosion images are different lengths
+                // The explosion gifs are different lengths
                 var duration = (random == 1) ? 750 : 1100;
                 
                 // EXPLODE!
-                $(this).attr('src', img);
+                $('.workspace').el[0].appendChild(image);
 
-                $('.explosion').el[0].pause();
-                $('.explosion').el[0].currentTime = 0;
-                $('.explosion').el[0].play();
+                $('audio.explosion').el[0].pause();
+                $('audio.explosion').el[0].currentTime = 0;
+                $('audio.explosion').el[0].play();
 
-                var image = this;
-
-                if(timeout.explosion)
+                // Remove the original element, if it's not an explosion
+                if(!$(this).hasClass('explosion'))
                 {
-                    clearTimeout(timeout.explosion);
+                    $(this).remove();
                 }
 
-                timeout.explosion = setTimeout(function()
+                // Remove the explosion after the animation is finished
+                setTimeout(function()
                 {
                     $(image).remove();
                 }, duration)
