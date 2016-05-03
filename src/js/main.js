@@ -143,6 +143,19 @@ $(document).ready(function()
     {
         var key = event.key.toLowerCase();
         pressed[key] = true;
+
+        // Toggle the menu when pressing escape
+        if(key == 'escape')
+        {
+            if($('.menu').hasClass('hidden'))
+            {
+                $('.menu').removeClass('hidden');
+            }
+            else
+            {
+                $('.menu').addClass('hidden');
+            }
+        }
     });
 
     $('body').on('keyup', function(event)
