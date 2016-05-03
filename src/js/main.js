@@ -18,6 +18,18 @@ var webcam;
 
 $(document).ready(function()
 {
+    $('.overlays').on('click', function()
+    {
+        $('body').removeClass('overlay-open');
+        $('.overlay').removeClass('open');
+    });
+    
+    $('.help').on('click', function()
+    {
+        $('body').addClass('overlay-open');
+        $('.overlay.help').addClass('open');
+    });
+    
     $('.start-webcam').on('click', function()
     {
         $(this).addClass('hidden');
