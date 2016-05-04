@@ -6,7 +6,7 @@ var overlay =
     init: function()
     {
         // Close all overlays when clicking outside of the overlay content
-        $('.overlays').on('click', function()
+        $('.overlay-wrap').on('click', function()
         {
             $('body').removeClass('overlay-open');
             $('.overlay').removeClass('open');

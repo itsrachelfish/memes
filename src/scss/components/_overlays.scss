@@ -1,11 +1,11 @@
 body.overlay-open {
-    .overlays {
+    .overlay-wrap {
         z-index: 100;
         opacity: 1;
     }
 }
 
-.overlays {
+.overlay-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
