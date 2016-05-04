@@ -10,7 +10,20 @@ var helper = require('./helper');
 var pressed = {};
 
 // Global timeout cache
-var timeout = {};
+var timeout =
+{
+    // The durations of the different explosion animations
+    explosion:
+    {
+        1: 1600,
+        2: 1200,
+        3: 860,
+        4: 1060,
+        5: 1600,
+        6: 900,
+        7: 1090
+    }
+};
 
 // Global webcam object
 var webcam;
@@ -118,11 +131,8 @@ $(document).ready(function()
                 $(image).addClass('explosion');
 
                 // Generate a random explosion image
-                var random = helper.random(1, 2);
+                var random = helper.random(1, 7);
                 $(image).attr('src', 'img/explosion-' + random + '.gif');
-
-                // The explosion gifs are different lengths
-                var duration = (random == 1) ? 750 : 1100;
                 
                 // EXPLODE!
                 $('.workspace').el[0].appendChild(image);
@@ -141,7 +151,7 @@ $(document).ready(function()
                 setTimeout(function()
                 {
                     $(image).remove();
-                }, duration)
+                }, timeout.explosion[random])
             }
             else
             {
