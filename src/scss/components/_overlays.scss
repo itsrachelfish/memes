@@ -26,6 +26,9 @@ body.overlay-open {
     width: 50%;
     height: 50%;
     padding: 1em;
+    border-radius: 8px;
+    box-shadow: 4px 4px 4px 0px rgba(50, 50, 50, 0.75);
+    overflow-x: auto;
 
     &.open {
         display: block;

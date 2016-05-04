@@ -23,6 +23,11 @@ $(document).ready(function()
         $('body').removeClass('overlay-open');
         $('.overlay').removeClass('open');
     });
+
+    $('.overlay').on('click', function(event)
+    {
+        event.stopPropagation();
+    });
     
     $('.help').on('click', function()
     {
@@ -159,14 +164,7 @@ $(document).ready(function()
         // Toggle the menu when pressing escape
         if(key == 'escape')
         {
-            if($('.menu').hasClass('hidden'))
-            {
-                $('.menu').removeClass('hidden');
-            }
-            else
-            {
-                $('.menu').addClass('hidden');
-            }
+            $('.menu').toggle('hidden');
         }
     });
 
