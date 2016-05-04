@@ -15,11 +15,14 @@ var menu =
     // Global menu event bindings when the page is loaded
     init: function()
     {
-        $('.help').on('click', function()
+        $('.menu button').on('click', function()
         {
-            overlay.open('.help');
+            if($(this).data('overlay'))
+            {
+                overlay.open($(this).data('overlay'));
+            }
         });
-        
+
         $('.start-webcam').on('click', function()
         {
             $(this).addClass('hidden');

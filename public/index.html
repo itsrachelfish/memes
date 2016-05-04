@@ -20,20 +20,20 @@
         <div class="menu">
             <h1>Menu</h1>
 
-            <button class="help">Help</button>
-            <button class="presets">Presets</button>
+            <button class="help" data-overlay=".help">Help</button>
+            <button class="presets" data-overlay=".presets">Presets</button>
             <button class="start-webcam">View Webcam</button>
             <button class="stop-webcam hidden">Stop Webcam</button>
-            <button class="add-image">Add an Image</button>
-            <button class="add-sound">Add a Sound</button>
-            <button class="add-video">Add a Video</button>
-            <button class="add-drawing">Add a Drawing</button>
-            <button class="add-text">Add Text</button>
-            <button class="edit-scripts">Edit Scripts</button>
-            <button class="edit-css">Edit CSS</button>
+            <button class="add-image" data-overlay=".image">Add an Image</button>
+            <button class="add-sound" data-overlay=".sound">Add a Sound</button>
+            <button class="add-video" data-overlay=".video">Add a Video</button>
+            <button class="add-drawing" data-overlay=".drawing">Add a Drawing</button>
+            <button class="add-text" data-overlay=".text">Add Text</button>
+            <button class="edit-scripts" data-overlay=".scripts">Edit Scripts</button>
+            <button class="edit-css" data-overlay=".css">Edit CSS</button>
             <button class="credits">Credits</button>
-            <button class="save">Save Page</button>
-            <button class="load">Load Page</button>
+            <button class="save" data-overlay=".save">Save Page</button>
+            <button class="load" data-overlay=".load">Load Page</button>
         </div>
 
         <!-- Overlays -->
@@ -65,8 +65,106 @@
                 </ul>
             </div>
 
+            <div class="overlay presets">
+                <button class="airhorn">Airhorn</button>
+                <button class="penis">Penis</button>
+                <button class="weed">Weed</button>
+                <button class="snoop">Snoop</button>
+                <button class="sparkles">Sparkles</button>
+                <button class="doritos">Doritos</button>
+                <button class="dew">Mountain Dew</button>
+                <button class="mlg">MLG</button>
+                <button class="gun">Gun</button>
+                <button class="wow">Wow</button>
+            </div>
+
+            <div class="overlay image">
+                Basic options
+                    Image URL
+                    Title
+                    License
+
+                Advanced options
+                    Class
+                    ID
+                    Style
+            </div>
+
+            <div class="overlay sound">
+                Basic options
+                    Sound URL
+                    Title
+                    License
+                    Autoplay
+                    Loop
+                    Volume
+
+                Advanced options
+                    Class
+                    ID
+                    Style
+            </div>
+
+            <div class="overlay video">
+                Basic options
+                    Image URL
+                    Title
+                    License
+                    Autoplay
+                    Loop
+                    Volume
+                    Controls
+
+                Advanced options
+                    Class
+                    ID
+                    Style
+            </div>
+
+            <div class="overlay drawing">
+                Basic options
+                    Brush size
+                    Brush color
+                    Erase
+
+                Advanced options
+                    Class
+                    ID
+                    Style
+            </div>
+
+            <div class="overlay text">
+                Basic options
+                    Text
+                    Size
+                    Color
+                    Border size
+                    Border color
+
+                Advanced options
+                    Class
+                    ID
+                    Style
+            </div>
+
+            <div class="overlay scripts">
+                <textarea></textarea>
+
+                <button class="save">Save</button>
+                <button class="revert">Revert</button>
+                <button class="cancel">Cancel</button>
+            </div>
+
+            <div class="overlay css">
+                <textarea></textarea>
+
+                <button class="save">Save</button>
+                <button class="revert">Revert</button>
+                <button class="cancel">Cancel</button>
+            </div>
+
             <div class="overlay save">
-                <p>Saving the page will save all elements, styles, and scripts currently in use. The page data will be saved to localstorage and can be loaded even after refreshing the page.</p>
+                <p>Saving the page will save all elements, styles, and scripts currently in use. The page data will be saved in your browser and can be loaded even after refreshing the page.</p>
             </div>
 
             <div class="overlay load">
