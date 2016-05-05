@@ -4,8 +4,8 @@
   "description": "Miscelaneous things related to my youtube channel",
   "author": "Rachel Fish <rachel@wetfish.net> (https://wetfish.net)",
   "dependencies": {
-    "dragondrop": "^0.6.1",
-    "wetfish-basic": "github:wetfish/basic"
+    "dragondrop": "^0.6.2",
+    "wetfish-basic": "^0.7.11"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
