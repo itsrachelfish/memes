@@ -19,3 +19,28 @@
 .hidden {
     display: none !important;
 }
+
+.workspace {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.hitmarker {
+    position: absolute;
+    pointer-events: none;
+    margin-top: -75px;
+    margin-left: -75px;
+}
+
+::-moz-selection{
+    background-color:Transparent;
+    color:#000;
+}
+
+::selection {
+    background-color:Transparent;
+    color:#000;
+}

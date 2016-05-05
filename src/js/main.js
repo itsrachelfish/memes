@@ -32,8 +32,49 @@ $(document).ready(function()
     menu.init();
     overlay.init();
 
-    $('body').on('mousedown', '.workspace *', function(event)
+    // Hitmarkers
+    $('body').on('mousedown', '.workspace', function(event)
     {
+        // If left click was pressed
+        if(event.buttons == 1)
+        {
+            // If the user is holding control while clicking
+            if(pressed.control)
+            {
+                var audio = $('.preload .hitmarker').clone();
+                $(audio).attr('preload', false);
+
+                var image = document.createElement('img');
+                $(image).style({'top': event.clientY + 'px', 'left': event.clientX + 'px'});
+                $(image).addClass('hitmarker');
+                $(image).attr('src', 'img/hitmarker.png');
+
+                $('.workspace').el[0].appendChild(audio);
+                $('.workspace').el[0].appendChild(image);
+
+                audio.pause();
+                audio.currentTime = 0;
+                audio.play();
+
+                // Remove the sound quickly so the browser queue doesn't get filled up
+                setTimeout(function()
+                {
+                    $(audio).remove();
+                }, 50)
+
+                // Remove the image a bit later
+                setTimeout(function()
+                {
+                    $(image).remove();
+                }, 500);
+
+            }
+        }
+    });
+
+    // Deleting things
+    $('body').on('mousedown', '.workspace *', function(event)
+    {        
         // If right click was pressed
         if(event.buttons == 2)
         {
