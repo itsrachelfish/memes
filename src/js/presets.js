@@ -38,8 +38,10 @@ var presets =
     {
         init: function()
         {
+            // When an airhorn is clicked
             $('body').on('mousedown', '.workspace .airhorn', function()
             {
+                // Play the airhorn sound
                 var audio = $('.preload .airhorn').clone();
                 $('.workspace').el[0].appendChild(audio);
 
@@ -47,11 +49,26 @@ var presets =
                 audio.currentTime = 0;
                 audio.play();
 
-                // Remove the sound after it's finished playing
+                // Make the airhorn jiggle
+                var airhorn = this;
+                $(airhorn).addClass('active');
+
+                // Always remove audio after it's finished playing
                 setTimeout(function()
                 {
                     $(audio).remove();
-                }, 1000)
+                }, 1750)
+
+                if(presets.airhorn.timeout)
+                {
+                    clearTimeout(presets.airhorn.timeout);
+                }
+
+                // Wait for last timeout before removing the active class
+                presets.airhorn.timeout = setTimeout(function()
+                {
+                    $(airhorn).removeClass('active');
+                }, 1750)
 
             });
         },
