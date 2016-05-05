@@ -38,7 +38,22 @@ var presets =
     {
         init: function()
         {
-            // todo
+            $('body').on('mousedown', '.workspace .airhorn', function()
+            {
+                var audio = $('.preload .airhorn').clone();
+                $('.workspace').el[0].appendChild(audio);
+
+                audio.pause();
+                audio.currentTime = 0;
+                audio.play();
+
+                // Remove the sound after it's finished playing
+                setTimeout(function()
+                {
+                    $(audio).remove();
+                }, 1000)
+
+            });
         },
 
         // Add an airhorn to the page
