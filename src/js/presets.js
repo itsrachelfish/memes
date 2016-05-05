@@ -36,6 +36,9 @@ var presets =
 
     airhorn:
     {
+        // Object for airhorn timeouts
+        timeout: {},
+
         init: function()
         {
             // When an airhorn is clicked
@@ -53,19 +56,23 @@ var presets =
                 var airhorn = this;
                 $(airhorn).addClass('active');
 
+                // Does this airhorn have a unique ID? If not, generate one
+                var id = $(airhorn).attr('id') || Math.random().toString(36).slice(2);
+
                 // Always remove audio after it's finished playing
                 setTimeout(function()
                 {
                     $(audio).remove();
                 }, 1750)
 
-                if(presets.airhorn.timeout)
+                // Clear any previously defined timeouts for this airhorn
+                if(presets.airhorn.timeout[id])
                 {
-                    clearTimeout(presets.airhorn.timeout);
+                    clearTimeout(presets.airhorn.timeout[id]);
                 }
 
-                // Wait for last timeout before removing the active class
-                presets.airhorn.timeout = setTimeout(function()
+                // Set a timeout to remove the active class based on the airhorn's unique ID
+                presets.airhorn.timeout[id] = setTimeout(function()
                 {
                     $(airhorn).removeClass('active');
                 }, 1750)
