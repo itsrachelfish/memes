@@ -7,6 +7,7 @@ var Webcam = require('./webcam');
 var helper = require('./helper');
 var menu = require('./menu');
 var overlay = require('./overlay');
+var presets = require('./presets');
 
 // A map of currently pressed keys
 var pressed = {};
@@ -31,9 +32,10 @@ $(document).ready(function()
 {
     menu.init();
     overlay.init();
+    presets.init();
 
     // Hitmarkers
-    $('body').on('mousedown', '.workspace', function(event)
+    $('body').on('mousedown', '.workspace, .workspace *', function(event)
     {
         // If left click was pressed
         if(event.buttons == 1)
@@ -67,7 +69,6 @@ $(document).ready(function()
                 {
                     $(image).remove();
                 }, 500);
-
             }
         }
     });
