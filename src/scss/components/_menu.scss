@@ -1,4 +1,6 @@
 .menu {
+    border-radius: 8px;
+    margin: 1em;
     border: 1px solid #000;
     background-color: rgba(255, 255, 255, 0.75);
     display: inline-block;
@@ -12,5 +14,6 @@
 
     button {
         display: block;
+        width: 100%;
     }
 }

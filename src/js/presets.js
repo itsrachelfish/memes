@@ -17,7 +17,7 @@ var presets =
     {
         $('.presets button').on('click', function()
         {
-            var preset = this.className;
+            var preset = $(this).data('preset');
 
             // If there is a handler object for this preset
             if(presets[preset] !== undefined)
