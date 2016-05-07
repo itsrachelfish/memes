@@ -30,6 +30,20 @@ var timeout =
     }
 };
 
+// Key codes for control characters
+var keys =
+{
+    8: 'backspace',
+    9: 'tab',
+    16: 'shift',
+    17: 'control',
+    18: 'alt',
+    20: 'caps',
+    27: 'escape',
+    46: 'delete',
+    91: 'system',
+};
+
 $(document).ready(function()
 {
     menu.init();
@@ -137,7 +151,7 @@ $(document).ready(function()
 
     $('body').on('keydown', function(event)
     {
-        var key = event.key.toLowerCase();
+        var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
         pressed[key] = true;
 
         // Toggle the menu when pressing escape
@@ -149,7 +163,7 @@ $(document).ready(function()
 
     $('body').on('keyup', function(event)
     {
-        var key = event.key.toLowerCase();
+        var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
         delete pressed[key];
     });
 });
