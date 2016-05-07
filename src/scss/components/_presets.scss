@@ -35,3 +35,21 @@
         animation: jiggle 1s infinite;
     }
 }
+
+.workspace .laughing-man {
+    position: absolute;
+    background-image: url('../img/laughing-man.gif');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 420px;
+    width: 460px;
+}
+
+.workspace .cum {
+    position: absolute;
+    background-image: url('../img/cum.gif');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 275px;
+    width: 450px;
+}
