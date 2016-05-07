@@ -51,8 +51,6 @@ var menu =
             $('.play').removeClass('hidden');
         });
 
-
-/*
         $('.add-image').on('click', function()
         {
             var src = prompt("Enter an image URL");
@@ -61,7 +59,7 @@ var menu =
 
             helper.addElement(image, {'centered': true});
         });
-*/
+
         $('.add-sound').on('click', function()
         {
             var src = prompt("Enter a sound URL");

@@ -28,22 +28,23 @@
             <hr>
 
             <i>(in dev)</i>
-            <button class="add-image" data-overlay=".image">Add an Image</button>
-            <button class="add-sound" data-overlay=".sound">Add a Sound</button>
-            <button class="add-video" data-overlay=".video">Add a Video</button>
+            <button class="nope add-image" data-overlay=".image">Add an Image</button>
+            <button class="nope add-sound" data-overlay=".sound">Add a Sound</button>
+            <button class="nope add-video" data-overlay=".video">Add a Video</button>
             <hr>
 
             <i>(soon ™)</i>
-            <button class="add-drawing" data-overlay=".drawing">Add a Drawing</button>
-            <button class="add-text" data-overlay=".text">Add Text</button>
-            <button class="edit-scripts" data-overlay=".scripts">Edit Scripts</button>
-            <button class="edit-css" data-overlay=".css">Edit CSS</button>
-            <button class="credits">Credits</button>
-            <button class="save" data-overlay=".save">Save Page</button>
-            <button class="load" data-overlay=".load">Load Page</button>
+            <button class="nope background" data-overlay=".drawing">Set Background</button>
+            <button class="nope edit-scripts" data-overlay=".scripts">Edit Scripts</button>
+            <button class="nope edit-css" data-overlay=".css">Edit CSS</button>
+            <button class="nope add-text" data-overlay=".text">Add Text</button>
+            <button class="nope add-drawing" data-overlay=".drawing">Add a Drawing</button>
+            <button class="nope credits">Credits</button>
+            <button class="nope save" data-overlay=".save">Save Page</button>
+            <button class="nope load" data-overlay=".load">Load Page</button>
 
-            <button class="play">Play &emsp; ►</button>
-            <button class="pause hidden">Pause &emsp; ❙❙</button>
+            <button class="nope play">Play &emsp; ►</button>
+            <button class="nope pause hidden">Pause &emsp; ❙❙</button>
         </div>
 
         <!-- Overlays -->
@@ -128,13 +129,49 @@
             </div>
 
             <div class="overlay sound">
-                Basic options
-                    Sound URL
-                    Title
-                    License
-                    Autoplay
-                    Loop
-                    Volume
+                <h1>Add a Sound</h1>
+
+                <form>
+                    <div class="row">
+                        <div class="twelve columns">
+                            <label for="sound-url">Audio URL</label>
+                            <input class="u-full-width" placeholder="https://classic.wetfish.net/audio/devansheaven.mp3" id="sound-url" type="text">
+                        </div>
+
+                        <div class="twelve columns">
+                            <label for="image-desc">Description</label>
+                            <input class="u-full-width" placeholder="Devan Oates' presidential advertisement" id="image-desc" type="text">
+                        </div>
+
+                        <div class="twelve columns">
+                            <label for="image-license">License</label>
+
+                            <select class="u-full-width" id="image-license">
+                                <option value="unknown">Unknown</option>
+                                <option value="own-work">Own Work</option>
+                                <option value="permission">Used With Permission</option>
+                                <option value="creative-commons">Creative Commons</option>
+                            </select>
+                        </div>
+
+                        <div class="twelve columns">
+                            <label for="sound-volume">Volume</label>
+                            <input id="sound-volume" type="range" data-option="volume" min="0" max="100">
+                        </div>
+
+                        <label>
+                            <input type="checkbox" data-option="autoplay"> <span class="label-body">Autoplay</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox" data-option="loop"> <span class="label-body">Loop</span>
+                        </label>
+                    </div>
+
+                    <hr>
+
+                    <input class="button-primary" value="Submit" type="submit">
+                </form>
             </div>
 
             <div class="overlay video">

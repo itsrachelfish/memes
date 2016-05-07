@@ -15,5 +15,9 @@
     button {
         display: block;
         width: 100%;
+
+        &.nope {
+            background-color: #fff;
+        }
     }
 }
