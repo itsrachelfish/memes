@@ -49,12 +49,7 @@ var presets =
             $('body').on('mousedown', '.workspace .airhorn', function()
             {
                 // Play the airhorn sound
-                var audio = $('.preload .airhorn').clone();
-                $('.workspace').el[0].appendChild(audio);
-
-                audio.pause();
-                audio.currentTime = 0;
-                audio.play();
+                pool.play('airhorn');
 
                 // Make the airhorn jiggle
                 var airhorn = this;
@@ -63,12 +58,6 @@ var presets =
                 // Does this airhorn have a unique ID? If not, generate one
                 var id = $(airhorn).attr('id') || Math.random().toString(36).slice(2);
                 $(airhorn).attr('id', id);
-
-                // Always remove audio after it's finished playing
-                setTimeout(function()
-                {
-                    $(audio).remove();
-                }, 1750)
 
                 // Clear any previously defined timeouts for this airhorn
                 if(presets.airhorn.timeout[id])
@@ -81,7 +70,6 @@ var presets =
                 {
                     $(airhorn).removeClass('active');
                 }, 1750)
-
             });
         },
 

@@ -40,7 +40,7 @@ $(document).ready(function()
     var hitmarker = $('.preload .hitmarker').el[0];    
     
     pool.init(explosion, 'explosion', 10);
-    pool.init(hitmarker, 'hitmarker', 5);
+    pool.init(hitmarker, 'hitmarker', 6);
 
     // Hitmarkers
     $('body').on('mousedown', '.workspace, .workspace *', function(event)
@@ -51,28 +51,15 @@ $(document).ready(function()
             // If the user is holding control while clicking
             if(pressed.control)
             {
-                var audio = $('.preload .hitmarker').clone();
-                $(audio).attr('preload', false);
-
                 var image = document.createElement('img');
                 $(image).style({'top': event.clientY + 'px', 'left': event.clientX + 'px'});
                 $(image).addClass('hitmarker');
                 $(image).attr('src', 'img/hitmarker.png');
-
-                $('.workspace').el[0].appendChild(audio);
                 $('.workspace').el[0].appendChild(image);
 
-                audio.pause();
-                audio.currentTime = 0;
-                audio.play();
+                pool.play('hitmarker');
 
-                // Remove the sound quickly so the browser queue doesn't get filled up
-                setTimeout(function()
-                {
-                    $(audio).remove();
-                }, 50)
-
-                // Remove the image a bit later
+                // Remove the image after a bit
                 setTimeout(function()
                 {
                     $(image).remove();
@@ -121,9 +108,7 @@ $(document).ready(function()
                 // EXPLODE!
                 $('.workspace').el[0].appendChild(image);
 
-                $('audio.explosion').el[0].pause();
-                $('audio.explosion').el[0].currentTime = 0;
-                $('audio.explosion').el[0].play();
+                pool.play('explosion');
 
                 // Remove the original element, if it's not an explosion
                 if(!$(this).hasClass('explosion'))
