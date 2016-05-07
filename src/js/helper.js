@@ -5,6 +5,9 @@ require('dragondrop');
 // Miscellaneous helper functions
 var helper =
 {
+    // Used to stack elements ontop of eachother as you move them
+    layers: 0,
+
     addElement: function(element, options)
     {
         $('.workspace').el[0].appendChild(element);
@@ -26,6 +29,12 @@ var helper =
         }
 
         $(element).dragondrop();
+
+        $(element).on('dragstart', function()
+        {
+            helper.layers++;
+            $(this).style({'z-index': helper.layers});
+        });
     },
 
     addImage: function(className)
