@@ -97,10 +97,34 @@
             <div class="overlay image">
                 <h1>Add an Image</h1>
 
-                
-                    Image URL
-                    Title
-                    License
+                <form>
+                    <div class="row">
+                        <div class="twelve columns">
+                            <label for="image-url">Image URL</label>
+                            <input class="u-full-width" placeholder="https://wetfish.net/img/under-construction-truck.gif" id="image-url" type="text">
+                        </div>
+
+                        <div class="twelve columns">
+                            <label for="image-desc">Description</label>
+                            <input class="u-full-width" placeholder="Under construction truck" id="image-desc" type="text">
+                        </div>
+
+                        <div class="twelve columns">
+                            <label for="image-license">License</label>
+
+                            <select class="u-full-width" id="image-license">
+                                <option value="unknown">Unknown</option>
+                                <option value="own-work">Own Work</option>
+                                <option value="permission">Used With Permission</option>
+                                <option value="creative-commons">Creative Commons</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <input class="button-primary" value="Submit" type="submit">
+                </form>
             </div>
 
             <div class="overlay sound">
