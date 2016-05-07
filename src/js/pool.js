@@ -23,7 +23,6 @@ var pool =
         
         $('.pool .' + name + ' audio').each(function()
         {
-            console.log(this);
             // Only play audio clips that aren't already playing
             // Also, only start one audio clip per loop by checking the started variable
             if(this.duration > 0 && this.paused && !started)
