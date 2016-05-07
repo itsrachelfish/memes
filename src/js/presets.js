@@ -4,6 +4,7 @@ require('dragondrop');
 
 // Load custom modules
 var overlay = require('./overlay');
+var pool = require('./pool');
 
 var presets =
 {
@@ -41,6 +42,9 @@ var presets =
 
         init: function()
         {
+            var airhorn = $('.preload .airhorn').el[0];
+            pool.init(airhorn, 'airhorn', 12);
+            
             // When an airhorn is clicked
             $('body').on('mousedown', '.workspace .airhorn', function()
             {
@@ -58,6 +62,7 @@ var presets =
 
                 // Does this airhorn have a unique ID? If not, generate one
                 var id = $(airhorn).attr('id') || Math.random().toString(36).slice(2);
+                $(airhorn).attr('id', id);
 
                 // Always remove audio after it's finished playing
                 setTimeout(function()

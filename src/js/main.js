@@ -8,6 +8,8 @@ var helper = require('./helper');
 var menu = require('./menu');
 var overlay = require('./overlay');
 var presets = require('./presets');
+var pool = require('./pool');
+
 
 // A map of currently pressed keys
 var pressed = {};
@@ -33,6 +35,12 @@ $(document).ready(function()
     menu.init();
     overlay.init();
     presets.init();
+
+    var explosion = $('.preload .explosion').el[0];
+    var hitmarker = $('.preload .hitmarker').el[0];    
+    
+    pool.init(explosion, 'explosion', 10);
+    pool.init(hitmarker, 'hitmarker', 5);
 
     // Hitmarkers
     $('body').on('mousedown', '.workspace, .workspace *', function(event)
