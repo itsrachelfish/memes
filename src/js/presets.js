@@ -1,10 +1,10 @@
 // Load wetfish basic
 var $ = require('wetfish-basic');
-require('dragondrop');
 
 // Load custom modules
 var overlay = require('./overlay');
 var pool = require('./pool');
+var helper = require('./helper');
 
 var presets =
 {
@@ -41,23 +41,6 @@ var presets =
             }
         });
     },
-
-    addImage: function(className)
-    {
-        var image = document.createElement('div');
-        $(image).addClass(className);
-        $('.workspace').el[0].appendChild(image);
-
-        // Now center it it the middle of the screen
-        var options =
-        {
-            'top': ($(window).height() / 2 - $(image).height() / 2) + 'px',
-            'left': ($(window).width() / 2 - $(image).width() / 2) + 'px',
-        };
-
-        $(image).style(options);
-        $(image).dragondrop();
-    }
 
     'airhorn':
     {
@@ -100,7 +83,7 @@ var presets =
         // Add an airhorn to the page
         create: function()
         {
-            presets.addImage('airhorn');
+            helper.addImage('airhorn');
         },
     },
 
@@ -108,7 +91,7 @@ var presets =
     {
         create: function()
         {
-            presets.addImage('laughing-man');
+            helper.addImage('laughing-man');
         }
     },
 
@@ -116,7 +99,7 @@ var presets =
     {
         create: function()
         {
-            presets.addImage('cum');
+            helper.addImage('cum');
         }
     }
 };

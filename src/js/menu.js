@@ -1,6 +1,5 @@
 // Load wetfish basic
 var $ = require('wetfish-basic');
-require('dragondrop');
 
 // Load custom modules
 var Webcam = require('./webcam');
@@ -44,33 +43,27 @@ var menu =
         {
             var src = prompt("Enter an image URL");
             var image = document.createElement('img');
-
             $(image).attr('src', src);
-            $(image).dragondrop();
 
-            $('.workspace').el[0].appendChild(image);
+            helper.addElement(image, {'centered': true});
         });
 
         $('.add-sound').on('click', function()
         {
             var src = prompt("Enter a sound URL");
             var sound = document.createElement('audio');
-
             $(sound).attr('src', src).prop('autoplay', true).prop('controls', true);
-            $(sound).dragondrop();
 
-            $('.workspace').el[0].appendChild(sound);
+            helper.addElement(sound, {'centered': true});
         });
 
         $('.add-video').on('click', function()
         {
             var src = prompt("Enter a video URL");
             var video = document.createElement('video');
-
             $(video).attr('src', src).prop('autoplay', true).prop('controls', true);
-            $(video).dragondrop();
 
-            $('.workspace').el[0].appendChild(video);
+            helper.addElement(video, {'centered': true});
         });
     }
 };

@@ -1,6 +1,5 @@
 // Load wetfish basic
 var $ = require('wetfish-basic');
-require('dragondrop');
 
 // Load custom modules
 var Webcam = require('./webcam');
