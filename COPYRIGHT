@@ -5,7 +5,7 @@ All other assets in this project are licensed as follows:
 MIT License
 ============
 
-public/src/fork-me-banner.png
+public/src/img/fork-me-banner.png
     - Source URL https://github.com/blog/273-github-ribbons
     - "If you're not satisfied with one of the colors here, I've provided the PSD files (MIT licensed). Feel free to modify as you please. The font being used is Collegiate."
 
@@ -17,6 +17,10 @@ public/src/audio/explosion.mp3
     - Creative Commons Attribution 3.0
     - Source URL http://soundbible.com/538-Blast.html
     - Recorded by Mike Koenig
+
+public/src/img/radheron.gif
+    - Source URL https://wiki.wetfish.net/redheron
+    - "<radheron> I like this one http://creativecommons.org/licenses/by-sa/4.0/"
 
 
 Permission Granted
