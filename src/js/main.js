@@ -52,8 +52,8 @@ $(document).ready(function()
     var explosion = $('.preload .explosion').el[0];
     var hitmarker = $('.preload .hitmarker').el[0];    
     
-    pool.init(explosion, 'explosion', 10);
-    pool.init(hitmarker, 'hitmarker', 6);
+    pool.init(explosion, 'explosion', 16);
+    pool.init(hitmarker, 'hitmarker', 7);
 
     // Hitmarkers
     $('body').on('mousedown', '.workspace, .workspace *', function(event)

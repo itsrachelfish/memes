@@ -14,6 +14,13 @@ var menu =
     // Global menu event bindings when the page is loaded
     init: function()
     {
+        // Make sure the menu is on top when you're mousing over it
+        $('.menu').on('mouseenter', function()
+        {
+            $(this).style({'z-index': helper.layers + 1});
+        });
+
+        // Check if menu buttons open an overlay
         $('.menu button').on('click', function()
         {
             if($(this).data('overlay'))
@@ -22,6 +29,7 @@ var menu =
             }
         });
 
+        // Webcam stuff
         $('.start-webcam').on('click', function()
         {
             $(this).addClass('hidden');
@@ -39,6 +47,7 @@ var menu =
             $('.webcam').attr('src', '');
         });
 
+        // Slideshow playback
         $('.play').on('click', function()
         {
             $(this).addClass('hidden');
