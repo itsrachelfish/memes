@@ -15,7 +15,7 @@ var menu =
     init: function()
     {
         // Make sure the menu is on top when you're mousing over it
-        $('.menu').on('mouseenter', function()
+        $('.menu').on('mouseenter touchstart', function()
         {
             $(this).style({'z-index': helper.layers + 1});
         });

@@ -56,10 +56,10 @@ $(document).ready(function()
     pool.init(hitmarker, 'hitmarker', 7);
 
     // Hitmarkers
-    $('body').on('mousedown', '.workspace, .workspace *', function(event)
+    $('body').on('mousedown touchstart', '.workspace, .workspace *', function(event)
     {
-        // If left click was pressed
-        if(event.buttons == 1)
+        // If left click was pressed, or this is a touch event
+        if(!event.buttons || event.buttons == 1)
         {
             // If the user is holding control while clicking
             if(pressed.control)
