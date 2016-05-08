@@ -42,6 +42,7 @@ var helper =
     {
         var image = document.createElement('img');
         $(image).attr('src', src);
+        $(image).style({'z-index': helper.layers + 1});
 
         helper.addElement(image, {'centered': true});
     },
