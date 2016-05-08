@@ -72,7 +72,7 @@
 
                 <ul>
                     <li>Escape - Open and close the menu</li>
-                    <li>More to come soon!</li>
+                    <li>More coming soon ™!</li>
                 </ul>
             </div>
 
@@ -84,9 +84,13 @@
                 <hr>
 
                 <i>(ayyy lmao)</i>
-                <button class="penis">Penis</button>
+                <button class="deal">Deal With It</button>
                 <button class="weed">Weed</button>
                 <button class="snoop">Snoop</button>
+                <hr>
+
+                <i>(soon ™)</i>
+                <button class="penis">Penis</button>
                 <button class="sparkles">Sparkles</button>
                 <button class="doritos">Doritos</button>
                 <button class="dew">Mountain Dew</button>
@@ -175,14 +179,55 @@
             </div>
 
             <div class="overlay video">
-                Basic options
-                    Image URL
-                    Title
-                    License
-                    Autoplay
-                    Loop
-                    Volume
-                    Controls
+                <h1>Add a Video</h1>
+
+                <i>Note! Only HTML5 video (.webm / .mp4 / .ogv) videos are currently supported. YouTube support coming soon ™</i> 
+
+                <form>
+                    <div class="row">
+                        <div class="twelve columns">
+                            <label for="video-url">Video URL</label>
+                            <input class="u-full-width" placeholder="https://www.oranges.net.nz/~oranges/webm/ayy_lmao.webm" id="video-url" type="text">
+                        </div>
+
+                        <div class="twelve columns">
+                            <label for="image-desc">Description</label>
+                            <input class="u-full-width" placeholder="Aliens with dance moves" id="image-desc" type="text">
+                        </div>
+
+                        <div class="twelve columns">
+                            <label for="image-license">License</label>
+
+                            <select class="u-full-width" id="image-license">
+                                <option value="unknown">Unknown</option>
+                                <option value="own-work">Own Work</option>
+                                <option value="permission">Used With Permission</option>
+                                <option value="creative-commons">Creative Commons</option>
+                            </select>
+                        </div>
+
+                        <div class="twelve columns">
+                            <label for="sound-volume">Volume</label>
+                            <input id="sound-volume" type="range" data-option="volume" min="0" max="100">
+                        </div>
+
+                        <label>
+                            <input type="checkbox" data-option="controls"> <span class="label-body">Display Controls</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox" data-option="autoplay"> <span class="label-body">Autoplay</span>
+                        </label>
+
+                        <label>
+                            <input type="checkbox" data-option="loop"> <span class="label-body">Loop</span>
+                        </label>
+                    </div>
+
+                    <hr>
+
+                    <input class="button-primary" value="Submit" type="submit">
+                </form>
             </div>
 
             <div class="overlay drawing">
