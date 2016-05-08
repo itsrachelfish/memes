@@ -110,6 +110,7 @@ var menu =
                 $(video).attr('volume', input.volume);
                 $(video).attr('autoplay', input.autoplay);
                 $(video).attr('loop', input.loop);
+                $(sound).attr('controls', input.controls);
 
                 $(video).data('desc', input.desc);
                 $(video).data('license', input.license);

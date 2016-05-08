@@ -2,6 +2,13 @@ All code for this project is released under the AGPL, a copy of this license can
 
 All other assets in this project are licensed as follows:
 
+MIT License
+============
+
+public/src/fork-me-banner.png
+    - Source URL https://github.com/blog/273-github-ribbons
+    - "If you're not satisfied with one of the colors here, I've provided the PSD files (MIT licensed). Feel free to modify as you please. The font being used is Collegiate."
+
 
 Creative Commons
 =================
@@ -55,7 +62,8 @@ public/src/img/mlp.png
 public/src/img/obey.png
     - Source URL http://haxisory.deviantart.com/art/Obey-468995591
 
-
+public/src/img/fork-me.png
+    - Source URL https://drawception.com/game/qmYBxLcYO6/fork-me-on-github/
 
 
 Unknown License
