@@ -51,6 +51,7 @@ var menu =
             $('.play').removeClass('hidden');
         });
 
+/*
         $('.add-image').on('click', function()
         {
             var src = prompt("Enter an image URL");
@@ -77,6 +78,7 @@ var menu =
 
             helper.addElement(video, {'centered': true});
         });
+        */
     }
 };
 
