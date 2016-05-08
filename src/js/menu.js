@@ -63,55 +63,22 @@ var menu =
         $('.image.overlay form').on('submit', function(event)
         {
             event.preventDefault();
-            var form = {};
+            var input = helper.serialize(this);
 
-            $(this).find('input, textarea, select').each(function()
+            if(helper.validate(input))
             {
-                if($(this).attr('type') != "submit")
-                {
-                    form[$(this).attr('name')] = $(this).value();
-                }
-            });
+                var image = helper.addImage(input.url);
+                $(image).data('desc', input.desc);
+                $(image).data('license', input.desc);
 
-            if(!form.url)
-            {
-                alert("ayyyyyyyy where's the url?");
-                return;
+                overlay.close('image');
             }
-
-            var image = helper.addImage(form.url);
-            $(image).data('desc', form.desc);
-            $(image).data('license', form.desc);
-
-            overlay.close('image');
         });
 
         $('.sound.overlay form').on('submit', function(event)
         {
             event.preventDefault();
 
-            console.log('cum in me');
-        });
-
-        $('.video.overlay form').on('submit', function(event)
-        {
-            event.preventDefault();
-
-            console.log('cum in me');
-        });
-
-/*
-        $('.add-image').on('click', function()
-        {
-            var src = prompt("Enter an image URL");
-            var image = document.createElement('img');
-            $(image).attr('src', src);
-
-            helper.addElement(image, {'centered': true});
-        });
-
-        $('.add-sound').on('click', function()
-        {
             var src = prompt("Enter a sound URL");
             var sound = document.createElement('audio');
             $(sound).attr('src', src).prop('autoplay', true).prop('controls', true);
@@ -119,15 +86,16 @@ var menu =
             helper.addElement(sound, {'centered': true});
         });
 
-        $('.add-video').on('click', function()
+        $('.video.overlay form').on('submit', function(event)
         {
+            event.preventDefault();
+
             var src = prompt("Enter a video URL");
             var video = document.createElement('video');
             $(video).attr('src', src).prop('autoplay', true).prop('controls', true);
 
             helper.addElement(video, {'centered': true});
         });
-        */
     }
 };
 

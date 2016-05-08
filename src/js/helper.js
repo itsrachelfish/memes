@@ -52,6 +52,32 @@ var helper =
     random: function(min, max)
     {
         return Math.round(Math.random() * (max - min)) + min;
+    },
+
+    serialize: function(form)
+    {
+        var input = {};
+
+        $(form).find('input, textarea, select').each(function()
+        {
+            if($(this).attr('type') != "submit")
+            {
+                input[$(this).attr('name')] = $(this).value();
+            }
+        });
+
+        return input;
+    },
+
+    validate: function(input)
+    {
+        if(!input.url)
+        {
+            alert("ayyyyyyyy where's the url?");
+            return false;
+        }
+
+        return true;
     }
 };
 
