@@ -42,6 +42,7 @@ var presets =
         });
     },
 
+    // Presets with custom events
     'airhorn':
     {
         // Object for airhorn timeouts
