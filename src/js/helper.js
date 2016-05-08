@@ -60,10 +60,27 @@ var helper =
 
         $(form).find('input, textarea, select').each(function()
         {
-            if($(this).attr('type') != "submit")
+            if($(this).attr('type') == "submit")
             {
-                input[$(this).attr('name')] = $(this).value();
+                return;
             }
+
+            if($(this).attr('type') == 'checkbox')
+            {
+                if($(this).prop('checked'))
+                {
+                    input[$(this).attr('name')] = true;
+                }
+                else
+                {
+                    input[$(this).attr('name')] = false;
+                }
+
+                return;
+            }
+
+            input[$(this).attr('name')] = $(this).value();
+
         });
 
         return input;

@@ -69,7 +69,7 @@ var menu =
             {
                 var image = helper.addImage(input.url);
                 $(image).data('desc', input.desc);
-                $(image).data('license', input.desc);
+                $(image).data('license', input.license);
 
                 overlay.close('image');
             }
@@ -78,23 +78,46 @@ var menu =
         $('.sound.overlay form').on('submit', function(event)
         {
             event.preventDefault();
+            var input = helper.serialize(this);
 
-            var src = prompt("Enter a sound URL");
-            var sound = document.createElement('audio');
-            $(sound).attr('src', src).prop('autoplay', true).prop('controls', true);
+            if(helper.validate(input))
+            {
+                var sound = document.createElement('audio');
+                $(sound).attr('src', input.url);
+                $(sound).attr('volume', input.volume);
+                $(sound).attr('autoplay', input.autoplay);
+                $(sound).attr('loop', input.loop);
+                $(sound).attr('controls', true);
 
-            helper.addElement(sound, {'centered': true});
+                $(sound).data('desc', input.desc);
+                $(sound).data('license', input.license);
+
+                helper.addElement(sound, {'centered': true});
+
+                overlay.close('sound');
+            }
         });
 
         $('.video.overlay form').on('submit', function(event)
         {
             event.preventDefault();
+            var input = helper.serialize(this);
 
-            var src = prompt("Enter a video URL");
-            var video = document.createElement('video');
-            $(video).attr('src', src).prop('autoplay', true).prop('controls', true);
+            if(helper.validate(input))
+            {
+                var video = document.createElement('audio');
+                $(video).attr('src', input.url);
+                $(video).attr('volume', input.volume);
+                $(video).attr('autoplay', input.autoplay);
+                $(video).attr('loop', input.loop);
 
-            helper.addElement(video, {'centered': true});
+                $(video).data('desc', input.desc);
+                $(video).data('license', input.license);
+
+                helper.addElement(video, {'centered': true});
+
+                overlay.close('video');
+            }
         });
     }
 };

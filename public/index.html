@@ -26,11 +26,8 @@
             <button class="button-primary start-webcam">Start Webcam</button>
             <button class="button-primary stop-webcam hidden">Stop Webcam</button>
             <button class="button-primary add-image" data-overlay=".image">Add an Image</button>
-            <hr>
-
-            <i>(in dev)</i>
-            <button class="nope add-sound" data-overlay=".sound">Add a Sound</button>
-            <button class="nope add-video" data-overlay=".video">Add a Video</button>
+            <button class="button-primary add-sound" data-overlay=".sound">Add a Sound</button>
+            <button class="button-primary add-video" data-overlay=".video">Add a Video</button>
             <hr>
 
             <i>(soon ™)</i>
@@ -183,9 +180,9 @@
                         </div>
 
                         <div class="twelve columns">
-                            <label for="image-license">License</label>
+                            <label for="sound-license">License</label>
 
-                            <select name="license" class="u-full-width" id="image-license">
+                            <select name="license" class="u-full-width" id="sound-license">
                                 <option value="unknown">Unknown</option>
                                 <option value="own-work">Own Work</option>
                                 <option value="permission">Used With Permission</option>
@@ -195,7 +192,7 @@
                         
                         <div class="twelve columns">
                             <label for="sound-volume">Volume</label>
-                            <input name="volume" id="sound-volume" type="range" min="0" max="100">
+                            <input name="volume" id="sound-volume" type="range" min="0" max="1" step="0.01">
                         </div>
 
                         <label>
@@ -243,7 +240,7 @@
 
                         <div class="twelve columns">
                             <label for="video-volume">Volume</label>
-                            <input name="volume" id="video-volume" type="range" min="0" max="100">
+                            <input name="volume" id="video-volume" type="range" min="0" max="1" step="0.01">
                         </div>
 
                         <label>
