@@ -28,13 +28,13 @@ var presets =
                     // Has it been?
                     if(presets.initialized[preset] === undefined)
                     {
-                        presets[preset].init();
+                        presets[preset].init(this);
                         presets.initialized[preset] = true;
                     }
                 }
 
                 // Now call the create method
-                presets[preset].create();
+                presets[preset].create(this);
 
                 // And close the presets menu
                 overlay.close('.presets');
@@ -42,8 +42,7 @@ var presets =
         });
     },
 
-    // Presets with custom events
-    'airhorn':
+    airhorn:
     {
         // Object for airhorn timeouts
         timeout: {},
@@ -52,7 +51,7 @@ var presets =
         {
             var airhorn = $('.preload .airhorn').el[0];
             pool.init(airhorn, 'airhorn', 12);
-            
+
             // When an airhorn is clicked
             $('body').on('mousedown', '.workspace .airhorn', function()
             {
@@ -84,25 +83,23 @@ var presets =
         // Add an airhorn to the page
         create: function()
         {
-            helper.addImage('airhorn');
+            var airhorn = document.createElement('div');
+            $(airhorn).addClass('airhorn');
+
+            helper.addElement(airhorn, {'centered': true});
         },
     },
 
-    'laughing-man':
+    image:
     {
-        create: function()
+        create: function(element)
         {
-            helper.addImage('laughing-man');
+            if($(element).data('src'))
+            {
+                helper.addImage('img/' + $(element).data('src'));
+            }
         }
     },
-
-    'cum':
-    {
-        create: function()
-        {
-            helper.addImage('cum');
-        }
-    }
 };
 
 module.exports = presets;

@@ -15,6 +15,7 @@ var helper =
         if(options.centered)
         {
             $(element).style({
+                'position': 'absolute',
                 'left': ($(window).width() / 2 - $(element).width() / 2) + 'px',
                 'top': ($(window).height() / 2 - $(element).height() / 2) + 'px',
             });
@@ -37,10 +38,10 @@ var helper =
         });
     },
 
-    addImage: function(className)
+    addImage: function(src)
     {
-        var image = document.createElement('div');
-        $(image).addClass(className);
+        var image = document.createElement('img');
+        $(image).attr('src', src);
 
         helper.addElement(image, {'centered': true});
     },
