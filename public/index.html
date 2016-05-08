@@ -25,10 +25,10 @@
             <button class="button-primary presets" data-overlay=".presets">Presets</button>
             <button class="button-primary start-webcam">Start Webcam</button>
             <button class="button-primary stop-webcam hidden">Stop Webcam</button>
+            <button class="button-primary add-image" data-overlay=".image">Add an Image</button>
             <hr>
 
             <i>(in dev)</i>
-            <button class="nope add-image" data-overlay=".image">Add an Image</button>
             <button class="nope add-sound" data-overlay=".sound">Add a Sound</button>
             <button class="nope add-video" data-overlay=".video">Add a Video</button>
             <hr>
@@ -139,18 +139,18 @@
                     <div class="row">
                         <div class="twelve columns">
                             <label for="image-url">Image URL</label>
-                            <input class="u-full-width" placeholder="https://wetfish.net/img/under-construction-truck.gif" id="image-url" type="text">
+                            <input name="url" class="u-full-width" placeholder="https://wetfish.net/img/under-construction-truck.gif" id="image-url" type="text">
                         </div>
 
                         <div class="twelve columns">
                             <label for="image-desc">Description</label>
-                            <input class="u-full-width" placeholder="Under construction truck" id="image-desc" type="text">
+                            <input name="desc" class="u-full-width" placeholder="Under construction truck" id="image-desc" type="text">
                         </div>
 
                         <div class="twelve columns">
                             <label for="image-license">License</label>
 
-                            <select class="u-full-width" id="image-license">
+                            <select name="license" class="u-full-width" id="image-license">
                                 <option value="unknown">Unknown</option>
                                 <option value="own-work">Own Work</option>
                                 <option value="permission">Used With Permission</option>
@@ -174,36 +174,36 @@
                     <div class="row">
                         <div class="twelve columns">
                             <label for="sound-url">Audio URL</label>
-                            <input class="u-full-width" placeholder="https://classic.wetfish.net/audio/devansheaven.mp3" id="sound-url" type="text">
+                            <input name="url" class="u-full-width" placeholder="https://classic.wetfish.net/audio/devansheaven.mp3" id="sound-url" type="text">
                         </div>
 
                         <div class="twelve columns">
                             <label for="sound-desc">Description</label>
-                            <input class="u-full-width" placeholder="Devan Oates' presidential advertisement" id="sound-desc" type="text">
+                            <input name="desc" class="u-full-width" placeholder="Devan Oates' presidential advertisement" id="sound-desc" type="text">
                         </div>
 
                         <div class="twelve columns">
                             <label for="image-license">License</label>
 
-                            <select class="u-full-width" id="image-license">
+                            <select name="license" class="u-full-width" id="image-license">
                                 <option value="unknown">Unknown</option>
                                 <option value="own-work">Own Work</option>
                                 <option value="permission">Used With Permission</option>
                                 <option value="creative-commons">Creative Commons</option>
                             </select>
                         </div>
-
+                        
                         <div class="twelve columns">
                             <label for="sound-volume">Volume</label>
-                            <input id="sound-volume" type="range" data-option="volume" min="0" max="100">
+                            <input name="volume" id="sound-volume" type="range" min="0" max="100">
                         </div>
 
                         <label>
-                            <input type="checkbox" data-option="autoplay"> <span class="label-body">Autoplay</span>
+                            <input name="autoplay" type="checkbox"> <span class="label-body">Autoplay</span>
                         </label>
 
                         <label>
-                            <input type="checkbox" data-option="loop"> <span class="label-body">Loop</span>
+                            <input name="loop" type="checkbox"> <span class="label-body">Loop</span>
                         </label>
                     </div>
 
@@ -222,18 +222,18 @@
                     <div class="row">
                         <div class="twelve columns">
                             <label for="video-url">Video URL</label>
-                            <input class="u-full-width" placeholder="https://www.oranges.net.nz/~oranges/webm/ayy_lmao.webm" id="video-url" type="text">
+                            <input name="url" class="u-full-width" placeholder="https://www.oranges.net.nz/~oranges/webm/ayy_lmao.webm" id="video-url" type="text">
                         </div>
 
                         <div class="twelve columns">
                             <label for="video-desc">Description</label>
-                            <input class="u-full-width" placeholder="Aliens with dance moves" id="video-desc" type="text">
+                            <input name="desc" class="u-full-width" placeholder="Aliens with dance moves" id="video-desc" type="text">
                         </div>
 
                         <div class="twelve columns">
-                            <label for="image-license">License</label>
+                            <label for="video-license">License</label>
 
-                            <select class="u-full-width" id="image-license">
+                            <select name="license" class="u-full-width" id="video-license">
                                 <option value="unknown">Unknown</option>
                                 <option value="own-work">Own Work</option>
                                 <option value="permission">Used With Permission</option>
@@ -242,20 +242,20 @@
                         </div>
 
                         <div class="twelve columns">
-                            <label for="sound-volume">Volume</label>
-                            <input id="sound-volume" type="range" data-option="volume" min="0" max="100">
+                            <label for="video-volume">Volume</label>
+                            <input name="volume" id="video-volume" type="range" min="0" max="100">
                         </div>
 
                         <label>
-                            <input type="checkbox" data-option="controls"> <span class="label-body">Display Controls</span>
+                            <input name="controls" type="checkbox"> <span class="label-body">Display Controls</span>
                         </label>
 
                         <label>
-                            <input type="checkbox" data-option="autoplay"> <span class="label-body">Autoplay</span>
+                            <input name="autoplay" type="checkbox"> <span class="label-body">Autoplay</span>
                         </label>
 
                         <label>
-                            <input type="checkbox" data-option="loop"> <span class="label-body">Loop</span>
+                            <input name="loop" type="checkbox"> <span class="label-body">Loop</span>
                         </label>
                     </div>
 

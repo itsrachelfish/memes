@@ -45,6 +45,8 @@ var helper =
         $(image).style({'z-index': helper.layers + 1});
 
         helper.addElement(image, {'centered': true});
+
+        return image;
     },
 
     random: function(min, max)

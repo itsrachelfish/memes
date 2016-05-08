@@ -60,6 +60,46 @@ var menu =
             $('.play').removeClass('hidden');
         });
 
+        $('.image.overlay form').on('submit', function(event)
+        {
+            event.preventDefault();
+            var form = {};
+
+            $(this).find('input, textarea, select').each(function()
+            {
+                if($(this).attr('type') != "submit")
+                {
+                    form[$(this).attr('name')] = $(this).value();
+                }
+            });
+
+            if(!form.url)
+            {
+                alert("ayyyyyyyy where's the url?");
+                return;
+            }
+
+            var image = helper.addImage(form.url);
+            $(image).data('desc', form.desc);
+            $(image).data('license', form.desc);
+
+            overlay.close('image');
+        });
+
+        $('.sound.overlay form').on('submit', function(event)
+        {
+            event.preventDefault();
+
+            console.log('cum in me');
+        });
+
+        $('.video.overlay form').on('submit', function(event)
+        {
+            event.preventDefault();
+
+            console.log('cum in me');
+        });
+
 /*
         $('.add-image').on('click', function()
         {
