@@ -71,7 +71,7 @@ var menu =
                 $(image).data('desc', input.desc);
                 $(image).data('license', input.license);
 
-                overlay.close('image');
+                overlay.close('.image');
             }
         });
 
@@ -94,7 +94,7 @@ var menu =
 
                 helper.addElement(sound, {'centered': true});
 
-                overlay.close('sound');
+                overlay.close('.sound');
             }
         });
 
@@ -105,19 +105,19 @@ var menu =
 
             if(helper.validate(input))
             {
-                var video = document.createElement('audio');
+                var video = document.createElement('video');
                 $(video).attr('src', input.url);
                 $(video).attr('volume', input.volume);
                 $(video).attr('autoplay', input.autoplay);
                 $(video).attr('loop', input.loop);
-                $(sound).attr('controls', input.controls);
+                $(video).attr('controls', input.controls);
 
                 $(video).data('desc', input.desc);
                 $(video).data('license', input.license);
 
                 helper.addElement(video, {'centered': true});
 
-                overlay.close('video');
+                overlay.close('.video');
             }
         });
     }
