@@ -42,15 +42,17 @@
             <hr>
 
             <i>(soon ™)</i>
+            <button class="nope tools" data-overlay=".tools">Tools</button>
+            <button class="nope file">File</button>
             <button class="nope background" data-overlay=".drawing">Set Background</button>
             <button class="nope edit-scripts" data-overlay=".scripts">Edit Scripts</button>
             <button class="nope edit-css" data-overlay=".css">Edit CSS</button>
             <button class="nope add-text" data-overlay=".text">Add Text</button>
             <button class="nope add-drawing" data-overlay=".drawing">Add a Drawing</button>
             <button class="nope credits">Credits</button>
-            <button class="nope save" data-overlay=".save">Save Page</button>
-            <button class="nope load" data-overlay=".load">Load Page</button>
-
+            <button class="nope prev-slide">Previous Slide</button>
+            <button class="nope next-slide">Next Slide</button>
+            <button class="nope slides">View All Slides</button>
             <button class="nope play">Play &emsp; ►</button>
             <button class="nope pause hidden">Pause &emsp; ❙❙</button>
         </div>
@@ -85,11 +87,32 @@
             </div>
 
             <div class="overlay presets">
+                <label>Interactive</label>
                 <button class="button-primary" data-preset="airhorn">Airhorn</button>
+
+                <br>(interactivity coming soon ™)<br>
+                <button class="button-primary" data-preset="image" data-src="deal-with-it.png">Deal With It</button>
+                <button class="button-primary" data-preset="image" data-src="joint-2.png">Left Joint</button>
+                <button class="button-primary" data-preset="image" data-src="joint.png">Right Joint</button>
+                <button class="button-primary" data-preset="image" data-src="mlady.gif">M'lady</button>
+                <button class="button-primary" data-preset="image" data-src="salamander-man.gif">Salamander Man</button>
+                <button class="button-primary" data-preset="image" data-src="sanic.gif">Sanic</button>
+                <button class="button-primary" data-preset="image" data-src="wow.gif">Wow</button>
+                <button class="button-primary" data-preset="image" data-src="weed-wallpaper.gif">Weed Wallpaper</button>
+
+                <br>(doesn't even work yet)<br>
+                <button class="nope">Duck</button>
+                <button class="nope">Applause</button>
+                <button class="nope">Cheering</button>
+                <button class="nope">Boo</button>
+                <button class="nope">America</button>
+                <button class="nope">Fireworks</button>
+                <button class="nope">The X-Files</button>
+
+                <label>Images</label>
                 <button class="button-primary" data-preset="image" data-src="laughing-man.gif">Laughing Man</button>
                 <button class="button-primary" data-preset="image" data-src="cum.gif">Cum</button>
                 <button class="button-primary" data-preset="image" data-src="anime.png">Anime</button>
-                <button class="button-primary" data-preset="image" data-src="deal-with-it.png">Deal With It</button>
                 <button class="button-primary" data-preset="image" data-src="doge.gif">Doge</button>
                 <button class="button-primary" data-preset="image" data-src="dogecoin.gif">Dogecoin</button>
                 <button class="button-primary" data-preset="image" data-src="exploding-illuminati.gif">Exploding Illuminati</button>
@@ -99,10 +122,7 @@
                 <button class="button-primary" data-preset="image" data-src="gun.gif">Gun Gif</button>
                 <button class="button-primary" data-preset="image" data-src="gun.png">Gun</button>
                 <button class="button-primary" data-preset="image" data-src="illuminati.png">Illuminati</button>
-                <button class="button-primary" data-preset="image" data-src="joint.png">Joint</button>
-                <button class="button-primary" data-preset="image" data-src="joint-2.png">Join 2</button>
                 <button class="button-primary" data-preset="image" data-src="lenny.gif">Lenny</button>
-                <button class="button-primary" data-preset="image" data-src="mlady.gif">M'lady</button>
                 <button class="button-primary" data-preset="image" data-src="mlg.gif">MLG</button>
                 <button class="button-primary" data-preset="image" data-src="mlg-3d.gif">MLG in 3D</button>
                 <button class="button-primary" data-preset="image" data-src="mlp.png">MLP</button>
@@ -114,8 +134,6 @@
                 <button class="button-primary" data-preset="image" data-src="regular-show.gif">Regular Show</button>
                 <button class="button-primary" data-preset="image" data-src="rickroll.gif">Rickroll</button>
                 <button class="button-primary" data-preset="image" data-src="rifle.gif">Rifle</button>
-                <button class="button-primary" data-preset="image" data-src="salamander-man.gif">Salamander Man</button>
-                <button class="button-primary" data-preset="image" data-src="sanic.gif">Sanic</button>
                 <button class="button-primary" data-preset="image" data-src="shrek.gif">Shrek</button>
                 <button class="button-primary" data-preset="image" data-src="skeleton.gif">Skeleton</button>
                 <button class="button-primary" data-preset="image" data-src="skeletons.gif">Skeletons</button>
@@ -124,7 +142,6 @@
                 <button class="button-primary" data-preset="image" data-src="time-of-death.gif">Time of Death</button>
                 <button class="button-primary" data-preset="image" data-src="top-hat.png">Top Hat</button>
                 <button class="button-primary" data-preset="image" data-src="undertale.png">Undertale</button>
-                <button class="button-primary" data-preset="image" data-src="wow.gif">Wow Animated</button>
                 <button class="button-primary" data-preset="image" data-src="wow.png">Wow</button>
                 <button class="button-primary" data-preset="image" data-src="nug.png">Nug</button>
                 <button class="button-primary" data-preset="image" data-src="nugs.png">Nugs</button>
@@ -133,10 +150,41 @@
                 <button class="button-primary" data-preset="image" data-src="8bit-doritos.png">8bit Doritos</button>
                 <button class="button-primary" data-preset="image" data-src="dorito.gif">Dorito</button>
                 <button class="button-primary" data-preset="image" data-src="doritos-logo.png">Doritos Logo</button>
-                <button class="button-primary" data-preset="image" data-src="weed-wallpaper.gif">Weed Wallpaper</button>
                 <button class="button-primary" data-preset="image" data-src="8bit-weed.gif">8bit Weed</button>
                 <button class="button-primary" data-preset="image" data-src="sparkles.gif">Sparkles</button>
                 <button class="button-primary" data-preset="image" data-src="radheron.gif">RadHeron</button>
+
+                <label>Sounds</label>
+                <button class="nope">Wombo Combo</button>
+                <button class="nope">Leeroy Jenkins</button>
+
+                <label>Videos</label>
+                <button class="nope">Spooky</button>
+                <button class="nope">Rap Battle</button>
+                <button class="nope">Yee</button>
+
+                <label>Overlays</label>
+                <button class="nope">Wasted</button>
+                <button class="nope">Round Winning Kill</button>
+                <button class="nope">Shit Everywhere</button>
+            </div>
+
+            <div class="overlay tools">
+                <button class="nope">Select</button>
+                <button class="nope">Transform</button>
+                <button class="nope">Flip</button>
+                <button class="nope">Copy</button>
+                <button class="nope">Rotate 90° Clockwise ↷</button>
+                <button class="nope">Rotate 90° Counterclockwise ↶</button>
+                <button class="nope">Grayscale</button>
+                <button class="nope">Invert</button>
+                <button class="nope">Opacity</button>
+                <button class="nope">Blur</button>
+                <button class="nope">Filter</button>
+                <button class="nope">Crop</button>
+                <button class="nope">Trippy</button>
+                <button class="nope">Jiggle</button>
+                <button class="nope">Spin</button>
             </div>
 
             <div class="overlay image">
