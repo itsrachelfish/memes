@@ -65,7 +65,7 @@ $(document).ready(function()
             if(timeout.click)
             {
                 // If this is an audio or video element
-                if(this.nodeName && this.nodeName.toLowerCase() == 'audio' || this.nodeName.toLowercase() == 'video')
+                if(this.nodeName && this.nodeName.toLowerCase() == 'audio' || this.nodeName.toLowerCase() == 'video')
                 {
                     // Toggle playing state
                     if(this.paused)
@@ -78,15 +78,15 @@ $(document).ready(function()
                     }
                 }
 
-                timeout.click = false;
+                timeout.click = null;
             }
             else
             {
                 // Create a timeout to determine if the user is double clicking
                 timeout.click = setTimeout(function()
                 {
-                    timeout.click = false;
-                }, 150);
+                    timeout.click = null;
+                }, 250);
             }
 
             // If the user is holding control while clicking
