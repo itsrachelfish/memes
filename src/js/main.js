@@ -8,7 +8,7 @@ var menu = require('./menu');
 var overlay = require('./overlay');
 var presets = require('./presets');
 var pool = require('./pool');
-
+var templates = require('./templates');
 
 // A map of currently pressed keys
 var pressed = {};
@@ -45,152 +45,155 @@ var keys =
 
 $(document).ready(function()
 {
-    menu.init();
-    overlay.init();
-    presets.init();
-
-    var explosion = $('.preload .explosion').el[0];
-    var hitmarker = $('.preload .hitmarker').el[0];    
-    
-    pool.init(explosion, 'explosion', 16);
-    pool.init(hitmarker, 'hitmarker', 7);
-
-    // Hitmarkers
-    $('body').on('mousedown touchstart', '.workspace, .workspace *', function(event)
+    templates.ready(function()
     {
-        // If left click was pressed, or this is a touch event
-        if(!event.buttons || event.buttons == 1)
+        menu.init();
+        overlay.init();
+        presets.init();
+
+        var explosion = $('.preload .explosion').el[0];
+        var hitmarker = $('.preload .hitmarker').el[0];    
+        
+        pool.init(explosion, 'explosion', 16);
+        pool.init(hitmarker, 'hitmarker', 7);
+
+        // Hitmarkers
+        $('body').on('mousedown touchstart', '.workspace, .workspace *', function(event)
         {
-            // If the click timeout is defined, this must be a double click!
-            if(timeout.click)
+            // If left click was pressed, or this is a touch event
+            if(!event.buttons || event.buttons == 1)
             {
-                // If this is an audio or video element
-                if(this.nodeName && this.nodeName.toLowerCase() == 'audio' || this.nodeName.toLowerCase() == 'video')
+                // If the click timeout is defined, this must be a double click!
+                if(timeout.click)
                 {
-                    // Toggle playing state
-                    if(this.paused)
+                    // If this is an audio or video element
+                    if(this.nodeName && this.nodeName.toLowerCase() == 'audio' || this.nodeName.toLowerCase() == 'video')
                     {
-                        this.play();
+                        // Toggle playing state
+                        if(this.paused)
+                        {
+                            this.play();
+                        }
+                        else
+                        {
+                            this.pause();
+                        }
                     }
-                    else
+
+                    timeout.click = null;
+                }
+                else
+                {
+                    // Create a timeout to determine if the user is double clicking
+                    timeout.click = setTimeout(function()
                     {
-                        this.pause();
-                    }
+                        timeout.click = null;
+                    }, 250);
                 }
 
-                timeout.click = null;
+                // If the user is holding control while clicking
+                if(pressed.control)
+                {
+                    var image = document.createElement('img');
+                    $(image).style({'top': event.clientY + 'px', 'left': event.clientX + 'px'});
+                    $(image).addClass('hitmarker');
+                    $(image).attr('src', 'img/hitmarker.png');
+                    $('.workspace').el[0].appendChild(image);
+
+                    pool.play('hitmarker');
+
+                    // Remove the image after a bit
+                    setTimeout(function()
+                    {
+                        $(image).remove();
+                    }, 500);
+                }
             }
-            else
+        });
+
+        // Deleting things
+        $('body').on('mousedown', '.workspace *', function(event)
+        {        
+            // If right click was pressed
+            if(event.buttons == 2)
             {
-                // Create a timeout to determine if the user is double clicking
-                timeout.click = setTimeout(function()
+                // If the user is holding control while deleting an image
+                if(pressed.control)
                 {
-                    timeout.click = null;
-                }, 250);
-            }
+                    // Save the size and position of the current element
+                    var size = $(this).size();
+                    var position = $(this).position();
 
-            // If the user is holding control while clicking
-            if(pressed.control)
-            {
-                var image = document.createElement('img');
-                $(image).style({'top': event.clientY + 'px', 'left': event.clientX + 'px'});
-                $(image).addClass('hitmarker');
-                $(image).attr('src', 'img/hitmarker.png');
-                $('.workspace').el[0].appendChild(image);
+                    // Increase the size of the explosion a little bit
+                    size.width += 50;
+                    size.height += 50;
+                    position.top -= 25;
+                    position.left -= 25;
 
-                pool.play('hitmarker');
+                    // Create an image to overlay the explosion over the current element
+                    var image = document.createElement('img');
+                    var options =
+                    {
+                        'position': 'absolute',
+                        'top': position.top + 'px',
+                        'left': position.left + 'px',
+                        'width': size.width + 'px',
+                        'height': size.height + 'px',
+                    };
 
-                // Remove the image after a bit
-                setTimeout(function()
+                    $(image).style(options);
+                    $(image).addClass('explosion');
+
+                    // Generate a random explosion image
+                    var random = helper.random(1, 7);
+                    $(image).attr('src', 'img/explosion-' + random + '.gif');
+                    
+                    // EXPLODE!
+                    $('.workspace').el[0].appendChild(image);
+
+                    pool.play('explosion');
+
+                    // Remove the original element, if it's not an explosion
+                    if(!$(this).hasClass('explosion'))
+                    {
+                        $(this).remove();
+                    }
+
+                    // Remove the explosion after the animation is finished
+                    setTimeout(function()
+                    {
+                        $(image).remove();
+                    }, timeout.explosion[random])
+                }
+                else
                 {
-                    $(image).remove();
-                }, 500);
-            }
-        }
-    });
-
-    // Deleting things
-    $('body').on('mousedown', '.workspace *', function(event)
-    {        
-        // If right click was pressed
-        if(event.buttons == 2)
-        {
-            // If the user is holding control while deleting an image
-            if(pressed.control)
-            {
-                // Save the size and position of the current element
-                var size = $(this).size();
-                var position = $(this).position();
-
-                // Increase the size of the explosion a little bit
-                size.width += 50;
-                size.height += 50;
-                position.top -= 25;
-                position.left -= 25;
-
-                // Create an image to overlay the explosion over the current element
-                var image = document.createElement('img');
-                var options =
-                {
-                    'position': 'absolute',
-                    'top': position.top + 'px',
-                    'left': position.left + 'px',
-                    'width': size.width + 'px',
-                    'height': size.height + 'px',
-                };
-
-                $(image).style(options);
-                $(image).addClass('explosion');
-
-                // Generate a random explosion image
-                var random = helper.random(1, 7);
-                $(image).attr('src', 'img/explosion-' + random + '.gif');
-                
-                // EXPLODE!
-                $('.workspace').el[0].appendChild(image);
-
-                pool.play('explosion');
-
-                // Remove the original element, if it's not an explosion
-                if(!$(this).hasClass('explosion'))
-                {
+                    // Otherwise just remove it
                     $(this).remove();
                 }
-
-                // Remove the explosion after the animation is finished
-                setTimeout(function()
-                {
-                    $(image).remove();
-                }, timeout.explosion[random])
             }
-            else
-            {
-                // Otherwise just remove it
-                $(this).remove();
-            }
-        }
-    });
+        });
 
-    $('body').on('contextmenu', function(event)
-    {
-        event.preventDefault();
-    });
-
-    $('body').on('keydown', function(event)
-    {
-        var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
-        pressed[key] = true;
-
-        // Toggle the menu when pressing escape
-        if(key == 'escape')
+        $('body').on('contextmenu', function(event)
         {
-            $('.menu').toggle('hidden');
-        }
-    });
+            event.preventDefault();
+        });
 
-    $('body').on('keyup', function(event)
-    {
-        var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
-        delete pressed[key];
+        $('body').on('keydown', function(event)
+        {
+            var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
+            pressed[key] = true;
+
+            // Toggle the menu when pressing escape
+            if(key == 'escape')
+            {
+                $('.menu').toggle('hidden');
+            }
+        });
+
+        $('body').on('keyup', function(event)
+        {
+            var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
+            delete pressed[key];
+        });
     });
 });
