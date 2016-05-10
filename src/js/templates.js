@@ -1,5 +1,5 @@
 var $ = require('wetfish-basic');
-require('load');
+require('./load');
 
 // Basic templating engine
 var templates =
