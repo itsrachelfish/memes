@@ -80,6 +80,31 @@ var helper =
         return sound;
     },
 
+    addVideo: function(src, options)
+    {
+        var defaults =
+        {
+            volume: 1,
+            autoplay: true,
+            loop: true,
+            controls: true
+        };
+
+        // Deep combine user given options with defaults
+        options = extend(true, defaults, options);
+
+        var video = document.createElement('video');
+        $(video).attr('src', src);
+        $(video).attr('volume', options.volume);
+        $(video).attr('autoplay', options.autoplay);
+        $(video).attr('loop', options.loop);
+        $(video).attr('controls', options.controls);
+
+        helper.addElement(video, {'centered': true});
+
+        return video;
+    },
+
     random: function(min, max)
     {
         return Math.round(Math.random() * (max - min)) + min;

@@ -111,6 +111,17 @@ var presets =
             }
         }
     },
+
+    video:
+    {
+        create: function(element)
+        {
+            if($(element).data('src'))
+            {
+                helper.addVideo('video/' + $(element).data('src'));
+            }
+        }
+    },
 };
 
 module.exports = presets;
