@@ -100,6 +100,17 @@ var presets =
             }
         }
     },
+
+    sound:
+    {
+        create: function(element)
+        {
+            if($(element).data('src'))
+            {
+                helper.addSound('audio/' + $(element).data('src'));
+            }
+        }
+    },
 };
 
 module.exports = presets;

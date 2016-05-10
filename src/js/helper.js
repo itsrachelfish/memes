@@ -2,6 +2,9 @@
 var $ = require('wetfish-basic');
 require('dragondrop');
 
+// Load other stuff
+var extend = require('extend');
+
 // Miscellaneous helper functions
 var helper =
 {
@@ -11,6 +14,9 @@ var helper =
     addElement: function(element, options)
     {
         $('.workspace').el[0].appendChild(element);
+
+        // Put new element on the top layer
+        $(element).style({'z-index': helper.layers + 1});
 
         if(options.centered)
         {
@@ -33,6 +39,7 @@ var helper =
 
         $(element).on('dragstart', function()
         {
+            // Ensure the element being dragged is always on top
             helper.layers++;
             $(this).style({'z-index': helper.layers});
         });
@@ -42,11 +49,35 @@ var helper =
     {
         var image = document.createElement('img');
         $(image).attr('src', src);
-        $(image).style({'z-index': helper.layers + 1});
 
         helper.addElement(image, {'centered': true});
 
         return image;
+    },
+
+    addSound: function(src, options)
+    {
+        var defaults =
+        {
+            volume: 1,
+            autoplay: true,
+            loop: true,
+            controls: true
+        };
+
+        // Deep combine user given options with defaults
+        options = extend(true, defaults, options);
+
+        var sound = document.createElement('audio');
+        $(sound).attr('src', src);
+        $(sound).attr('volume', options.volume);
+        $(sound).attr('autoplay', options.autoplay);
+        $(sound).attr('loop', options.loop);
+        $(sound).attr('controls', options.controls);
+
+        helper.addElement(sound, {'centered': true});
+
+        return sound;
     },
 
     random: function(min, max)
