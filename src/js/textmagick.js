@@ -87,7 +87,7 @@ TextMagick.prototype.refresh = function()
         if(this.options.border.image)
         {
             $(this.element.wrapper).find('pattern.stroke image').el[0].setAttribute('xlink:href', this.options.border.image);
-            this.element.stroke.setAttribute('stroke', 'url(#' + this.id.pattern + ')');
+            this.element.stroke.setAttribute('stroke', 'url(#' + this.id.stroke + ')');
         }
         else
         {
