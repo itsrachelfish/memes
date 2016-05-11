@@ -141,11 +141,13 @@ var menu =
             {
                 size: input['text-size'],
                 color: input['text-color'],
+                image: input['text-image'],
                 border:
                 {
                     enabled: input['border'],
                     size: input['border-size'],
                     color: input['border-color'],
+                    image: input['border-image'],
                 }
             };
 

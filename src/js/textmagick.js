@@ -27,14 +27,24 @@ var TextMagick = function(text, options)
 
 TextMagick.prototype.text = 'sample text';
 TextMagick.prototype.element = {};
+TextMagick.prototype.pattern = {};
+TextMagick.prototype.id = {};
 
 TextMagick.prototype.init = function()
 {
     this.element.wrapper = $('.preload .textmagick').clone();
-
     this.element.svg = $(this.element.wrapper).find('svg').el[0];
     this.element.text = $(this.element.wrapper).find('text.text').el[0];
     this.element.stroke = $(this.element.wrapper).find('text.stroke').el[0];
+    this.pattern.text = $(this.element.wrapper).find('pattern.text').el[0];
+    this.pattern.stroke = $(this.element.wrapper).find('pattern.stroke').el[0];
+
+    // Generate randomized, unique IDs for the pattern elements
+    this.id.text = Math.random().toString(36).slice(2).replace(/^[0-9]+/, '');
+    this.id.stroke = Math.random().toString(36).slice(2).replace(/^[0-9]+/, '');
+
+    $(this.pattern.text).attr('id', this.id.text);
+    $(this.pattern.stroke).attr('id', this.id.stroke);
 
     this.setText();
     this.refresh();
@@ -62,23 +72,58 @@ TextMagick.prototype.refresh = function()
     this.element.text.setAttribute('font-size', this.options.size);
     this.element.stroke.setAttribute('font-size', this.options.size);
 
-    this.element.text.setAttribute('fill', this.options.color);
+    if(this.options.image)
+    {
+        $(this.element.wrapper).find('pattern.text image').el[0].setAttribute('xlink:href', this.options.image);
+        this.element.text.setAttribute('fill', 'url(#' + this.id.text + ')');
+    }
+    else
+    {
+        this.element.text.setAttribute('fill', this.options.color);
+    }
 
-    this.element.stroke.setAttribute('stroke', this.options.border.color);
-    this.element.stroke.setAttribute('stroke-width', this.options.border.size);
+    if(this.options.border.enabled)
+    {
+        if(this.options.border.image)
+        {
+            $(this.element.wrapper).find('pattern.stroke image').el[0].setAttribute('xlink:href', this.options.border.image);
+            this.element.stroke.setAttribute('stroke', 'url(#' + this.id.pattern + ')');
+        }
+        else
+        {
+            this.element.stroke.setAttribute('stroke', this.options.border.color);
+        }
+
+        this.element.stroke.setAttribute('stroke-width', this.options.border.size);
+    }
+    else
+    {
+        this.element.stroke.setAttribute('stroke', 'none');
+        this.element.stroke.setAttribute('stroke-width', 0);
+    }
 }
 
 TextMagick.prototype.resize = function()
 {
+    // Get bounding box of the svg content
     var size = this.element.stroke.getBBox();
 
-    // Add the stroke size if stroke is enabled
+    // Add the border size if the border is enabled
     if(this.options.border.enabled)
     {
-        size.height += parseInt(this.options.border.size);
-        size.width += parseInt(this.options.border.size);
+        this.options.border.size = parseInt(this.options.border.size);
+
+        size.height += this.options.border.size;
+        size.width += this.options.border.size;
+
+        this.element.stroke.setAttribute('x', this.options.border.size / 2);
+        this.element.stroke.setAttribute('y', this.options.border.size / 2);
+
+        this.element.text.setAttribute('x', this.options.border.size / 2);
+        this.element.text.setAttribute('y', this.options.border.size / 2);
     }
 
+    // Set the svg to be the same size as the rendered content (otherwise the text could be cut off)
     this.element.svg.setAttribute('width', size.width);
     this.element.svg.setAttribute('height', size.height);
 }
