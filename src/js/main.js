@@ -1,5 +1,6 @@
 // Load wetfish basic
 var $ = require('wetfish-basic');
+require('dragondrop');
 
 // Load custom modules
 var Webcam = require('./webcam');
@@ -9,6 +10,7 @@ var overlay = require('./overlay');
 var presets = require('./presets');
 var pool = require('./pool');
 var templates = require('./templates');
+var TextMagick = require('./textmagick');
 
 // A map of currently pressed keys
 var pressed = {};
@@ -50,6 +52,13 @@ $(document).ready(function()
         menu.init();
         overlay.init();
         presets.init();
+
+        var text = new TextMagick('uhh... hi?');
+        var textElement = text.getElement();
+        $('.workspace').el[0].appendChild(textElement);
+        text.resize();
+
+        $(textElement).dragondrop();
 
         var explosion = $('.preload .explosion').el[0];
         var hitmarker = $('.preload .hitmarker').el[0];    
