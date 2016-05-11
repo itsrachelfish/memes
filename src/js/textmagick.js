@@ -75,8 +75,8 @@ TextMagick.prototype.resize = function()
     // Add the stroke size if stroke is enabled
     if(this.options.border.enabled)
     {
-        size.height += this.options.border.size;
-        size.width += this.options.border.size;
+        size.height += parseInt(this.options.border.size);
+        size.width += parseInt(this.options.border.size);
     }
 
     this.element.svg.setAttribute('width', size.width);
