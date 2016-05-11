@@ -120,6 +120,18 @@ var menu =
                 overlay.close('.video');
             }
         });
+
+        $('.text.overlay .border').on('click change', function()
+        {
+            if($(this).prop('checked'))
+            {
+                $('.text.overlay .use-border').removeClass('hidden');
+            }
+            else
+            {
+                $('.text.overlay .use-border').addClass('hidden');
+            }
+        });
     }
 };
 
