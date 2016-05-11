@@ -4,6 +4,7 @@ require('dragondrop');
 
 // Load other stuff
 var extend = require('extend');
+var TextMagick = require('./textmagick');
 
 // Miscellaneous helper functions
 var helper =
@@ -103,6 +104,19 @@ var helper =
         helper.addElement(video, {'centered': true});
 
         return video;
+    },
+
+    addText: function(text, options)
+    {
+        var text = new TextMagick(text, options);
+        var element = text.getElement();
+
+        helper.addElement(element, {'centered': true});
+
+        text.resize();
+        $(element).dragondrop();
+
+        return text;
     },
 
     random: function(min, max)

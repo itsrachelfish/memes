@@ -132,6 +132,27 @@ var menu =
                 $('.text.overlay .use-border').addClass('hidden');
             }
         });
+        
+        $('.text.overlay form').on('submit', function(event)
+        {
+            event.preventDefault();
+            var input = helper.serialize(this);
+            var options =
+            {
+                size: input['text-size'],
+                color: input['text-color'],
+                border:
+                {
+                    enabled: input['border'],
+                    size: input['border-size'],
+                    color: input['border-color'],
+                }
+            };
+
+            helper.addText(input.text, options);
+            overlay.close('.text');
+        });
+
     }
 };
 
