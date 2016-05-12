@@ -177,7 +177,14 @@ $(document).ready(function()
 
         $('body').on('contextmenu', function(event)
         {
-            event.preventDefault();
+            // Is the current element the workspace or a child of it?
+            if($(event.target).hasClass('workspace') || $(event.target).parents('.workspace').el.length)
+            {
+                // Prevent right-click menu from appearing
+                event.preventDefault();
+            }
+
+            // Otherwise, let menus appear normally
         });
 
         $('body').on('keydown', function(event)
