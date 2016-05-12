@@ -31,6 +31,11 @@ html, body {
     bottom: 0;
     left: 0;
     right: 0;
+
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .hitmarker {
@@ -39,16 +44,6 @@ html, body {
     margin-top: -75px;
     margin-left: -75px;
     z-index: 9001;
-}
-
-::-moz-selection{
-    background-color:Transparent;
-    color:#000;
-}
-
-::selection {
-    background-color:Transparent;
-    color:#000;
 }
 
 .note {
