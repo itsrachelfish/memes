@@ -155,6 +155,33 @@ var menu =
             overlay.close('.text');
         });
 
+        $('.background.overlay form').on('submit', function(event)
+        {
+            event.preventDefault();
+            var input = helper.serialize(this);
+
+            if(input.background)
+            {
+                $('body').style({'background': input.background});
+            }
+
+            if(input.image)
+            {
+                $('body').style({'background-image': 'url("'+input.image+'")'});
+            }
+
+            if(input.repeat)
+            {
+                $('body').style({'background-repeat': input.repeat});
+            }
+
+            if(input.position)
+            {
+                $('body').style({'background-position': input.position});
+            }
+
+            overlay.close('.background');
+        });
     }
 };
 
