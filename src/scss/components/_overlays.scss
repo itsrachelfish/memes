@@ -1,11 +1,9 @@
-body.overlay-open {
-    .overlay-wrap {
-        z-index: 100;
+.overlay-wrap {
+    body.overlay-open & {
+        z-index: 9001;
         opacity: 1;
     }
-}
 
-.overlay-wrap {
     display: flex;
     align-items: center;
     justify-content: center;

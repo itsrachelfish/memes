@@ -96,7 +96,7 @@ $(document).ready(function()
                 if(pressed.control)
                 {
                     var image = document.createElement('img');
-                    $(image).style({'top': event.clientY + 'px', 'left': event.clientX + 'px'});
+                    $(image).style({'top': event.clientY + 'px', 'left': event.clientX + 'px', 'z-index': helper.layers + 1});
                     $(image).addClass('hitmarker');
                     $(image).attr('src', 'img/hitmarker.png');
                     $('.workspace').el[0].appendChild(image);
@@ -140,6 +140,7 @@ $(document).ready(function()
                         'left': position.left + 'px',
                         'width': size.width + 'px',
                         'height': size.height + 'px',
+                        'z-index': $(this).style('z-index')
                     };
 
                     $(image).style(options);

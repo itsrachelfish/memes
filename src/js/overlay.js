@@ -1,4 +1,5 @@
 var $ = require('wetfish-basic');
+var helper = require('./helper');
 
 var overlay =
 {
@@ -24,6 +25,9 @@ var overlay =
     {
         $('body').addClass('overlay-open');
         $('.overlay' + selector).addClass('open');
+
+        // Make sure the overlay is always on top
+        $('.overlay' + selector).style({'z-index': helper.layers + 1});
     },
 
     // Close an overlay
