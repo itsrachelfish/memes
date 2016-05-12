@@ -52,6 +52,33 @@ TextMagick.prototype.init = function()
     return this.element.svg;
 }
 
+TextMagick.prototype.setPatternSize = function(url, type)
+{
+    var scope = this;
+    var image = document.createElement('img');
+    $(image).attr('src', url);
+
+    $(image).on('load', function()
+    {
+        if(type == 'text')
+        {
+            $(scope.pattern.text).attr('width', image.width);
+            $(scope.pattern.text).attr('height', image.height);
+
+            $(scope.element.wrapper).find('pattern.text image').attr('width', image.width);
+            $(scope.element.wrapper).find('pattern.text image').attr('height', image.height);
+        }
+        else
+        {
+            $(scope.pattern.stroke).attr('width', image.width);
+            $(scope.pattern.stroke).attr('height', image.height);
+
+            $(scope.element.wrapper).find('pattern.stroke image').attr('width', image.width);
+            $(scope.element.wrapper).find('pattern.stroke image').attr('height', image.height);
+        }
+    });
+}
+
 TextMagick.prototype.setText = function(text)
 {
     text = text || this.text;
@@ -74,6 +101,8 @@ TextMagick.prototype.refresh = function()
 
     if(this.options.image)
     {
+        this.setPatternSize(this.options.image, 'text');
+
         $(this.element.wrapper).find('pattern.text image').el[0].setAttribute('xlink:href', this.options.image);
         this.element.text.setAttribute('fill', 'url(#' + this.id.text + ')');
     }
@@ -86,6 +115,8 @@ TextMagick.prototype.refresh = function()
     {
         if(this.options.border.image)
         {
+            this.setPatternSize(this.options.image, 'stroke');
+
             $(this.element.wrapper).find('pattern.stroke image').el[0].setAttribute('xlink:href', this.options.border.image);
             this.element.stroke.setAttribute('stroke', 'url(#' + this.id.stroke + ')');
         }
