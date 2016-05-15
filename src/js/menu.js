@@ -67,10 +67,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var image = helper.addImage(input.url);
-                $(image).data('desc', input.desc);
-                $(image).data('license', input.license);
-
+                var image = helper.addImage(input.url, input);
                 overlay.close('.image');
             }
         });
@@ -82,18 +79,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var sound = document.createElement('audio');
-                $(sound).attr('src', input.url);
-                $(sound).attr('volume', input.volume);
-                $(sound).attr('autoplay', input.autoplay);
-                $(sound).attr('loop', input.loop);
-                $(sound).attr('controls', true);
-
-                $(sound).data('desc', input.desc);
-                $(sound).data('license', input.license);
-
-                helper.addElement(sound, {'centered': true});
-
+                var sound = helper.addSound(input.url, input);
                 overlay.close('.sound');
             }
         });
@@ -105,18 +91,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var video = document.createElement('video');
-                $(video).attr('src', input.url);
-                $(video).attr('volume', input.volume);
-                $(video).attr('autoplay', input.autoplay);
-                $(video).attr('loop', input.loop);
-                $(video).attr('controls', input.controls);
-
-                $(video).data('desc', input.desc);
-                $(video).data('license', input.license);
-
-                helper.addElement(video, {'centered': true});
-
+                var video = helper.addVideo(input.url, input);
                 overlay.close('.video');
             }
         });

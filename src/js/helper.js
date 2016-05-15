@@ -46,10 +46,15 @@ var helper =
         });
     },
 
-    addImage: function(src)
+    addImage: function(src, options)
     {
+        // Make sure options is not null
+        options = options || {};
+
         var image = document.createElement('img');
         $(image).attr('src', src);
+        $(image).data('desc', options.desc);
+        $(image).data('license', options.license);
 
         helper.addElement(image, {'centered': true});
 
@@ -75,6 +80,8 @@ var helper =
         $(sound).attr('autoplay', options.autoplay);
         $(sound).attr('loop', options.loop);
         $(sound).attr('controls', options.controls);
+        $(sound).data('desc', options.desc);
+        $(sound).data('license', options.license);
 
         helper.addElement(sound, {'centered': true});
 
@@ -100,6 +107,8 @@ var helper =
         $(video).attr('autoplay', options.autoplay);
         $(video).attr('loop', options.loop);
         $(video).attr('controls', options.controls);
+        $(video).data('desc', options.desc);
+        $(video).data('license', options.license);
 
         helper.addElement(video, {'centered': true});
 

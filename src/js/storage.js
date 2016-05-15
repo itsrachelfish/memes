@@ -23,21 +23,27 @@ var project =
 // Public object with data manipulation functions
 var storage =
 {
+    // Initialize any saved project data when the page loads
     init: function()
     {
+        // Check local storage for any saved data
 
+        // Use default project data if none is found
     },
 
+    // Load saved data onto the page
     load: function()
     {
 
     },
 
+    // Save or update an object
     save: function()
     {
 
     },
 
+    // Calculate total localstorage usage
     usage: function()
     {
 
