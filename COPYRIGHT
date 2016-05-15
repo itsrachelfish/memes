@@ -116,6 +116,12 @@ public/src/video/rap-battle.webm
 public/src/video/yee.webm
     - Source URL https://www.youtube.com/watch?v=q6EoRBvdVPQ
 
+public/src/video/hot-hot-hot.webm
+    - Source URL https://www.youtube.com/watch?v=QZs6kcSYuk8
+    - Original video file edited using ffmpeg on the command line:
+        - ffmpeg -i original.webm -c copy -ss 00:00:50 -t 00:00:20 -async 1 edited.webm
+
+
 
 Unknown License
 ================
