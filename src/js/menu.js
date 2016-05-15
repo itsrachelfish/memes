@@ -67,7 +67,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var image = helper.addImage(input.url, input);
+                var image = helper.addImage(input);
                 overlay.close('.image');
             }
         });
@@ -79,7 +79,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var sound = helper.addSound(input.url, input);
+                var sound = helper.addSound(input);
                 overlay.close('.sound');
             }
         });
@@ -91,7 +91,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var video = helper.addVideo(input.url, input);
+                var video = helper.addVideo(input);
                 overlay.close('.video');
             }
         });
@@ -126,7 +126,7 @@ var menu =
                 }
             };
 
-            helper.addText(input.text, options);
+            helper.addText(options);
             overlay.close('.text');
         });
 

@@ -86,7 +86,7 @@ var presets =
             var airhorn = document.createElement('div');
             $(airhorn).addClass('airhorn');
 
-            helper.addElement(airhorn, {'centered': true});
+            helper.addElement(airhorn, {type: 'preset', preset: 'airhorn', centered: true});
         },
     },
 
@@ -96,7 +96,7 @@ var presets =
         {
             if($(element).data('src'))
             {
-                helper.addImage('img/' + $(element).data('src'));
+                helper.addImage({url: 'img/' + $(element).data('src')});
             }
         }
     },
@@ -107,7 +107,7 @@ var presets =
         {
             if($(element).data('src'))
             {
-                helper.addSound('audio/' + $(element).data('src'));
+                helper.addSound({url: 'audio/' + $(element).data('src')});
             }
         }
     },
@@ -118,7 +118,7 @@ var presets =
         {
             if($(element).data('src'))
             {
-                helper.addVideo('video/' + $(element).data('src'));
+                helper.addVideo({url: 'video/' + $(element).data('src')});
             }
         }
     },

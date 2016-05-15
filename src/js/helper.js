@@ -14,16 +14,13 @@ var helper =
 
     addElement: function(element, options)
     {
-        // Check the type of the element
-        var type = element.tagName.toLowerCase();
-
-        // Add audio / video specific options
-        if(type == 'audio' || type == 'video')
+        // Check if audio / video specific options need to be added
+        if(options.type == 'audio' || options.type == 'video')
         {
-            $(video).attr('volume', options.volume);
-            $(video).attr('autoplay', options.autoplay);
-            $(video).attr('loop', options.loop);
-            $(video).attr('controls', options.controls);
+            $(element).attr('volume', options.volume);
+            $(element).attr('autoplay', options.autoplay);
+            $(element).attr('loop', options.loop);
+            $(element).attr('controls', options.controls);
         }
 
         // Add license information if provided
@@ -69,6 +66,7 @@ var helper =
     {
         var defaults =
         {
+            type: 'image',
             centered: true,
         };
 
@@ -76,7 +74,7 @@ var helper =
         options = extend(true, defaults, options);
 
         var image = document.createElement('img');
-        $(image).attr('src', options.src);
+        $(image).attr('src', options.url);
 
         helper.addElement(image, options);
 
@@ -87,6 +85,7 @@ var helper =
     {
         var defaults =
         {
+            type: 'audio',
             volume: 1,
             autoplay: true,
             loop: true,
@@ -98,9 +97,9 @@ var helper =
         options = extend(true, defaults, options);
 
         var sound = document.createElement('audio');
-        $(sound).attr('src', options.src);
+        $(sound).attr('src', options.url);
 
-        helper.addElement(sound, {'centered': true});
+        helper.addElement(sound, options);
 
         return sound;
     },
@@ -109,6 +108,7 @@ var helper =
     {
         var defaults =
         {
+            type: 'video',
             volume: 1,
             autoplay: true,
             loop: true,
@@ -120,7 +120,7 @@ var helper =
         options = extend(true, defaults, options);
 
         var video = document.createElement('video');
-        $(video).attr('src', options.src);
+        $(video).attr('src', options.url);
 
         helper.addElement(video, options);
 
@@ -131,6 +131,7 @@ var helper =
     {
         var defaults =
         {
+            type: 'text',
             centered: true,
         };
 
