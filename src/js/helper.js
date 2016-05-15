@@ -14,11 +14,29 @@ var helper =
 
     addElement: function(element, options)
     {
+        // Check the type of the element
+        var type = element.tagName.toLowerCase();
+
+        // Add audio / video specific options
+        if(type == 'audio' || type == 'video')
+        {
+            $(video).attr('volume', options.volume);
+            $(video).attr('autoplay', options.autoplay);
+            $(video).attr('loop', options.loop);
+            $(video).attr('controls', options.controls);
+        }
+
+        // Add license information if provided
+        $(element).data('desc', options.desc);
+        $(element).data('license', options.license);
+
+        // Add the new element to the workspace
         $('.workspace').el[0].appendChild(element);
 
-        // Put new element on the top layer
+        // Make sure it's on the top layer
         $(element).style({'z-index': helper.layers + 1});
 
+        // Centered option automatically centers the new element in the middle of the page
         if(options.centered)
         {
             $(element).style({
@@ -28,6 +46,7 @@ var helper =
             });
         }
 
+        // Duration option will remove the element after a certain amount of time
         if(options.duration)
         {
             setTimeout(function()
@@ -38,92 +57,91 @@ var helper =
 
         $(element).dragondrop();
 
+        // Ensure the element being dragged is always on top
         $(element).on('dragstart', function()
         {
-            // Ensure the element being dragged is always on top
             helper.layers++;
             $(this).style({'z-index': helper.layers});
         });
     },
 
-    addImage: function(src, options)
+    addImage: function(options)
     {
-        // Make sure options is not null
-        options = options || {};
+        var defaults =
+        {
+            centered: true,
+        };
+
+        // Deep combine user given options with defaults
+        options = extend(true, defaults, options);
 
         var image = document.createElement('img');
-        $(image).attr('src', src);
-        $(image).data('desc', options.desc);
-        $(image).data('license', options.license);
+        $(image).attr('src', options.src);
 
-        helper.addElement(image, {'centered': true});
+        helper.addElement(image, options);
 
         return image;
     },
 
-    addSound: function(src, options)
+    addSound: function(options)
     {
         var defaults =
         {
             volume: 1,
             autoplay: true,
             loop: true,
-            controls: true
+            controls: true,
+            centered: true,
         };
 
         // Deep combine user given options with defaults
         options = extend(true, defaults, options);
 
         var sound = document.createElement('audio');
-        $(sound).attr('src', src);
-        $(sound).attr('volume', options.volume);
-        $(sound).attr('autoplay', options.autoplay);
-        $(sound).attr('loop', options.loop);
-        $(sound).attr('controls', options.controls);
-        $(sound).data('desc', options.desc);
-        $(sound).data('license', options.license);
+        $(sound).attr('src', options.src);
 
         helper.addElement(sound, {'centered': true});
 
         return sound;
     },
 
-    addVideo: function(src, options)
+    addVideo: function(options)
     {
         var defaults =
         {
             volume: 1,
             autoplay: true,
             loop: true,
-            controls: true
+            controls: true,
+            centered: true,
         };
 
         // Deep combine user given options with defaults
         options = extend(true, defaults, options);
 
         var video = document.createElement('video');
-        $(video).attr('src', src);
-        $(video).attr('volume', options.volume);
-        $(video).attr('autoplay', options.autoplay);
-        $(video).attr('loop', options.loop);
-        $(video).attr('controls', options.controls);
-        $(video).data('desc', options.desc);
-        $(video).data('license', options.license);
+        $(video).attr('src', options.src);
 
-        helper.addElement(video, {'centered': true});
+        helper.addElement(video, options);
 
         return video;
     },
 
-    addText: function(text, options)
+    addText: function(options)
     {
-        var text = new TextMagick(text, options);
+        var defaults =
+        {
+            centered: true,
+        };
+
+        // Deep combine user given options with defaults
+        options = extend(true, defaults, options);
+
+        var text = new TextMagick(options.text, options);
         var element = text.getElement();
 
-        helper.addElement(element, {'centered': true});
-
+        helper.addElement(element, options);
         text.resize();
-        $(element).dragondrop();
 
         return text;
     },
