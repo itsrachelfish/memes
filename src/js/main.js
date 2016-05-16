@@ -52,6 +52,7 @@ $(document).ready(function()
         menu.init();
         overlay.init();
         presets.init();
+
         storage.init();
 
         var explosion = $('.preload .explosion').el[0];

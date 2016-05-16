@@ -33,15 +33,25 @@ var storage =
     init: function()
     {
         // Check local storage for any saved data
+        var data = localStorage.getItem('project');
 
-        // Use default project data if none is found
-        project.data = project.defaults;
+        if(data)
+        {
+            project.data = JSON.parse(localStorage.getItem('project'));
+        }
+        else
+        {
+            // Use default project data if none is found
+            project.data = project.defaults;
+        }
+
+        storage.load();
     },
 
     // Load saved data onto the page
     load: function()
     {
-        
+        console.log('now loading', project.data);
     },
 
     // Save or update an object
