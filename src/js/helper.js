@@ -1,10 +1,5 @@
 // Load wetfish basic
 var $ = require('wetfish-basic');
-require('dragondrop');
-
-// Load other stuff
-var extend = require('extend');
-var TextMagick = require('./textmagick');
 
 // Miscellaneous helper functions
 var helper =
@@ -12,144 +7,15 @@ var helper =
     // Used to stack elements ontop of eachother as you move them
     layers: 0,
 
-    addElement: function(element, options)
-    {
-        // Check if audio / video specific options need to be added
-        if(options.type == 'audio' || options.type == 'video')
-        {
-            $(element).attr('volume', options.volume);
-            $(element).attr('autoplay', options.autoplay);
-            $(element).attr('loop', options.loop);
-            $(element).attr('controls', options.controls);
-        }
-
-        // Add license information if provided
-        $(element).data('desc', options.desc);
-        $(element).data('license', options.license);
-
-        // Add the new element to the workspace
-        $('.workspace').el[0].appendChild(element);
-
-        // Make sure it's on the top layer
-        $(element).style({'z-index': helper.layers + 1});
-
-        // Centered option automatically centers the new element in the middle of the page
-        if(options.centered)
-        {
-            $(element).style({
-                'position': 'absolute',
-                'left': ($(window).width() / 2 - $(element).width() / 2) + 'px',
-                'top': ($(window).height() / 2 - $(element).height() / 2) + 'px',
-            });
-        }
-
-        // Duration option will remove the element after a certain amount of time
-        if(options.duration)
-        {
-            setTimeout(function()
-            {
-                $(element).remove();
-            }, options.duration);
-        }
-
-        $(element).dragondrop();
-
-        // Ensure the element being dragged is always on top
-        $(element).on('dragstart', function()
-        {
-            helper.layers++;
-            $(this).style({'z-index': helper.layers});
-        });
-    },
-
-    addImage: function(options)
-    {
-        var defaults =
-        {
-            type: 'image',
-            centered: true,
-        };
-
-        // Deep combine user given options with defaults
-        options = extend(true, defaults, options);
-
-        var image = document.createElement('img');
-        $(image).attr('src', options.url);
-
-        helper.addElement(image, options);
-
-        return image;
-    },
-
-    addSound: function(options)
-    {
-        var defaults =
-        {
-            type: 'audio',
-            volume: 1,
-            autoplay: true,
-            loop: true,
-            controls: true,
-            centered: true,
-        };
-
-        // Deep combine user given options with defaults
-        options = extend(true, defaults, options);
-
-        var sound = document.createElement('audio');
-        $(sound).attr('src', options.url);
-
-        helper.addElement(sound, options);
-
-        return sound;
-    },
-
-    addVideo: function(options)
-    {
-        var defaults =
-        {
-            type: 'video',
-            volume: 1,
-            autoplay: true,
-            loop: true,
-            controls: true,
-            centered: true,
-        };
-
-        // Deep combine user given options with defaults
-        options = extend(true, defaults, options);
-
-        var video = document.createElement('video');
-        $(video).attr('src', options.url);
-
-        helper.addElement(video, options);
-
-        return video;
-    },
-
-    addText: function(options)
-    {
-        var defaults =
-        {
-            type: 'text',
-            centered: true,
-        };
-
-        // Deep combine user given options with defaults
-        options = extend(true, defaults, options);
-
-        var text = new TextMagick(options.text, options);
-        var element = text.getElement();
-
-        helper.addElement(element, options);
-        text.resize();
-
-        return text;
-    },
-
-    random: function(min, max)
+    randomInt: function(min, max)
     {
         return Math.round(Math.random() * (max - min)) + min;
+    },
+
+    randomString: function()
+    {
+        // Remove leading numbers because they are not valid html IDs
+        return Math.random().toString(36).slice(2).replace(/^[0-9]+/, '');
     },
 
     serialize: function(form)

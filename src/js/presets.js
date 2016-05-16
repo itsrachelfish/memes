@@ -5,6 +5,7 @@ var $ = require('wetfish-basic');
 var overlay = require('./overlay');
 var pool = require('./pool');
 var helper = require('./helper');
+var element = require('./element');
 
 var presets =
 {
@@ -86,7 +87,7 @@ var presets =
             var airhorn = document.createElement('div');
             $(airhorn).addClass('airhorn');
 
-            helper.addElement(airhorn, {type: 'preset', preset: 'airhorn', centered: true});
+            element.addElement(airhorn, {type: 'preset', preset: 'airhorn', centered: true});
         },
     },
 
@@ -96,7 +97,7 @@ var presets =
         {
             if($(element).data('src'))
             {
-                helper.addImage({url: 'img/' + $(element).data('src')});
+                element.addImage({url: 'img/' + $(element).data('src')});
             }
         }
     },
@@ -107,7 +108,7 @@ var presets =
         {
             if($(element).data('src'))
             {
-                helper.addSound({url: 'audio/' + $(element).data('src')});
+                element.addSound({url: 'audio/' + $(element).data('src')});
             }
         }
     },
@@ -118,7 +119,7 @@ var presets =
         {
             if($(element).data('src'))
             {
-                helper.addVideo({url: 'video/' + $(element).data('src')});
+                element.addVideo({url: 'video/' + $(element).data('src')});
             }
         }
     },

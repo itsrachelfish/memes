@@ -5,6 +5,7 @@ var $ = require('wetfish-basic');
 var Webcam = require('./webcam');
 var helper = require('./helper');
 var overlay = require('./overlay');
+var element = require('./element');
 
 // Global webcam object
 var webcam;
@@ -67,7 +68,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var image = helper.addImage(input);
+                var image = element.addImage(input);
                 overlay.close('.image');
             }
         });
@@ -79,7 +80,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var sound = helper.addSound(input);
+                var sound = element.addSound(input);
                 overlay.close('.sound');
             }
         });
@@ -91,7 +92,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var video = helper.addVideo(input);
+                var video = element.addVideo(input);
                 overlay.close('.video');
             }
         });
@@ -126,7 +127,7 @@ var menu =
                 }
             };
 
-            helper.addText(options);
+            element.addText(options);
             overlay.close('.text');
         });
 
