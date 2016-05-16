@@ -3,6 +3,7 @@ var $ = require('wetfish-basic');
 
 // Load other stuff
 var extend = require('extend');
+var helper = require('./helper');
 
 var TextMagick = function(text, options)
 {
@@ -40,8 +41,8 @@ TextMagick.prototype.init = function()
     this.pattern.stroke = $(this.element.wrapper).find('pattern.stroke').el[0];
 
     // Generate randomized, unique IDs for the pattern elements
-    this.id.text = Math.random().toString(36).slice(2).replace(/^[0-9]+/, '');
-    this.id.stroke = Math.random().toString(36).slice(2).replace(/^[0-9]+/, '');
+    this.id.text = helper.randomString();
+    this.id.stroke = helper.randomString();
 
     $(this.pattern.text).attr('id', this.id.text);
     $(this.pattern.stroke).attr('id', this.id.stroke);

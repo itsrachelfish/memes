@@ -64,7 +64,7 @@ var presets =
                 $(airhorn).addClass('active');
 
                 // Does this airhorn have a unique ID? If not, generate one
-                var id = $(airhorn).attr('id') || Math.random().toString(36).slice(2);
+                var id = $(airhorn).attr('id') || helper.randomString();
                 $(airhorn).attr('id', id);
 
                 // Clear any previously defined timeouts for this airhorn
