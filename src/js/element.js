@@ -6,12 +6,10 @@ require('dragondrop');
 var extend = require('extend');
 var helper = require('./helper');
 var TextMagick = require('./textmagick');
-var storage = require('./storage');
 
 // Helper functions for creating elements on the page
 var element =
 {
-
     addNew: function(element, options)
     {
         // Check if audio / video specific options need to be added
@@ -54,9 +52,6 @@ var element =
 
         $(element).dragondrop();
 
-        // Save the new element in local storage
-        storage.save(element, options);
-
         // Ensure the element being dragged is always on top
         $(element).on('dragstart', function()
         {
@@ -81,7 +76,7 @@ var element =
 
         element.addNew(image, options);
 
-        return image;
+        return {element: image, options: options};
     },
 
     addAudio: function(options)
@@ -104,7 +99,7 @@ var element =
 
         element.addNew(sound, options);
 
-        return sound;
+        return {element: sound, options: options};
     },
 
     addVideo: function(options)
@@ -127,7 +122,7 @@ var element =
 
         element.addNew(video, options);
 
-        return video;
+        return {element: video, options: options};
     },
 
     addText: function(options)
@@ -147,7 +142,7 @@ var element =
         element.addNew(element, options);
         text.resize();
 
-        return text;
+        return {element: text, options: options};
     },
 };
 
