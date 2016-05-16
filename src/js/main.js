@@ -10,6 +10,7 @@ var overlay = require('./overlay');
 var presets = require('./presets');
 var pool = require('./pool');
 var templates = require('./templates');
+var storage = require('./storage');
 
 // A map of currently pressed keys
 var pressed = {};
@@ -51,6 +52,7 @@ $(document).ready(function()
         menu.init();
         overlay.init();
         presets.init();
+        storage.init();
 
         var explosion = $('.preload .explosion').el[0];
         var hitmarker = $('.preload .hitmarker').el[0];    
@@ -147,7 +149,7 @@ $(document).ready(function()
                     $(image).addClass('explosion');
 
                     // Generate a random explosion image
-                    var random = helper.random(1, 7);
+                    var random = helper.randomInt(1, 7);
                     $(image).attr('src', 'img/explosion-' + random + '.gif');
                     
                     // EXPLODE!
