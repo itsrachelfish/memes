@@ -80,7 +80,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var sound = element.addSound(input);
+                var sound = element.addAudio(input);
                 overlay.close('.sound');
             }
         });

@@ -84,7 +84,7 @@ var element =
         return image;
     },
 
-    addSound: function(options)
+    addAudio: function(options)
     {
         var defaults =
         {

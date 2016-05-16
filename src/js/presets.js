@@ -108,7 +108,7 @@ var presets =
         {
             if($(element).data('src'))
             {
-                element.addSound({url: 'audio/' + $(element).data('src')});
+                element.addAudio({url: 'audio/' + $(element).data('src')});
             }
         }
     },
