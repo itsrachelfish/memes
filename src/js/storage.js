@@ -61,31 +61,38 @@ var storage =
                 if(project.data.objects[id] !== undefined)
                 {
                     var object = project.data.objects[id];
+                    var created = false;
 
                     if(object.type == 'image')
                     {
-                        element.addImage(object);
+                        created = element.addImage(object);
                     }
                     else if(object.type == 'audio')
                     {
-                        element.addAudio(object);
+                        created = element.addAudio(object);
                     }
                     else if(object.type == 'video')
                     {
-                        element.addVideo(object);
+                        created = element.addVideo(object);
                     }
                     else if(object.type == 'text')
                     {
-                        element.addText(object);
+                        created = element.addText(object);
                     }
                     else if(object.type == 'preset' && presets[object.preset] !== undefined)
                     {
                         presets[object.preset].init();
-                        presets[object.preset].create();
+                        created = presets[object.preset].create();
                     }
                     else
                     {
                         console.log("Object '" + id + "' failed to load, no handler function matched.");
+                    }
+
+                    // Add the saved ID to the created element
+                    if(created)
+                    {
+                        $(created.element).attr('id', id);
                     }
                 }
             }
@@ -107,6 +114,24 @@ var storage =
         }
 
         project.data.frames[project.data.frame][id] = true;
+
+        localStorage.setItem('project', JSON.stringify(project.data));
+    },
+
+    // Remove an obejct
+    remove: function(element)
+    {
+        // Check if this element has a unique ID
+        var id = $(element).attr('id');
+
+        // We can't remove something without an ID
+        if(!id)
+        {
+            return;
+        }
+
+        delete project.data.frames[project.data.frame][id];
+        delete project.data.objects[id];
 
         localStorage.setItem('project', JSON.stringify(project.data));
     },

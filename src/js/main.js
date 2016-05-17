@@ -172,6 +172,8 @@ $(document).ready(function()
                     // Otherwise just remove it
                     $(this).remove();
                 }
+
+                storage.remove(this);
             }
         });
 
