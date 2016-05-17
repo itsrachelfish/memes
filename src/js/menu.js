@@ -188,7 +188,8 @@ var menu =
                 }
 
                 // Now call the create method
-                presets[preset].create(this);
+                var preset = presets[preset].create(this);
+                storage.save(preset.element, preset.options);
 
                 // And close the presets menu
                 overlay.close('.presets');

@@ -72,33 +72,33 @@ var presets =
 
     image:
     {
-        create: function(element)
+        create: function(image)
         {
-            if($(element).data('src'))
+            if($(image).data('src'))
             {
-                return element.addImage({url: 'img/' + $(element).data('src')});
+                return element.addImage({url: 'img/' + $(image).data('src')});
             }
         }
     },
 
     sound:
     {
-        create: function(element)
+        create: function(sound)
         {
-            if($(element).data('src'))
+            if($(sound).data('src'))
             {
-                return element.addAudio({url: 'audio/' + $(element).data('src')});
+                return element.addAudio({url: 'audio/' + $(sound).data('src')});
             }
         }
     },
 
     video:
     {
-        create: function(element)
+        create: function(video)
         {
-            if($(element).data('src'))
+            if($(video).data('src'))
             {
-                return element.addVideo({url: 'video/' + $(element).data('src')});
+                return element.addVideo({url: 'video/' + $(video).data('src')});
             }
         }
     },
