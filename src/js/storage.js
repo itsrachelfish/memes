@@ -63,7 +63,6 @@ var storage =
             {
                 if(project.data.objects[id] !== undefined)
                 {
-                    console.log(frame[id]);
                     // Combine any additional frame data with the saved element's options
                     var options = extend(true, project.data.objects[id], frame[id]);
                     var created = false;
@@ -87,7 +86,7 @@ var storage =
                     else if(options.type == 'preset' && presets[options.preset] !== undefined)
                     {
                         presets[options.preset].init();
-                        created = presets[options.preset].create();
+                        created = presets[options.preset].create(options);
                     }
                     else
                     {

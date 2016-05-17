@@ -7,6 +7,7 @@ var pool = require('./pool');
 var helper = require('./helper');
 var element = require('./element');
 var storage = require('./storage');
+var extend = require('extend');
 
 var presets =
 {
@@ -53,17 +54,20 @@ var presets =
         },
 
         // Add an airhorn to the page
-        create: function()
+        create: function(options)
         {
             var airhorn = document.createElement('div');
             $(airhorn).addClass('airhorn');
 
-            var options =
+            var defaults =
             {
                 type: 'preset',
                 preset: 'airhorn',
                 centered: true
             };
+
+            // Deep combine user given options with defaults
+            options = extend(true, defaults, options);
 
             element.addNew(airhorn, options);
             return {element: airhorn, options: options};
