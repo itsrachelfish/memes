@@ -41,6 +41,16 @@ var element =
             });
         }
 
+        // If a specific position was passed
+        if(options.position)
+        {
+            $(element).style({
+                'position': 'absolute',
+                'left': options.position.left + 'px',
+                'top': options.position.top + 'px',
+            });
+        }
+
         // Duration option will remove the element after a certain amount of time
         if(options.duration)
         {
@@ -57,6 +67,15 @@ var element =
         {
             helper.layers++;
             $(this).style({'z-index': helper.layers});
+
+            // Trigger an event on the workspace
+            $('.workspace').trigger('start', element);
+        });
+
+        $(element).on('dragend', function()
+        {
+            // Trigger an event on the workspace
+            $('.workspace').trigger('dragend', element);
         });
     },
 

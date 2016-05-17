@@ -177,6 +177,13 @@ $(document).ready(function()
             }
         });
 
+        // When something is moved around
+        $('.workspace').on('dragend', function(event)
+        {
+            // Update storage
+            storage.update(event.detail);
+        });
+
         $('body').on('contextmenu', function(event)
         {
             // Is the current element the workspace or a child of it?
