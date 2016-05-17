@@ -139,6 +139,7 @@ var storage =
 
         // any custom classes / effects?
         // if the element is hidden?
+        // rotation???
         // custom styles?
         // z-index???
 

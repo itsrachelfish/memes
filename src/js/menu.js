@@ -123,6 +123,7 @@ var menu =
             var input = helper.serialize(this);
             var options =
             {
+                text: input['text'],
                 size: input['text-size'],
                 color: input['text-color'],
                 image: input['text-image'],
