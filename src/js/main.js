@@ -7,7 +7,6 @@ var Webcam = require('./webcam');
 var helper = require('./helper');
 var menu = require('./menu');
 var overlay = require('./overlay');
-var presets = require('./presets');
 var pool = require('./pool');
 var templates = require('./templates');
 var storage = require('./storage');
@@ -51,8 +50,6 @@ $(document).ready(function()
     {
         menu.init();
         overlay.init();
-        presets.init();
-
         storage.init();
 
         var explosion = $('.preload .explosion').el[0];

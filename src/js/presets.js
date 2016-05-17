@@ -13,36 +13,6 @@ var presets =
     // Object which saves which presets have been initialized
     // Presets do not bind any events until they are actually used
     initialized: {},
-    
-    // Global event bindings for presets when the page is loaded
-    init: function()
-    {
-        $('.presets button').on('click', function()
-        {
-            var preset = $(this).data('preset');
-
-            // If there is a handler object for this preset
-            if(presets[preset] !== undefined)
-            {
-                // Does this preset need to be initialized?
-                if(typeof presets[preset].init == "function")
-                {
-                    // Has it been?
-                    if(presets.initialized[preset] === undefined)
-                    {
-                        presets[preset].init(this);
-                        presets.initialized[preset] = true;
-                    }
-                }
-
-                // Now call the create method
-                presets[preset].create(this);
-
-                // And close the presets menu
-                overlay.close('.presets');
-            }
-        });
-    },
 
     airhorn:
     {
@@ -96,19 +66,17 @@ var presets =
             };
 
             element.addNew(airhorn, options);
-            storage.save(airhorn, options);
+            return {element: airhorn, options: options};
         },
     },
 
-/*
     image:
     {
         create: function(element)
         {
             if($(element).data('src'))
             {
-                var image = element.addImage({url: 'img/' + $(element).data('src')});
-                storage.save(image.element, image.options);
+                return element.addImage({url: 'img/' + $(element).data('src')});
             }
         }
     },
@@ -119,8 +87,7 @@ var presets =
         {
             if($(element).data('src'))
             {
-                var audio = element.addAudio({url: 'audio/' + $(element).data('src')});
-                storage.save(audio.element, audio.options);
+                return element.addAudio({url: 'audio/' + $(element).data('src')});
             }
         }
     },
@@ -131,12 +98,10 @@ var presets =
         {
             if($(element).data('src'))
             {
-                var video = element.addVideo({url: 'video/' + $(element).data('src')});
-                storage.save(video.element, video.options);
+                return element.addVideo({url: 'video/' + $(element).data('src')});
             }
         }
     },
-*/
 };
 
 module.exports = presets;

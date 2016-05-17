@@ -7,6 +7,7 @@ var helper = require('./helper');
 var overlay = require('./overlay');
 var element = require('./element');
 var storage = require('./storage');
+var presets = require('./presets');
 
 // Global webcam object
 var webcam;
@@ -165,6 +166,33 @@ var menu =
             }
 
             overlay.close('.background');
+        });
+
+        // Handler when buttons are clicekd in the presets menu
+        $('.presets button').on('click', function()
+        {
+            var preset = $(this).data('preset');
+
+            // If there is a handler object for this preset
+            if(presets[preset] !== undefined)
+            {
+                // Does this preset need to be initialized?
+                if(typeof presets[preset].init == "function")
+                {
+                    // Has it been?
+                    if(presets.initialized[preset] === undefined)
+                    {
+                        presets[preset].init(this);
+                        presets.initialized[preset] = true;
+                    }
+                }
+
+                // Now call the create method
+                presets[preset].create(this);
+
+                // And close the presets menu
+                overlay.close('.presets');
+            }
         });
     }
 };
