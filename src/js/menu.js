@@ -6,6 +6,7 @@ var Webcam = require('./webcam');
 var helper = require('./helper');
 var overlay = require('./overlay');
 var element = require('./element');
+var storage = require('./storage');
 
 // Global webcam object
 var webcam;
@@ -69,6 +70,10 @@ var menu =
             if(helper.validate(input))
             {
                 var image = element.addImage(input);
+
+                // Save the new element in local storage
+                storage.save(image.element, image.options);
+
                 overlay.close('.image');
             }
         });
@@ -81,6 +86,7 @@ var menu =
             if(helper.validate(input))
             {
                 var sound = element.addAudio(input);
+                storage.save(sound.element, sound.options);
                 overlay.close('.sound');
             }
         });
@@ -93,6 +99,7 @@ var menu =
             if(helper.validate(input))
             {
                 var video = element.addVideo(input);
+                storage.save(video.element, video.options);
                 overlay.close('.video');
             }
         });
@@ -127,7 +134,8 @@ var menu =
                 }
             };
 
-            element.addText(options);
+            var text = element.addText(options);
+            storage.save(text.element, text.options);
             overlay.close('.text');
         });
 

@@ -6,6 +6,7 @@ var overlay = require('./overlay');
 var pool = require('./pool');
 var helper = require('./helper');
 var element = require('./element');
+var storage = require('./storage');
 
 var presets =
 {
@@ -87,17 +88,27 @@ var presets =
             var airhorn = document.createElement('div');
             $(airhorn).addClass('airhorn');
 
-            element.addElement(airhorn, {type: 'preset', preset: 'airhorn', centered: true});
+            var options =
+            {
+                type: 'preset',
+                preset: 'airhorn',
+                centered: true
+            };
+
+            element.addNew(airhorn, options);
+            storage.save(airhorn, options);
         },
     },
 
+/*
     image:
     {
         create: function(element)
         {
             if($(element).data('src'))
             {
-                element.addImage({url: 'img/' + $(element).data('src')});
+                var image = element.addImage({url: 'img/' + $(element).data('src')});
+                storage.save(image.element, image.options);
             }
         }
     },
@@ -108,7 +119,8 @@ var presets =
         {
             if($(element).data('src'))
             {
-                element.addAudio({url: 'audio/' + $(element).data('src')});
+                var audio = element.addAudio({url: 'audio/' + $(element).data('src')});
+                storage.save(audio.element, audio.options);
             }
         }
     },
@@ -119,10 +131,12 @@ var presets =
         {
             if($(element).data('src'))
             {
-                element.addVideo({url: 'video/' + $(element).data('src')});
+                var video = element.addVideo({url: 'video/' + $(element).data('src')});
+                storage.save(video.element, video.options);
             }
         }
     },
+*/
 };
 
 module.exports = presets;

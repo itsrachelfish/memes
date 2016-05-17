@@ -9,7 +9,7 @@ var $ = require('wetfish-basic');
 // Load other stuff
 var helper = require('./helper');
 var element = require('./element');
-var presets = require('./presets');
+//var presets = require('./presets');
 
 // Private object which stores the current project data in memory
 var project =
@@ -78,11 +78,13 @@ var storage =
                     {
                         element.addText(object);
                     }
+                    /*
                     else if(object.type == 'preset' && presets[object.preset] !== undefined)
                     {
                         presets[object.preset].init();
                         presets[object.preset].create();
                     }
+                    */
                     else
                     {
                         console.log("Object '" + id + "' failed to load, no handler function matched.");

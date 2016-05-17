@@ -137,12 +137,12 @@ var element =
         options = extend(true, defaults, options);
 
         var text = new TextMagick(options.text, options);
-        var element = text.getElement();
+        var textElement = text.getElement();
 
-        element.addNew(element, options);
+        element.addNew(textElement, options);
         text.resize();
 
-        return {element: text, options: options};
+        return {element: textElement, text: text, options: options};
     },
 };
 
