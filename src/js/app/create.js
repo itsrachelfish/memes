@@ -160,6 +160,29 @@ var create =
 
         return {element: element, text: text, options: options};
     },
+
+    background: function(options)
+    {
+        if(options.background)
+        {
+            $('body').style({'background': options.background});
+        }
+
+        if(options.image)
+        {
+            $('body').style({'background-image': 'url("'+options.image+'")'});
+        }
+
+        if(options.repeat)
+        {
+            $('body').style({'background-repeat': options.repeat});
+        }
+
+        if(options.position)
+        {
+            $('body').style({'background-position': options.position});
+        }
+    }
 };
 
 module.exports = create;

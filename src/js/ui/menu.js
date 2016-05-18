@@ -149,25 +149,8 @@ var menu =
             event.preventDefault();
             var input = helper.serialize(this);
 
-            if(input.background)
-            {
-                $('body').style({'background': input.background});
-            }
-
-            if(input.image)
-            {
-                $('body').style({'background-image': 'url("'+input.image+'")'});
-            }
-
-            if(input.repeat)
-            {
-                $('body').style({'background-repeat': input.repeat});
-            }
-
-            if(input.position)
-            {
-                $('body').style({'background-position': input.position});
-            }
+            create.background(input);
+            storage.background(input);
 
             overlay.close('.background');
         });

@@ -20,7 +20,6 @@ var project =
     {
         title: 'Untitled Project',
         camera: false,
-        background: {},
         frame: 0,
         frames: [],
         objects: {},
@@ -58,6 +57,11 @@ var storage =
         if(project.data.frames[project.data.frame] !== undefined)
         {
             var frame = project.data.frames[project.data.frame];
+
+            if(frame.background)
+            {
+                create.background(frame.background);
+            }
 
             for(var id in frame)
             {
@@ -153,6 +157,13 @@ var storage =
         };
 
         project.data.frames[project.data.frame][id] = data;
+        localStorage.setItem('project', JSON.stringify(project.data));
+    },
+
+    // Update the background of the current frame
+    background: function(data)
+    {
+        project.data.frames[project.data.frame].background = data;
         localStorage.setItem('project', JSON.stringify(project.data));
     },
 
