@@ -1,13 +1,16 @@
 // Load wetfish basic
 var $ = require('wetfish-basic');
 
-// Load custom modules
-var overlay = require('./overlay');
-var pool = require('./pool');
+// Load other stuff
+var extend = require('extend');
+
+var overlay = require('../ui/overlay');
+var pool = require('../ui/pool');
+
 var helper = require('./helper');
 var element = require('./element');
 var storage = require('./storage');
-var extend = require('extend');
+
 
 var presets =
 {

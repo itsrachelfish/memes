@@ -5,7 +5,7 @@ require('dragondrop');
 // Load other stuff
 var extend = require('extend');
 var helper = require('./helper');
-var TextMagick = require('./textmagick');
+var TextMagick = require('../plugins/textmagick');
 
 // Helper functions for creating elements on the page
 var element =

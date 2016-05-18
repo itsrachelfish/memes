@@ -3,13 +3,15 @@ var $ = require('wetfish-basic');
 require('dragondrop');
 
 // Load custom modules
-var Webcam = require('./webcam');
-var helper = require('./helper');
-var menu = require('./menu');
-var overlay = require('./overlay');
-var pool = require('./pool');
-var templates = require('./templates');
-var storage = require('./storage');
+var pool = require('./plugins/pool');
+var templates = require('./plugins/templates');
+
+var helper = require('./app/helper');
+var storage = require('./app/storage');
+
+var menu = require('./ui/menu');
+var overlay = require('./ui/overlay');
+
 
 // A map of currently pressed keys
 var pressed = {};

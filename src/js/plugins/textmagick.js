@@ -3,7 +3,9 @@ var $ = require('wetfish-basic');
 
 // Load other stuff
 var extend = require('extend');
-var helper = require('./helper');
+
+// TODO: Remove application specific dependency
+var helper = require('../app/helper');
 
 var TextMagick = function(text, options)
 {

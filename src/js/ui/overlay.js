@@ -1,5 +1,5 @@
 var $ = require('wetfish-basic');
-var helper = require('./helper');
+var helper = require('../app/helper');
 
 var overlay =
 {

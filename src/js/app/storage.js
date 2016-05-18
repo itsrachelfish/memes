@@ -7,10 +7,10 @@
 var $ = require('wetfish-basic');
 
 // Load other stuff
+var extend = require('extend');
 var helper = require('./helper');
 var create = require('./element');
 var presets = require('./presets');
-var extend = require('extend');
 
 // Private object which stores the current project data in memory
 var project =

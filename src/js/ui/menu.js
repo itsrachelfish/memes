@@ -2,12 +2,15 @@
 var $ = require('wetfish-basic');
 
 // Load custom modules
-var Webcam = require('./webcam');
-var helper = require('./helper');
+var Webcam = require('../plugins/webcam');
+
+var helper = require('../app/helper');
+var element = require('../app/element');
+var storage = require('../app/storage');
+var presets = require('../app/presets');
+
 var overlay = require('./overlay');
-var element = require('./element');
-var storage = require('./storage');
-var presets = require('./presets');
+
 
 // Global webcam object
 var webcam;
