@@ -9,7 +9,7 @@ var $ = require('wetfish-basic');
 // Load other stuff
 var extend = require('extend');
 var helper = require('./helper');
-var create = require('./element');
+var create = require('./create');
 var presets = require('./presets');
 
 // Private object which stores the current project data in memory
@@ -69,19 +69,19 @@ var storage =
 
                     if(options.type == 'image')
                     {
-                        created = create.addImage(options);
+                        created = create.image(options);
                     }
                     else if(options.type == 'audio')
                     {
-                        created = create.addAudio(options);
+                        created = create.audio(options);
                     }
                     else if(options.type == 'video')
                     {
-                        created = create.addVideo(options);
+                        created = create.video(options);
                     }
                     else if(options.type == 'text')
                     {
-                        created = create.addText(options);
+                        created = create.text(options);
                     }
                     else if(options.type == 'preset' && presets[options.preset] !== undefined)
                     {

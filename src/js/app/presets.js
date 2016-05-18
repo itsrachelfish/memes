@@ -5,10 +5,10 @@ var $ = require('wetfish-basic');
 var extend = require('extend');
 
 var overlay = require('../ui/overlay');
-var pool = require('../ui/pool');
+var pool = require('../plugins/pool');
 
 var helper = require('./helper');
-var element = require('./element');
+var create = require('./create');
 var storage = require('./storage');
 
 
@@ -72,7 +72,7 @@ var presets =
             // Deep combine user given options with defaults
             options = extend(true, defaults, options);
 
-            element.addNew(airhorn, options);
+            create.element(airhorn, options);
             return {element: airhorn, options: options};
         },
     },
@@ -83,7 +83,7 @@ var presets =
         {
             if($(image).data('src'))
             {
-                return element.addImage({url: 'img/' + $(image).data('src')});
+                return create.image({url: 'img/' + $(image).data('src')});
             }
         }
     },
@@ -94,7 +94,7 @@ var presets =
         {
             if($(sound).data('src'))
             {
-                return element.addAudio({url: 'audio/' + $(sound).data('src')});
+                return create.audio({url: 'audio/' + $(sound).data('src')});
             }
         }
     },
@@ -105,7 +105,7 @@ var presets =
         {
             if($(video).data('src'))
             {
-                return element.addVideo({url: 'video/' + $(video).data('src')});
+                return create.video({url: 'video/' + $(video).data('src')});
             }
         }
     },

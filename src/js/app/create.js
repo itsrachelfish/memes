@@ -8,9 +8,9 @@ var helper = require('./helper');
 var TextMagick = require('../plugins/textmagick');
 
 // Helper functions for creating elements on the page
-var element =
+var create =
 {
-    addNew: function(element, options)
+    element: function(element, options)
     {
         // Check if audio / video specific options need to be added
         if(options.type == 'audio' || options.type == 'video')
@@ -79,7 +79,7 @@ var element =
         });
     },
 
-    addImage: function(options)
+    image: function(options)
     {
         var defaults =
         {
@@ -93,12 +93,11 @@ var element =
         var image = document.createElement('img');
         $(image).attr('src', options.url);
 
-        element.addNew(image, options);
-
+        create.element(image, options);
         return {element: image, options: options};
     },
 
-    addAudio: function(options)
+    audio: function(options)
     {
         var defaults =
         {
@@ -116,12 +115,11 @@ var element =
         var sound = document.createElement('audio');
         $(sound).attr('src', options.url);
 
-        element.addNew(sound, options);
-
+        create.element(sound, options);
         return {element: sound, options: options};
     },
 
-    addVideo: function(options)
+    video: function(options)
     {
         var defaults =
         {
@@ -139,12 +137,11 @@ var element =
         var video = document.createElement('video');
         $(video).attr('src', options.url);
 
-        element.addNew(video, options);
-
+        create.element(video, options);
         return {element: video, options: options};
     },
 
-    addText: function(options)
+    text: function(options)
     {
         var defaults =
         {
@@ -156,13 +153,13 @@ var element =
         options = extend(true, defaults, options);
 
         var text = new TextMagick(options.text, options);
-        var textElement = text.getElement();
+        var element = text.getElement();
 
-        element.addNew(textElement, options);
+        create.element(element, options);
         text.resize();
 
-        return {element: textElement, text: text, options: options};
+        return {element: element, text: text, options: options};
     },
 };
 
-module.exports = element;
+module.exports = create;

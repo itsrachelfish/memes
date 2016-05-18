@@ -5,7 +5,7 @@ var $ = require('wetfish-basic');
 var Webcam = require('../plugins/webcam');
 
 var helper = require('../app/helper');
-var element = require('../app/element');
+var create = require('../app/create');
 var storage = require('../app/storage');
 var presets = require('../app/presets');
 
@@ -73,7 +73,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var image = element.addImage(input);
+                var image = create.image(input);
 
                 // Save the new element in local storage
                 storage.save(image.element, image.options);
@@ -89,7 +89,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var sound = element.addAudio(input);
+                var sound = create.audio(input);
                 storage.save(sound.element, sound.options);
                 overlay.close('.sound');
             }
@@ -102,7 +102,7 @@ var menu =
 
             if(helper.validate(input))
             {
-                var video = element.addVideo(input);
+                var video = create.video(input);
                 storage.save(video.element, video.options);
                 overlay.close('.video');
             }
@@ -139,7 +139,7 @@ var menu =
                 }
             };
 
-            var text = element.addText(options);
+            var text = create.text(options);
             storage.save(text.element, text.options);
             overlay.close('.text');
         });
