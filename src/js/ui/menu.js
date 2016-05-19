@@ -175,7 +175,7 @@ var menu =
                 }
 
                 // Now call the create method
-                var preset = presets[preset].create();
+                var preset = presets[preset].create(this);
                 storage.save(preset.element, preset.options);
 
                 // And close the presets menu
