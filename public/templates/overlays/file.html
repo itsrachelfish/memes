@@ -1,11 +1,13 @@
 <div class="overlay file">
-    <h1>Save / Export</h1>
+    <h1>Project File</h1>
 
     <i class="note">Never load a project from someone you don't trust, you could get hacked!</i>
 
-    <button class="nope">Delete Project</button>
-    <button class="nope">Save Project</button>
-    <button class="nope">Import Project</button>
+    <div>
+        <button class="nope">New Project</button>
+        <button class="nope">Save Project</button>
+        <button class="nope">Import Project</button>
+    </div>
 
     <form>
         <div class="row">
@@ -15,8 +17,22 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="twelve columns">
+                <label for="date-created">Date Created</label>
+                <input name="date-created" class="u-full-width" placeholder="YYYY-MM-DD HH:MM:SS" id="date-created" type="text" readonly>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="twelve columns">
+                <label for="last-modified">Last Modified</label>
+                <input name="last-modified" class="u-full-width" placeholder="YYYY-MM-DD HH:MM:SS" id="last-modified" type="text" readonly>
+            </div>
+        </div>
+
         <hr>
 
-        <input class="button-primary" value="Submit" type="submit">
+        <input class="button-primary" value="Submit" type="submit" value="Save Project">
     </form>
 </div>
