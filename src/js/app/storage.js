@@ -195,6 +195,7 @@ var storage =
     {
         var saveWindow = window.open();
         saveWindow.document.write('<body><pre>' + JSON.stringify(project.data, null, '    ') + '</pre></body>');
+        saveWindow.document.close();
     },
 
     reset: function()
