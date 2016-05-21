@@ -195,6 +195,14 @@ var storage =
     {
         var saveWindow = window.open();
         saveWindow.document.write('<body><pre>' + JSON.stringify(project.data, null, '    ') + '</pre></body>');
+    },
+
+    reset: function()
+    {
+        project.data = project.defaults;
+        $('.workspace').html('');
+        $('body').attr('style', false);
+        localStorage.setItem('project', JSON.stringify(project.data));
     }
 };
 

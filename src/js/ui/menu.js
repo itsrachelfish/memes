@@ -36,9 +36,21 @@ var menu =
         });
 
         // Project file menu
+        $('.file .new').on('click', function()
+        {
+            var sure = confirm("Are you sure you want to start a new project? Any unsaved changes will be lost.");
+
+            if(sure)
+            {
+                storage.reset();
+                overlay.close('.file');
+            }
+        });
+
         $('.file .save').on('click', function()
         {
             storage.saveToFile();
+            overlay.close('.file');
         });
 
         // Webcam stuff
