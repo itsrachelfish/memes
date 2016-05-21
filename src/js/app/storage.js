@@ -190,6 +190,12 @@ var storage =
     {
 
     },
+
+    saveToFile: function()
+    {
+        var saveWindow = window.open();
+        saveWindow.document.write('<body><pre>' + JSON.stringify(project.data, null, '    ') + '</pre></body>');
+    }
 };
 
 module.exports = storage;

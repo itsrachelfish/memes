@@ -35,6 +35,12 @@ var menu =
             }
         });
 
+        // Project file menu
+        $('.file .save').on('click', function()
+        {
+            storage.saveToFile();
+        });
+
         // Webcam stuff
         $('.start-webcam').on('click', function()
         {
