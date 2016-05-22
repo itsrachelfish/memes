@@ -58,6 +58,28 @@ var menu =
             storage.title($(this).value());
         });
 
+        $('.file .import').on('submit', function(event)
+        {
+            event.preventDefault();
+
+            var sure = confirm("Are you sure you want to import a project? Any unsaved changes will be lost.");
+
+            if(sure)
+            {
+                var file = $('.file .import input').el[0].files[0];
+
+                if(file && file.type == 'application/json')
+                {
+                    storage.loadFromFile(file);
+                    overlay.close('.file');
+                }
+                else
+                {
+                    alert('Failed to load import file! Make sure it is saved as .json');
+                }
+            }
+        });
+
         // Webcam stuff
         $('.start-webcam').on('click', function()
         {

@@ -215,6 +215,31 @@ var storage =
         saveWindow.document.close();
     },
 
+    loadFromFile: function(file)
+    {
+        // Start by clearing out the storage
+        storage.reset();
+
+        var reader = new FileReader();
+        reader.readAsText(file);
+
+        reader.onload = function(event)
+        {
+            try
+            {
+                project.data = JSON.parse(reader.result);
+            }
+            catch(error)
+            {
+                project.data = project.defaults;
+                alert('There was an error loading your save file. Make sure it is valid JSON!');
+            }
+
+            storage.load();
+            localStorage.setItem('project', JSON.stringify(project.data));
+        }
+    },
+
     reset: function()
     {
         project.data = project.defaults;
