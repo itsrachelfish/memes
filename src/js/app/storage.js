@@ -53,6 +53,9 @@ var storage =
     // Load saved data onto the page
     load: function()
     {
+        // Set the title of the page
+        storage.title();
+
         // If there is saved data for the current frame
         if(project.data.frames[project.data.frame] !== undefined)
         {
@@ -164,6 +167,20 @@ var storage =
     background: function(data)
     {
         project.data.frames[project.data.frame].background = data;
+        localStorage.setItem('project', JSON.stringify(project.data));
+    },
+
+    // Update the title of the project
+    title: function(text)
+    {
+        if(text)
+        {
+            project.data.title = text;
+        }
+
+        $('title').text(project.data.title);
+        $('.file .title').value(project.data.title);
+
         localStorage.setItem('project', JSON.stringify(project.data));
     },
 

@@ -53,6 +53,11 @@ var menu =
             overlay.close('.file');
         });
 
+        $('.file .title').on('input change', function()
+        {
+            storage.title($(this).value());
+        });
+
         // Webcam stuff
         $('.start-webcam').on('click', function()
         {
