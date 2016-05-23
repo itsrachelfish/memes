@@ -80,6 +80,16 @@ var menu =
             }
         });
 
+        // Populate created / modified dates when the file overlay is opened
+        $('.file').on('overlay-opened', function()
+        {
+            var created = new Date(storage.get('created'));
+            var modified = new Date(storage.get('modified'));
+
+            $('.date-created').value(created.toLocaleDateString() + " - " + created.toLocaleTimeString());
+            $('.date-modified').value(modified.toLocaleDateString() + " - " + modified.toLocaleTimeString());
+        });
+
         // Webcam stuff
         $('.start-webcam').on('click', function()
         {

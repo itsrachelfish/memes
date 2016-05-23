@@ -10,6 +10,7 @@ var overlay =
         $('.overlay-wrap').on('click', function()
         {
             $('body').removeClass('overlay-open');
+            $('.overlay.open').trigger('overlay-closed');
             $('.overlay').removeClass('open');
         });
 
@@ -24,7 +25,7 @@ var overlay =
     open: function(selector)
     {
         $('body').addClass('overlay-open');
-        $('.overlay' + selector).addClass('open');
+        $('.overlay' + selector).addClass('open').trigger('overlay-opened');
 
         // Make sure the overlay is always on top
         $('.overlay' + selector).style({'z-index': helper.layers + 1});
@@ -34,7 +35,7 @@ var overlay =
     close: function(selector)
     {
         $('body').removeClass('overlay-open');
-        $('.overlay' + selector).removeClass('open');
+        $('.overlay' + selector).removeClass('open').trigger('overlay-closed');
     },
 };
 

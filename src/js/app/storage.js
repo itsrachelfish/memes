@@ -269,6 +269,12 @@ var storage =
         }
     },
 
+    // Get a property from the project
+    get: function(property)
+    {
+        return project.data[property];
+    },
+
     reset: function()
     {
         project.data = storage.create();
