@@ -55,8 +55,16 @@ var storage =
     {
         var output = project.defaults;
         output.created = new Date();
+        output.modified = new Date();
 
         return output;
+    },
+
+    // Persist project data to local storage
+    persist: function()
+    {
+        project.data.modified = new Date();
+        localStorage.setItem('project', JSON.stringify(project.data));
     },
 
     // Load saved data onto the page
@@ -169,14 +177,14 @@ var storage =
         };
 
         project.data.frames[project.data.frame][id] = data;
-        localStorage.setItem('project', JSON.stringify(project.data));
+        storage.persist();
     },
 
     // Update the background of the current frame
     background: function(data)
     {
         project.data.frames[project.data.frame].background = data;
-        localStorage.setItem('project', JSON.stringify(project.data));
+        storage.persist();
     },
 
     // Update the title of the project
@@ -190,7 +198,7 @@ var storage =
         $('title').text(project.data.title);
         $('.file .title').value(project.data.title);
 
-        localStorage.setItem('project', JSON.stringify(project.data));
+        storage.persist();
     },
 
     // Remove an obejct
@@ -208,7 +216,7 @@ var storage =
         delete project.data.frames[project.data.frame][id];
         delete project.data.objects[id];
 
-        localStorage.setItem('project', JSON.stringify(project.data));
+        storage.persist();
     },
 
     // Calculate total localstorage usage
@@ -245,7 +253,7 @@ var storage =
             }
 
             storage.load();
-            localStorage.setItem('project', JSON.stringify(project.data));
+            storage.persist();
         }
     },
 
@@ -254,7 +262,7 @@ var storage =
         project.data = storage.create();
         $('.workspace').html('');
         $('body').attr('style', false);
-        localStorage.setItem('project', JSON.stringify(project.data));
+        storage.persist();
     }
 };
 
