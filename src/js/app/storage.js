@@ -44,10 +44,19 @@ var storage =
         else
         {
             // Use default project data if none is found
-            project.data = project.defaults;
+            project.data = storage.create();
         }
 
         storage.load();
+    },
+
+    // Create a new project from default settings
+    create: function()
+    {
+        var output = project.defaults;
+        output.created = new Date();
+
+        return output;
     },
 
     // Load saved data onto the page
@@ -231,7 +240,7 @@ var storage =
             }
             catch(error)
             {
-                project.data = project.defaults;
+                project.data = storage.create();
                 alert('There was an error loading your save file. Make sure it is valid JSON!');
             }
 
@@ -242,7 +251,7 @@ var storage =
 
     reset: function()
     {
-        project.data = project.defaults;
+        project.data = storage.create();
         $('.workspace').html('');
         $('body').attr('style', false);
         localStorage.setItem('project', JSON.stringify(project.data));
