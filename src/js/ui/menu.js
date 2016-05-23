@@ -85,7 +85,8 @@ var menu =
         {
             $(this).addClass('hidden');
             $('.stop-webcam').removeClass('hidden');
-            
+
+            storage.camera(true);
             webcam = new Webcam('.webcam');
         });
 
@@ -94,6 +95,7 @@ var menu =
             $(this).addClass('hidden');
             $('.start-webcam').removeClass('hidden');
 
+            storage.camera(false);
             webcam.stop();
             $('.webcam').attr('src', '');
         });

@@ -73,6 +73,11 @@ var storage =
         // Set the title of the page
         storage.title();
 
+        if(project.data.camera)
+        {
+            $('.start-webcam').trigger('click');
+        }
+
         // If there is saved data for the current frame
         if(project.data.frames[project.data.frame] !== undefined)
         {
@@ -198,6 +203,13 @@ var storage =
         $('title').text(project.data.title);
         $('.file .title').value(project.data.title);
 
+        storage.persist();
+    },
+
+    camera: function(recording)
+    {
+        recording = recording ? true : false;
+        project.data.camera = recording;
         storage.persist();
     },
 
