@@ -8,6 +8,7 @@ var templates = require('./plugins/templates');
 
 var helper = require('./app/helper');
 var storage = require('./app/storage');
+var tools = require('./app/tools');
 
 var menu = require('./ui/menu');
 var overlay = require('./ui/overlay');
@@ -53,6 +54,7 @@ $(document).ready(function()
         menu.init();
         overlay.init();
         storage.init();
+        tools.init();
 
         var explosion = $('.preload .explosion').el[0];
         var hitmarker = $('.preload .hitmarker').el[0];    
