@@ -17,15 +17,34 @@ var tools =
             {
                 tools[tool](this);
 
-                // And close the tools menu
+                // Close the tools menu
                 overlay.close('.tools');
+
+                // And open tools help menu
+                overlay.open('.tools-help');
+
+                // Display help details for this tool
+                $('.tools-help .details').addClass('hidden');
+                $('.tools-help .details.' + tool).removeClass('hidden');
             }
         });
     },
 
+    // Helper function called whenever tools start being used
+    start: function()
+    {
+
+    },
+
+    // Helper function when a tool is finished being used
+    stop: function()
+    {
+
+    },
+
     select: function()
     {
-        alert('Select stuff!');
+        
     },
 };
 
