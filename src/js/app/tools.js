@@ -4,9 +4,13 @@ var $ = require('wetfish-basic');
 // Load other stuff
 var overlay = require('../ui/overlay');
 
+// Private variable for tracking the current tool in use
+var active = false;
+
+// Public object for all tool related functions
 var tools =
 {
-    init: function()
+   init: function()
     {
         $('.tools button').on('click', function()
         {
@@ -16,7 +20,7 @@ var tools =
             if(typeof(tools[tool]) === "function")
             {
                 tools.start();
-                tools[tool](this);
+                active = tool;
 
                 // Close the tools menu
                 overlay.close('.tools');
@@ -46,12 +50,22 @@ var tools =
             overlay.close('.tools-help');
             localStorage.setItem('tooCoolForHelp', 1);
         });
+
+        // When clicking on a draggable element in tool mode
+        $('body').on('click', '.tool-mode .dragon', function(event)
+        {
+            event.preventDefault();
+
+            // Pass the clicked element to the active tool handler
+            tools[active](this);
+        });
     },
 
     // Helper function called whenever tools start being used
     start: function()
     {
-
+        $('body').addClass('tool-mode');
+        $('.workspace .dragon').addClass('disabled');
     },
 
     // Helper function when a tool is finished being used
@@ -60,9 +74,10 @@ var tools =
 
     },
 
-    select: function()
+    select: function(element)
     {
-        
+        // Click handler
+        console.log(element);
     },
 };
 

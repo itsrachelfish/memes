@@ -65,6 +65,12 @@ $(document).ready(function()
         // Hitmarkers
         $('body').on('mousedown touchstart', '.workspace, .workspace *', function(event)
         {
+            // Prevent default behavior when in tool mode
+            if($('body').hasClass('tool-mode'))
+            {
+                return;
+            }
+
             // If left click was pressed, or this is a touch event
             if(!event.buttons || event.buttons == 1)
             {
@@ -118,7 +124,13 @@ $(document).ready(function()
 
         // Deleting things
         $('body').on('mousedown', '.workspace *', function(event)
-        {        
+        {
+            // Prevent default behavior when in tool mode
+            if($('body').hasClass('tool-mode'))
+            {
+                return;
+            }
+
             // If right click was pressed
             if(event.buttons == 2)
             {

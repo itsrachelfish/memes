@@ -31,6 +31,12 @@ var presets =
             // When an airhorn is clicked
             $('body').on('mousedown', '.workspace .airhorn', function()
             {
+                // Prevent default behavior when in tool mode
+                if($('body').hasClass('tool-mode'))
+                {
+                    return;
+                }
+
                 // Play the airhorn sound
                 pool.play('airhorn');
 
