@@ -15,18 +15,36 @@ var tools =
             // If there is a handler function for this tool
             if(typeof(tools[tool]) === "function")
             {
+                tools.start();
                 tools[tool](this);
 
                 // Close the tools menu
                 overlay.close('.tools');
 
-                // And open tools help menu
-                overlay.open('.tools-help');
+                // Does the user want to see help windows?
+                var tooCool = parseInt(localStorage.getItem('tooCoolForHelp'));
 
-                // Display help details for this tool
-                $('.tools-help .details').addClass('hidden');
-                $('.tools-help .details.' + tool).removeClass('hidden');
+                if(!tooCool)
+                {
+                    // Then open tools help menu
+                    overlay.open('.tools-help');
+
+                    // Display help details for this tool
+                    $('.tools-help .details').addClass('hidden');
+                    $('.tools-help .details.' + tool).removeClass('hidden');
+                }
             }
+        });
+
+        $('.tools-help .accept-help').on('click', function()
+        {
+            overlay.close('.tools-help');
+        });
+
+        $('.tools-help .enough-help').on('click', function()
+        {
+            overlay.close('.tools-help');
+            localStorage.setItem('tooCoolForHelp', 1);
         });
     },
 
