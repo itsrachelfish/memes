@@ -35,7 +35,18 @@ var overlay =
     close: function(selector)
     {
         $('body').removeClass('overlay-open');
-        $('.overlay' + selector).removeClass('open').trigger('overlay-closed');
+
+        // Was a selector passed?
+        if(selector)
+        {
+            $('.overlay' + selector).removeClass('open').trigger('overlay-closed');
+        }
+
+        // Otherwise, close any open overlay
+        else
+        {
+            $('.overlay.open').removeClass('open').trigger('overlay-closed');
+        }
     },
 };
 

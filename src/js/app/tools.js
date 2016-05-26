@@ -71,7 +71,9 @@ var tools =
     // Helper function when a tool is finished being used
     stop: function()
     {
-
+        active = false;
+        $('body').removeClass('tool-mode');
+        $('.workspace .dragon').removeClass('disabled');
     },
 
     select: function(element)

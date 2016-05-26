@@ -217,10 +217,26 @@ $(document).ready(function()
             var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
             pressed[key] = true;
 
-            // Toggle the menu when pressing escape
+            // Keyboard shortcuts that trigger when a user presses escape
             if(key == 'escape')
             {
-                $('.menu').toggle('hidden');
+                // Are we in tool mode?
+                if($('body').hasClass('tool-mode'))
+                {
+                    tools.stop();
+                }
+
+                // Is an overlay open?
+                else if($('body').hasClass('overlay-open'))
+                {
+                    overlay.close();
+                }
+
+                // Otherwise, toggle the menu when pressing escape
+                else
+                {
+                    $('.menu').toggle('hidden');
+                }
             }
         });
 
