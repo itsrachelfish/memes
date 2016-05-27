@@ -135,6 +135,9 @@ var menu =
                 // Save the new element in local storage
                 storage.save(image.element, image.options);
 
+                // Remove any temporary input fields (automatically generated under certain conditions, like when tools are used)
+                $(this).find('.temporary').remove();
+
                 overlay.close('.image');
             }
         });
@@ -148,6 +151,7 @@ var menu =
             {
                 var audio = create.audio(input);
                 storage.save(audio.element, audio.options);
+                $(this).find('.temporary').remove();
                 overlay.close('.audio');
             }
         });
@@ -161,6 +165,7 @@ var menu =
             {
                 var video = create.video(input);
                 storage.save(video.element, video.options);
+                $(this).find('.temporary').remove();
                 overlay.close('.video');
             }
         });

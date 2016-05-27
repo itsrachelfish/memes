@@ -12,6 +12,13 @@ var create =
 {
     element: function(element, options)
     {
+        // Does the element already exist on the page?
+        if(!document.contains(element))
+        {
+            // Add the new element to the workspace
+            $('.workspace').el[0].appendChild(element);
+        }
+
         // Check if audio / video specific options need to be added
         if(options.type == 'audio' || options.type == 'video')
         {
@@ -24,9 +31,6 @@ var create =
         // Add license information if provided
         $(element).data('desc', options.desc);
         $(element).data('license', options.license);
-
-        // Add the new element to the workspace
-        $('.workspace').el[0].appendChild(element);
 
         // Make sure it's on the top layer
         $(element).style({'z-index': helper.layers + 1});
@@ -81,6 +85,7 @@ var create =
 
     image: function(options)
     {
+        var image;
         var defaults =
         {
             type: 'image',
@@ -90,7 +95,25 @@ var create =
         // Deep combine user given options with defaults
         options = extend(true, defaults, options);
 
-        var image = document.createElement('img');
+        // Check if any old save data was provided in the options
+        if(options.id && options.saved)
+        {
+            var id = options.id;
+            var saved = JSON.parse(options.saved);
+            delete options.id;
+            delete options.saved;
+
+            // Combine old save data with new form data
+            options = extend(true, saved, options);
+
+            // And now check if the saved element ID actually exists on the page
+            if($('#' + id).el.length)
+            {
+                image = $('#' + id).el[0];
+            }
+        }
+
+        image = image || document.createElement('img');
         $(image).attr('src', options.url);
 
         create.element(image, options);
@@ -99,6 +122,7 @@ var create =
 
     audio: function(options)
     {
+        var audio;
         var defaults =
         {
             type: 'audio',
@@ -112,7 +136,26 @@ var create =
         // Deep combine user given options with defaults
         options = extend(true, defaults, options);
 
-        var audio = document.createElement('audio');
+        // Check if any old save data was provided in the options
+        if(options.id && options.saved)
+        {
+            var id = options.id;
+            var saved = JSON.parse(options.saved);
+            delete options.id;
+            delete options.saved;
+
+            // Combine old save data with new form data
+            options = extend(true, saved, options);
+
+            // And now check if the saved element ID actually exists on the page
+            if($('#' + id).el.length)
+            {
+                audio = $('#' + id).el[0];
+            }
+        }
+
+
+        audio = audio || document.createElement('audio');
         $(audio).attr('src', options.url);
 
         create.element(audio, options);
@@ -121,6 +164,7 @@ var create =
 
     video: function(options)
     {
+        var video;
         var defaults =
         {
             type: 'video',
@@ -134,7 +178,25 @@ var create =
         // Deep combine user given options with defaults
         options = extend(true, defaults, options);
 
-        var video = document.createElement('video');
+        // Check if any old save data was provided in the options
+        if(options.id && options.saved)
+        {
+            var id = options.id;
+            var saved = JSON.parse(options.saved);
+            delete options.id;
+            delete options.saved;
+
+            // Combine old save data with new form data
+            options = extend(true, saved, options);
+
+            // And now check if the saved element ID actually exists on the page
+            if($('#' + id).el.length)
+            {
+                video = $('#' + id).el[0];
+            }
+        }
+
+        video = video || document.createElement('video');
         $(video).attr('src', options.url);
 
         create.element(video, options);

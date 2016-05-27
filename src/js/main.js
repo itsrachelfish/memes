@@ -220,16 +220,16 @@ $(document).ready(function()
             // Keyboard shortcuts that trigger when a user presses escape
             if(key == 'escape')
             {
-                // Are we in tool mode?
-                if($('body').hasClass('tool-mode'))
-                {
-                    tools.stop();
-                }
-
                 // Is an overlay open?
-                else if($('body').hasClass('overlay-open'))
+                if($('body').hasClass('overlay-open'))
                 {
                     overlay.close();
+                }
+                
+                // Are we in tool mode?
+                else if($('body').hasClass('tool-mode'))
+                {
+                    tools.stop();
                 }
 
                 // Otherwise, toggle the menu when pressing escape

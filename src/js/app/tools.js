@@ -3,6 +3,7 @@ var $ = require('wetfish-basic');
 
 // Load other stuff
 var overlay = require('../ui/overlay');
+var storage = require('./storage');
 
 // Private variable for tracking the current tool in use
 var active = false;
@@ -78,8 +79,50 @@ var tools =
 
     select: function(element)
     {
-        // Click handler
-        console.log(element);
+        // Check if the element has a unique ID
+        var id = $(element).attr('id');
+        var objects = storage.get('objects');
+
+        // Now make sure it actually exists in the project's save data
+        if(objects[id] !== undefined)
+        {
+            var object = objects[id];
+
+            if(object.type == 'image' || object.type == 'audio' || object.type == 'video')
+            {
+                var selector = '.' + object.type;
+                var form = '.overlay' + selector + ' form';
+
+                // Open the overlay for this type of object
+                overlay.open(selector);
+
+                // Set the original object data in a hidden field
+                $(form).append('<textarea class="temporary hidden" name="id">' + id + '</textarea>');
+                $(form).append('<textarea class="temporary hidden" name="saved">' + JSON.stringify(object) + '</textarea>');
+
+                // Basic information that applies to all images, audio, and videos
+                $(form).find('input[name="url"]').value(object.url);
+                $(form).find('input[name="desc"]').value(object.desc);
+                $(form).find('input[name="license"]').value(object.license);
+
+                // Options specific to audio and video elements
+                if(object.type == 'audio' || object.type == 'video')
+                {
+                    $(form).find('input[name="volume"]').value(object.url);
+                    $(form).find('input[name="controls"]').prop('checked', object.controls);
+                    $(form).find('input[name="autoplay"]').prop('checked', object.autoplay);
+                    $(form).find('input[name="loop"]').prop('checked', object.loop);
+                }
+            }
+            else if(object.type == 'text')
+            {
+                alert('Coming soon LOL');
+            }
+            else
+            {
+                alert('The object you selected cannot be modified by this tool. Special objects like interactive presets cannot be edited. Sorry!');
+            }
+        }
     },
 };
 
