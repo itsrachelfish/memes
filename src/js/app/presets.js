@@ -63,7 +63,7 @@ var presets =
         },
 
         // Add an airhorn to the page
-        create: function(options)
+        create: function(button, options)
         {
             var airhorn = document.createElement('div');
             $(airhorn).addClass('airhorn');
@@ -85,33 +85,33 @@ var presets =
 
     image:
     {
-        create: function(image)
+        create: function(button)
         {
             if($(image).data('src'))
             {
-                return create.image({url: 'img/' + $(image).data('src')});
+                return create.image({url: 'img/' + $(button).data('src')});
             }
         }
     },
 
     sound:
     {
-        create: function(sound)
+        create: function(button)
         {
             if($(sound).data('src'))
             {
-                return create.audio({url: 'audio/' + $(sound).data('src')});
+                return create.audio({url: 'audio/' + $(button).data('src')});
             }
         }
     },
 
     video:
     {
-        create: function(video)
+        create: function(button)
         {
             if($(video).data('src'))
             {
-                return create.video({url: 'video/' + $(video).data('src')});
+                return create.video({url: 'video/' + $(button).data('src')});
             }
         }
     },
