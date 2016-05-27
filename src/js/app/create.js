@@ -112,11 +112,11 @@ var create =
         // Deep combine user given options with defaults
         options = extend(true, defaults, options);
 
-        var sound = document.createElement('audio');
-        $(sound).attr('src', options.url);
+        var audio = document.createElement('audio');
+        $(audio).attr('src', options.url);
 
-        create.element(sound, options);
-        return {element: sound, options: options};
+        create.element(audio, options);
+        return {element: audio, options: options};
     },
 
     video: function(options)

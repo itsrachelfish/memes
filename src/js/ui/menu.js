@@ -139,16 +139,16 @@ var menu =
             }
         });
 
-        $('.sound.overlay form').on('submit', function(event)
+        $('.audio.overlay form').on('submit', function(event)
         {
             event.preventDefault();
             var input = helper.serialize(this);
 
             if(helper.validate(input))
             {
-                var sound = create.audio(input);
-                storage.save(sound.element, sound.options);
-                overlay.close('.sound');
+                var audio = create.audio(input);
+                storage.save(audio.element, audio.options);
+                overlay.close('.audio');
             }
         });
 

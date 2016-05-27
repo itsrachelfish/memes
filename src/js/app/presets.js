@@ -87,18 +87,18 @@ var presets =
     {
         create: function(button)
         {
-            if($(image).data('src'))
+            if($(button).data('src'))
             {
                 return create.image({url: 'img/' + $(button).data('src')});
             }
         }
     },
 
-    sound:
+    audio:
     {
         create: function(button)
         {
-            if($(sound).data('src'))
+            if($(button).data('src'))
             {
                 return create.audio({url: 'audio/' + $(button).data('src')});
             }
@@ -109,7 +109,7 @@ var presets =
     {
         create: function(button)
         {
-            if($(video).data('src'))
+            if($(button).data('src'))
             {
                 return create.video({url: 'video/' + $(button).data('src')});
             }
