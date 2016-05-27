@@ -115,7 +115,7 @@ var storage =
                     else if(options.type == 'preset' && presets[options.preset] !== undefined)
                     {
                         presets[options.preset].init();
-                        created = presets[options.preset].create(options);
+                        created = presets[options.preset].create(null, options);
                     }
                     else
                     {
