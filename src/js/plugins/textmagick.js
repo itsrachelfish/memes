@@ -52,7 +52,8 @@ TextMagick.prototype.init = function()
     this.setText();
     this.refresh();
 
-    return this.element.svg;
+    // Save a reference to textmagick on the dom, so we can access stuff later
+    this.element.wrapper.textmagick = this;
 }
 
 TextMagick.prototype.setPatternSize = function(url, type)

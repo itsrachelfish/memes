@@ -116,7 +116,23 @@ var tools =
             }
             else if(object.type == 'text')
             {
-                alert('Coming soon LOL');
+                overlay.open('.text');
+
+                var form = '.overlay.text form';
+
+                // Set the original object data in a hidden field
+                $(form).append('<textarea class="temporary hidden" name="id">' + id + '</textarea>');
+                $(form).append('<textarea class="temporary hidden" name="saved">' + JSON.stringify(object) + '</textarea>');
+
+                // Add saved options into the form
+                $(form).find('input[name="text"]').value(object.text);
+                $(form).find('input[name="text-color"]').value(object['text-color']);
+                $(form).find('input[name="text-image"]').value(object['text-image']);
+                $(form).find('input[name="text-size"]').value(object['text-size']);
+                $(form).find('input[name="border"]').prop('checked', object.border.enabled);
+                $(form).find('input[name="border-color"]').value(object['border-color']);
+                $(form).find('input[name="border-image"]').value(object['border-image']);
+                $(form).find('input[name="border-size"]').value(object['border-size']);
             }
             else
             {

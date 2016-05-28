@@ -198,11 +198,19 @@ var menu =
                     size: input['border-size'],
                     color: input['border-color'],
                     image: input['border-image'],
-                }
+                },
+
+                // Special options only set when editing existing text
+                id: input.id,
+                saved: input.saved
             };
+
+            // Remove any temporary input fields (automatically generated under certain conditions, like when tools are used)
+            $(this).find('.temporary').remove();
 
             var text = create.text(options);
             storage.save(text.element, text.options);
+
             overlay.close('.text');
         });
 

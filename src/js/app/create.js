@@ -205,6 +205,8 @@ var create =
 
     text: function(options)
     {
+        var text;
+        var element;
         var defaults =
         {
             type: 'text',
@@ -214,10 +216,35 @@ var create =
         // Deep combine user given options with defaults
         options = extend(true, defaults, options);
 
-        var text = new TextMagick(options.text, options);
-        var element = text.getElement();
+        // Check if any old save data was provided in the options
+        if(options.id && options.saved)
+        {
+            var id = options.id;
+            var saved = JSON.parse(options.saved);
+            delete options.id;
+            delete options.saved;
 
-        create.element(element, options);
+            // Combine old save data with new form data
+            options = extend(true, saved, options);
+
+            // And now check if the saved element ID actually exists on the page
+            if($('#' + id).el.length)
+            {
+                element = $('#' + id).el[0];
+                text = element.textmagick;
+
+                text.setText(options.text);
+                text.setOptions(options);
+            }
+        }
+        else
+        {
+            text = new TextMagick(options.text, options);
+            element = text.getElement();
+
+            create.element(element, options);
+        }
+
         text.resize();
 
         return {element: element, text: text, options: options};
