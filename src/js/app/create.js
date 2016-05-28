@@ -66,6 +66,12 @@ var create =
 
         $(element).dragondrop();
 
+        // Add disabled class if we're currently in tool mode, to prevent users from dragging newly created elements while still using a tool
+        if($('body').hasClass('tool-mode'))
+        {
+            $(element).addClass('disabled');
+        }
+
         // Ensure the element being dragged is always on top
         $(element).on('dragstart', function()
         {
