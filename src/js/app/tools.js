@@ -140,6 +140,11 @@ var tools =
             }
         }
     },
+
+    transform: function()
+    {
+        alert('OOOOOOOO BOY');
+    },
 };
 
 module.exports = tools;
