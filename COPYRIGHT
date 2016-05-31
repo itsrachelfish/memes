@@ -121,6 +121,15 @@ public/src/video/hot-hot-hot.webm
     - Original video file edited using ffmpeg on the command line:
         - ffmpeg -i original.webm -c copy -ss 00:00:50 -t 00:00:20 -async 1 edited.webm
 
+public/src/video/tea-bitch.mp4
+    - Source URL https://www.youtube.com/watch?v=5gvH6HeYe4k
+    - Original video file edited using ffmpeg on the command line:
+        - ffmpeg -i original.mp4 -ss 00:00:08 -t 00:00:05 -async 1 edited.mp4
+
+public/src/video/damn.mp4
+    - Source URL https://www.youtube.com/watch?v=5gvH6HeYe4k
+    - Original video file edited using ffmpeg on the command line:
+        - ffmpeg -i original.mp4 -ss 00:00:13 -t 00:00:06 -async 1 edited.mp4
 
 
 Unknown License
