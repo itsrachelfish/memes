@@ -4,6 +4,7 @@ var $ = require('wetfish-basic');
 // Load other stuff
 var overlay = require('../ui/overlay');
 var storage = require('./storage');
+var transform = require('../plugins/transform');
 
 // Private variable for tracking the current tool in use
 var active = false;
@@ -141,9 +142,9 @@ var tools =
         }
     },
 
-    transform: function()
+    transform: function(element)
     {
-        alert('OOOOOOOO BOY');
+        transform.start(element);
     },
 };
 

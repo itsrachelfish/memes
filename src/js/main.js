@@ -5,7 +5,6 @@ require('dragondrop');
 // Load custom modules
 var pool = require('./plugins/pool');
 var templates = require('./plugins/templates');
-var line = require('./plugins/line');
 
 var helper = require('./app/helper');
 var storage = require('./app/storage');
@@ -56,18 +55,6 @@ $(document).ready(function()
         overlay.init();
         storage.init();
         tools.init();
-        line.init();
-
-        $(window).on('mousemove', function(event)
-        {
-            line.refresh();
-            line.draw(event.clientX, event.clientY);
-        });
-
-        $(window).on('resize', function()
-        {
-            line.init();
-        });
 
         var explosion = $('.preload .explosion').el[0];
         var hitmarker = $('.preload .hitmarker').el[0];    
