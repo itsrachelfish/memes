@@ -25,6 +25,8 @@ var transform =
 
     stop: function(element)
     {
+        line.refresh();
+
         $(window).off('mousemove', transform.mousemove);
         $(window).off('resize', transform.resize);
     },

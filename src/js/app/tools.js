@@ -59,6 +59,7 @@ var tools =
             event.preventDefault();
 
             // Pass the clicked element to the active tool handler
+            tools.element = this;
             tools[active](this);
         });
     },
@@ -76,6 +77,9 @@ var tools =
         active = false;
         $('body').removeClass('tool-mode');
         $('.workspace .dragon').removeClass('disabled');
+
+        // Make sure transformation is stopped
+        transform.stop(tools.element);
     },
 
     select: function(element)
@@ -145,6 +149,7 @@ var tools =
     transform: function(element)
     {
         transform.start(element);
+        
     },
 };
 
