@@ -8,3 +8,70 @@
         }
     }
 }
+
+.transform {
+    position: relative;
+    border: 1px dashed #ccc;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+
+    .handle {
+        position: absolute;
+        height: 0.5em;
+        width: 0.5em;
+        background-color: #eee;
+        z-index: 1;
+    }
+
+    .handle.active {
+        background-color: yellow;
+    }
+
+    .top {
+        top: -0.25em;
+    }
+
+    .bottom {
+        bottom: -0.25em;
+    }
+
+    .left {
+        left: -0.25em;
+    }
+
+    .right {
+        right: -0.25em;
+    }
+
+    .horizontal {
+        top: 50%;
+        margin-top: -0.25em;
+    }
+
+    .vertical {
+        left: 50%;
+        margin-left: -0.25em;
+    }
+
+    .object {
+        border: 1px solid #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .object > * {
+        border: 1px solid #000;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        width: 100% !important;
+        height: 100% !important;
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+    }
+}

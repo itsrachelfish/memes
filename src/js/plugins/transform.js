@@ -3,13 +3,30 @@ var line = require('./line');
 
 var transform =
 {
+    started: false,
+    
     start: function(element)
     {
+        if(transform.started)
+        {
+            return;
+        }
+
+        transform.started = true;
+
         $(window).on('mousemove', transform.mousemove);
         $(window).on('resize', transform.resize);
 
         transform.element = element;
         line.init(element);
+
+        var template = $('.transform.hidden').clone();
+        $(template).find('.object').el[0].appendChild(element);
+        $(template).removeClass('hidden');
+
+        $('.workspace').el[0].appendChild(template);
+
+        transform.template = template;
     },
 
     mousemove: function(event)
@@ -29,6 +46,11 @@ var transform =
 
         $(window).off('mousemove', transform.mousemove);
         $(window).off('resize', transform.resize);
+
+        $('.workspace').el[0].appendChild(transform.element);
+        $(transform.template).remove();
+
+        transform.started = false;
     },
 };
 
