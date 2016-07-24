@@ -80,6 +80,7 @@ var tools =
 
         // Make sure transformation is stopped
         transform.stop(tools.element);
+        transform.unload();
     },
 
     select: function(element)
@@ -149,7 +150,6 @@ var tools =
     transform: function(element)
     {
         transform.start(element);
-        
     },
 };
 

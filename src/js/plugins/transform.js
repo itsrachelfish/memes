@@ -2,23 +2,42 @@ var $ = require('wetfish-basic');
 var line = require('./line');
 var extend = require('extend');
 
+var loaded = false;
 var transforming = false;
 
 var transform =
 {
-    start: function(element)
+    load: function(element)
     {
-        if(transforming)
-        {
-            return;
-        }
-
-        transforming = true;
-
         $(window).on('mousedown', '.transform .handle', transform.mousedown);
         $(window).on('mousemove', transform.mousemove);
         $(window).on('mouseup', transform.mouseup);
         $(window).on('resize', transform.resize);
+        loaded = true;
+    },
+
+    unload: function(element)
+    {
+        $(window).off('mousedown', '.transform .handle', transform.mousedown);
+        $(window).off('mousemove', transform.mousemove);
+        $(window).off('mouseup', transform.mouseup);
+        $(window).off('resize', transform.resize);
+        loaded = false;
+    },
+
+    start: function(element)
+    {
+        // Have all of the transform events been loaded yet?
+        if(!loaded)
+        {
+            transform.load();
+        }
+
+        // If a transformation was already started, stop it!
+        if(transform.element)
+        {
+            transform.stop();
+        }
 
         transform.element = element;
         line.init(element);
@@ -34,12 +53,18 @@ var transform =
         transform.template = template;
     },
 
+    stop: function(element)
+    {
+        line.refresh();
+        $(transform.template).remove();
+        transform.template = false;
+        transform.element = false;
+    },
+
     mousedown: function(event)
     {
-        if(transforming)
-        {
-            $(this).addClass('active');
-        }
+        $(this).addClass('active');
+        transforming = true;
     },
 
     mousemove: function(event)
@@ -57,6 +82,7 @@ var transform =
         {
             line.refresh();
             $('.transform .handle.active').removeClass('active');
+            transforming = false;
         }
     },
 
@@ -66,19 +92,6 @@ var transform =
         {
             line.init(transform.element);
         }
-    },
-
-    stop: function(element)
-    {
-        line.refresh();
-
-        $(window).off('mousedown', '.transform .handle', transform.mousedown);
-        $(window).off('mousemove', transform.mousemove);
-        $(window).off('mouseup', transform.mouseup);
-        $(window).off('resize', transform.resize);
-
-        $(transform.template).remove();
-        transforming = false;
     },
 };
 
