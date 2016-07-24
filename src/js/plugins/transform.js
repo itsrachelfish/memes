@@ -5,6 +5,16 @@ var extend = require('extend');
 var loaded = false;
 var transforming = false;
 
+function radians(degrees)
+{
+    return  degrees * Math.PI / 180;
+}
+
+function degrees(radians)
+{
+    return radians * 180 / Math.PI;
+}
+
 var transform =
 {
     load: function(element)
@@ -45,6 +55,12 @@ var transform =
         var original = extend($(element).size(), $(element).position());
         var template = $('.transform.hidden').clone();
 
+        transform.center =
+        {
+            x: original.left + (original.width / 2),
+            y: original.top + (original.height / 2)
+        };
+
         $(template).removeClass('hidden');
         $(template).style({'height': original.height + 'px', 'width': original.width + 'px'});
         $(template).transform('translate', original.left + 'px', original.top + 'px');
@@ -64,6 +80,8 @@ var transform =
     mousedown: function(event)
     {
         $(this).addClass('active');
+
+        transform.offset = parseInt($(this).data('offset'));
         transforming = true;
     },
 
@@ -73,6 +91,17 @@ var transform =
         {
             line.refresh();
             line.draw(event.clientX, event.clientY);
+
+            // Get the angle of the line relative to the origin
+            var difference =
+            {
+                x: event.clientX - transform.center.x,
+                y: event.clientY - transform.center.y
+            };
+
+            var angle = degrees(Math.atan2(difference.y, difference.x)) + transform.offset;
+            $(transform.template).transform('rotate', angle + 'deg');
+            $(transform.element).transform('rotate', angle + 'deg');
         }
     },
 
