@@ -15,6 +15,20 @@ function degrees(radians)
     return radians * 180 / Math.PI;
 }
 
+function distance(start, end)
+{
+    var delta =
+    {
+        x: end.x - start.x,
+        y: end.y - start.y
+    }
+
+    delta.x *= delta.x;
+    delta.y *= delta.y;
+
+    return Math.sqrt(delta.x + delta.y);
+}
+
 var transform =
 {
     load: function(element)
@@ -53,6 +67,8 @@ var transform =
         line.init(element);
 
         var original = extend($(element).size(), $(element).position());
+        transform.original = original;
+        
         var template = $('.transform.hidden').clone();
 
         transform.center =
@@ -61,9 +77,28 @@ var transform =
             y: original.top + (original.height / 2)
         };
 
+        // Which dimension is bigger?
+        transform.dimension = (original.height > original.width) ? 'height' : 'width';
+
         $(template).removeClass('hidden');
         $(template).style({'height': original.height + 'px', 'width': original.width + 'px'});
         $(template).transform('translate', original.left + 'px', original.top + 'px');
+
+        transform.angle = parseFloat($(element).data('rotate'));
+        transform.scale = parseFloat($(element).data('scale'));
+
+        // If this element has already been rotated
+        if(transform.angle)
+        {
+            // Set the new template to the same angle
+            $(template).transform('rotate', transform.angle + 'deg');
+        }
+
+        // If this element has already been scaled
+        if(transform.scale)
+        {
+            $(template).transform('scale', transform.scale);
+        }
 
         $('.workspace').el[0].appendChild(template);
         transform.template = template;
@@ -99,9 +134,15 @@ var transform =
                 y: event.clientY - transform.center.y
             };
 
+            // Calculate the new size of the element based on the distance from the center to the current mouse position
+            var size = distance(transform.center, {x: event.clientX, y: event.clientY}) * 2;
+            var original = transform.original[transform.dimension];
+            var scale = size / original;
             var angle = degrees(Math.atan2(difference.y, difference.x)) + transform.offset;
-            $(transform.template).transform('rotate', angle + 'deg');
-            $(transform.element).transform('rotate', angle + 'deg');
+            $(transform.template).transform('rotate', angle + 'deg').transform('scale', scale);
+            $(transform.element).transform('rotate', angle + 'deg').transform('scale', scale);
+            $(transform.element).data('rotate', angle);
+            $(transform.element).data('scale', scale);
         }
     },
 
