@@ -2,20 +2,22 @@ var $ = require('wetfish-basic');
 var line = require('./line');
 var extend = require('extend');
 
+var transforming = false;
+
 var transform =
 {
-    started: false,
-    
     start: function(element)
     {
-        if(transform.started)
+        if(transforming)
         {
             return;
         }
 
-        transform.started = true;
+        transforming = true;
 
+        $(window).on('mousedown', '.transform .handle', transform.mousedown);
         $(window).on('mousemove', transform.mousemove);
+        $(window).on('mouseup', transform.mouseup);
         $(window).on('resize', transform.resize);
 
         transform.element = element;
@@ -32,28 +34,51 @@ var transform =
         transform.template = template;
     },
 
+    mousedown: function(event)
+    {
+        if(transforming)
+        {
+            $(this).addClass('active');
+        }
+    },
+
     mousemove: function(event)
     {
-        line.refresh();
-        line.draw(event.clientX, event.clientY);
+        if(transforming)
+        {
+            line.refresh();
+            line.draw(event.clientX, event.clientY);
+        }
+    },
+
+    mouseup: function(event)
+    {
+        if(transforming)
+        {
+            line.refresh();
+            $('.transform .handle.active').removeClass('active');
+        }
     },
 
     resize: function(event)
     {
+        if(transforming)
+        {
             line.init(transform.element);
+        }
     },
 
     stop: function(element)
     {
         line.refresh();
 
+        $(window).off('mousedown', '.transform .handle', transform.mousedown);
         $(window).off('mousemove', transform.mousemove);
+        $(window).off('mouseup', transform.mouseup);
         $(window).off('resize', transform.resize);
 
-        $('.workspace').el[0].appendChild(transform.element);
         $(transform.template).remove();
-
-        transform.started = false;
+        transforming = false;
     },
 };
 
