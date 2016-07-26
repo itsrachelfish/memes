@@ -42,6 +42,14 @@ var transform =
 
     unload: function(element)
     {
+        delete transform.element;
+        delete transform.size;
+        delete transform.center;
+        delete transform.dimension;
+        delete transform.template;
+        delete transform.angle;
+        delete transform.scale;
+        
         $(window).off('mousedown', '.transform .handle', transform.mousedown);
         $(window).off('mousemove', transform.mousemove);
         $(window).off('mouseup', transform.mouseup);
@@ -66,23 +74,29 @@ var transform =
         transform.element = element;
         line.init(element);
 
-        var original = extend($(element).size(), $(element).position());
-        transform.original = original;
+        var position =
+        {
+            x: parseInt(element.transform.translate[0]), // Because wetfish basic is awesome <3
+            y: parseInt(element.transform.translate[1])
+        };
+
+        var size = $(element).size();
+        transform.size = size;
         
         var template = $('.transform.hidden').clone();
 
         transform.center =
         {
-            x: original.left + (original.width / 2),
-            y: original.top + (original.height / 2)
+            x: position.x + (size.width / 2),
+            y: position.y + (size.height / 2)
         };
 
         // Which dimension is bigger?
-        transform.dimension = (original.height > original.width) ? 'height' : 'width';
+        transform.dimension = (size.height > size.width) ? 'height' : 'width';
 
         $(template).removeClass('hidden');
-        $(template).style({'height': original.height + 'px', 'width': original.width + 'px'});
-        $(template).transform('translate', original.left + 'px', original.top + 'px');
+        $(template).style({'height': size.height + 'px', 'width': size.width + 'px'});
+        $(template).transform('translate', position.x + 'px', position.y + 'px');
 
         transform.angle = parseFloat($(element).data('rotate'));
         transform.scale = parseFloat($(element).data('scale'));
@@ -136,7 +150,7 @@ var transform =
 
             // Calculate the new size of the element based on the distance from the center to the current mouse position
             var size = distance(transform.center, {x: event.clientX, y: event.clientY}) * 2;
-            var original = transform.original[transform.dimension];
+            var original = transform.size[transform.dimension];
             var scale = size / original;
             var angle = degrees(Math.atan2(difference.y, difference.x)) + transform.offset;
             $(transform.template).transform('rotate', angle + 'deg').transform('scale', scale);
