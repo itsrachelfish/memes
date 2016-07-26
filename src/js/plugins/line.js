@@ -15,12 +15,11 @@ var line =
 
         // Set the "center" of the line based on the passed element
         var size = $(element).size();
-        var position = $(element).position();
 
         line.center =
         {
-            x: position.left + (size.width / 2),
-            y: position.top + (size.height / 2)
+            x: parseFloat(element.transform.translate[0]) + (size.width / 2),
+            y: parseFloat(element.transform.translate[1]) + (size.height / 2)
         };
 
         // Make the line white
