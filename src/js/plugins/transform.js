@@ -49,8 +49,6 @@ var transform =
         delete transform.center;
         delete transform.dimension;
         delete transform.template;
-        delete transform.angle;
-        delete transform.scale;
         
         $(window).off('mousedown', '.transform .handle', transform.mousedown);
         $(window).off('mousemove', transform.mousemove);
@@ -98,23 +96,7 @@ var transform =
 
         $(template).removeClass('hidden');
         $(template).style({'height': size.height + 'px', 'width': size.width + 'px', 'z-index': helper.layers + 1});
-        $(template).transform('translate', position.x + 'px', position.y + 'px');
-
-        transform.angle = parseFloat($(element).data('rotate'));
-        transform.scale = parseFloat($(element).data('scale'));
-
-        // If this element has already been rotated
-        if(transform.angle)
-        {
-            // Set the new template to the same angle
-            $(template).transform('rotate', transform.angle + 'deg');
-        }
-
-        // If this element has already been scaled
-        if(transform.scale)
-        {
-            $(template).transform('scale', transform.scale);
-        }
+        $(template).transform(element.transform);
 
         $('.workspace').el[0].appendChild(template);
         transform.template = template;
@@ -157,8 +139,6 @@ var transform =
             var angle = degrees(Math.atan2(difference.y, difference.x)) + transform.offset;
             $(transform.template).transform('rotate', angle + 'deg').transform('scale', scale);
             $(transform.element).transform('rotate', angle + 'deg').transform('scale', scale);
-            $(transform.element).data('rotate', angle);
-            $(transform.element).data('scale', scale);
         }
     },
 
