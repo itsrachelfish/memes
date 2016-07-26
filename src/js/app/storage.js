@@ -163,22 +163,22 @@ var storage =
             return;
         }
 
-        // Position
-        var position = $(element).position();
-
         // any custom classes / effects?
         // if the element is hidden?
-        // rotation???
         // custom styles?
         // z-index???
 
         var data =
         {
+            // Save the element's position
             'position':
             {
-                'top': position.top,
-                'left': position.left
-            }
+                'left': parseFloat(element.transform.translate[0]), // Because wetfish basic is awesome <3
+                'top': parseFloat(element.transform.translate[1])
+            },
+
+            // Save any transformations
+            'transform': element.transform
         };
 
         project.data.frames[project.data.frame][id] = data;

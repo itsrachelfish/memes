@@ -55,6 +55,12 @@ var create =
             });
         }
 
+        // If any transform options were passed
+        if(options.transform)
+        {
+            $(element).transform(options.transform);
+        }
+
         // Duration option will remove the element after a certain amount of time
         if(options.duration)
         {
