@@ -1,6 +1,7 @@
 var $ = require('wetfish-basic');
 var line = require('./line');
 var extend = require('extend');
+var storage = require('../app/storage');
 
 var loaded = false;
 var transforming = false;
@@ -167,6 +168,9 @@ var transform =
             line.refresh();
             $('.transform .handle.active').removeClass('active');
             transforming = false;
+
+            // Persist changes to localstorage
+            storage.update(transform.element);
         }
     },
 
