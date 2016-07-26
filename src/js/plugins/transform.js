@@ -2,6 +2,7 @@ var $ = require('wetfish-basic');
 var line = require('./line');
 var extend = require('extend');
 var storage = require('../app/storage');
+var helper = require('../app/helper');
 
 var loaded = false;
 var transforming = false;
@@ -96,7 +97,7 @@ var transform =
         transform.dimension = (size.height > size.width) ? 'height' : 'width';
 
         $(template).removeClass('hidden');
-        $(template).style({'height': size.height + 'px', 'width': size.width + 'px'});
+        $(template).style({'height': size.height + 'px', 'width': size.width + 'px', 'z-index': helper.layers + 1});
         $(template).transform('translate', position.x + 'px', position.y + 'px');
 
         transform.angle = parseFloat($(element).data('rotate'));
