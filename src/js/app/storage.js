@@ -246,26 +246,32 @@ var storage =
 
     loadFromFile: function(file)
     {
-        // Start by clearing out the storage
-        storage.reset();
-
         var reader = new FileReader();
         reader.readAsText(file);
 
         reader.onload = function(event)
         {
+            var data = false;
+
             try
             {
-                project.data = JSON.parse(reader.result);
+                data = JSON.parse(reader.result);
             }
             catch(error)
             {
-                project.data = storage.create();
                 alert('There was an error loading your save file. Make sure it is valid JSON!');
+                console.log(file, reader, error);
             }
 
-            storage.load();
-            storage.persist();
+            // Only reset the page if a file was successfully loaded
+            if(data)
+            {
+                storage.reset();
+                project.data = data;
+
+                storage.load();
+                storage.persist();
+            }
         }
     },
 

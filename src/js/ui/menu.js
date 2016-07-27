@@ -68,14 +68,14 @@ var menu =
             {
                 var file = $('.file .import input').el[0].files[0];
 
-                if(file && file.type == 'application/json')
+                if(file)
                 {
                     storage.loadFromFile(file);
                     overlay.close('.file');
                 }
                 else
                 {
-                    alert('Failed to load import file! Make sure it is saved as .json');
+                    alert('Failed to load import file! Make sure you have a file selected from your computer.');
                 }
             }
         });
