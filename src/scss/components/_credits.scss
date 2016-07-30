@@ -1,0 +1,47 @@
+.credits-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9002;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+
+    .credits {
+        height: 100%;
+
+        &.scroll {
+            transform:translateY(100%);
+            animation: scroll 20s linear;
+        }
+    }
+
+    .title {
+        font-size: 6em;
+    }
+
+    .author {
+        color: #ccc;
+        margin-top: -1em;
+    }
+
+    .sources {
+        margin-top: 4em;
+        font-size: 1.5em;
+    }
+
+    .source {
+        margin-bottom: 1em;
+
+        label {
+            
+        }
+    }
+}
+
+@keyframes scroll {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(-100%); }
+}

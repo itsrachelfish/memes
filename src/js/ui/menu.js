@@ -252,6 +252,18 @@ var menu =
                 overlay.close('.presets');
             }
         });
+
+        $('.menu .credits').on('click', function()
+        {
+            $('.credits-overlay').removeClass('hidden');
+            $('.credits').addClass('scroll');
+        });
+
+        $('.credits-overlay').on('click', function()
+        {
+            $('.credits-overlay').addClass('hidden');
+            $('.credits').removeClass('scroll');
+        });
     }
 };
 
