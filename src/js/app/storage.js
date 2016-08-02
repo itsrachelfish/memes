@@ -19,6 +19,7 @@ var project =
     defaults:
     {
         title: 'Untitled Project',
+        author: 'Anonymous',
         camera: false,
         frame: 0,
         frames: [],
@@ -72,6 +73,9 @@ var storage =
     {
         // Set the title of the page
         storage.title();
+
+        // Set the author
+        storage.author();
 
         if(project.data.camera)
         {
@@ -195,7 +199,7 @@ var storage =
     // Update the title of the project
     title: function(text)
     {
-        if(text)
+        if(text !== undefined)
         {
             project.data.title = text;
         }
@@ -203,6 +207,17 @@ var storage =
         $('title').text(project.data.title);
         $('.file .title').value(project.data.title);
 
+        storage.persist();
+    },
+
+    author: function(text)
+    {
+        if(text !== undefined)
+        {
+            project.data.author = text;
+        }
+
+        $('.file .author').value(project.data.author);
         storage.persist();
     },
 

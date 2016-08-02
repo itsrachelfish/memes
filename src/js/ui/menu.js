@@ -58,6 +58,11 @@ var menu =
             storage.title($(this).value());
         });
 
+        $('.file .author').on('input change', function()
+        {
+            storage.author($(this).value());
+        });
+
         $('.file .import').on('submit', function(event)
         {
             event.preventDefault();
