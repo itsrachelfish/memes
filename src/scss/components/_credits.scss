@@ -23,7 +23,7 @@
     }
 
     .author {
-        color: #ccc;
+        color: #aaa;
         margin-top: -1em;
     }
 
@@ -34,10 +34,18 @@
 
     .source {
         margin-bottom: 1em;
+    }
 
-        label {
-            
-        }
+    .url:before {
+        content: 'url : ';
+        color: #aaa;
+        font-size: 0.7em;
+    }
+
+    .license:before {
+        content: 'license : ';
+        color: #aaa;
+        font-size: 0.7em;
     }
 }
 

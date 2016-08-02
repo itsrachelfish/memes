@@ -81,4 +81,12 @@ svg {
     .half:last-child {
         margin-right: 0;
     }
+
+    .left {
+        text-align: right;
+    }
+
+    .right {
+        text-align: left;
+    }
 }
