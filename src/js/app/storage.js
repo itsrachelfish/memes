@@ -290,10 +290,17 @@ var storage =
         }
     },
 
-    // Get a property from the project
+    // Get data from the project
     get: function(property)
     {
-        return project.data[property];
+        // If a specific property was passed
+        if(property)
+        {
+            return project.data[property];
+        }
+
+        // Default to returning the entire project
+        return project.data;
     },
 
     reset: function()

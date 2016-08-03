@@ -10,7 +10,7 @@ var storage = require('../app/storage');
 var presets = require('../app/presets');
 
 var overlay = require('./overlay');
-
+var credits = require('./credits');
 
 // Global webcam object
 var webcam;
@@ -260,14 +260,12 @@ var menu =
 
         $('.menu .credits').on('click', function()
         {
-            $('.credits-overlay').removeClass('hidden');
-            $('.credits').addClass('scroll');
+            credits.show();
         });
 
         $('.credits-overlay').on('click', function()
         {
-            $('.credits-overlay').addClass('hidden');
-            $('.credits').removeClass('scroll');
+            credits.hide();
         });
     }
 };

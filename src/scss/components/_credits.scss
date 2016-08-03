@@ -25,6 +25,10 @@
     .author {
         color: #aaa;
         margin-top: -1em;
+
+        &:before {
+            content: 'by ';
+        }
     }
 
     .sources {
