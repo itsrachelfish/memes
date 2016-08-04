@@ -3,17 +3,20 @@ var storage = require('../app/storage');
 
 var credits =
 {
+    template: false,
+
     populate: function()
     {
         var data = storage.get();
+        var sources = document.createDocumentFragment();
 
         $('.credits .title').text(data.title);
         $('.credits .author').text(data.author);
 
-        var sources = document.createDocumentFragment();
-        var source = $('.credits .source').clone();
-
-        $('.credits .sources').html('');
+        if(!credits.template)
+        {
+            credits.template = $('.credits .source').clone();
+        }
 
         Object.keys(data.objects).forEach(function(id)
         {
@@ -25,8 +28,7 @@ var credits =
                 object.desc = object.desc || 'Untitled ' + object.type;
                 object.license = object.license || 'unknown';
 
-                console.log('two point one');
-                var template = $(source).clone();
+                var template = $(credits.template).clone();
                 $(template).find('label').text(object.desc);
                 $(template).find('.url').text(object.url);
                 $(template).find('.license').text(object.license);
@@ -35,6 +37,7 @@ var credits =
             }
         });
 
+        $('.credits .sources').html('');
         $('.credits .sources').el[0].appendChild(sources);
     },
 
