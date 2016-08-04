@@ -25,13 +25,19 @@ var credits =
             // Only certain elements have cited sources
             if(['image', 'audio', 'video'].indexOf(object.type) > -1)
             {
-                object.desc = object.desc || 'Untitled ' + object.type;
-                object.license = object.license || 'unknown';
+                // Make sure required vars are set
+                var desc = object.desc || 'Untitled ' + object.type;
+                var url = object.url;
+                var license = object.license || 'unknown';
+
+                // Get the human readable version of the license
+                var option = $('#license option[value="'+license+'"]').el[0];
+                license = option.innerText || option.textContent;
 
                 var template = $(credits.template).clone();
-                $(template).find('label').text(object.desc);
-                $(template).find('.url').text(object.url);
-                $(template).find('.license').text(object.license);
+                $(template).find('label').text(desc);
+                $(template).find('.url').text(url);
+                $(template).find('.license').text(license);
 
                 sources.appendChild(template);
             }
