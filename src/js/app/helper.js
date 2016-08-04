@@ -59,7 +59,7 @@ var helper =
         }
 
         return true;
-    }
+    },
 };
 
 
