@@ -32,8 +32,15 @@ var create =
         $(element).data('desc', options.desc);
         $(element).data('license', options.license);
 
-        // Make sure it's on the top layer
-        $(element).style({'z-index': helper.layers + 1});
+        if(options.layer)
+        {
+            $(element).style({'z-index': options.layer});
+        }
+        else
+        {
+            // Make sure it's on the top layer
+            $(element).style({'z-index': helper.layers + 1});
+        }
 
         // Centered option automatically centers the new element in the middle of the page
         if(options.centered)

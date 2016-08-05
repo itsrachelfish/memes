@@ -170,7 +170,6 @@ var storage =
         // any custom classes / effects?
         // if the element is hidden?
         // custom styles?
-        // z-index???
 
         var data =
         {
@@ -182,7 +181,10 @@ var storage =
             },
 
             // Save any transformations
-            'transform': element.transform
+            'transform': element.transform,
+
+            // Save what layer the element is on
+            'layer': $(element).style('z-index')
         };
 
         project.data.frames[project.data.frame][id] = data;
