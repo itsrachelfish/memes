@@ -267,6 +267,25 @@ var menu =
         {
             credits.hide();
         });
+
+        $('.menu .next, .menu .prev').on('click', function()
+        {
+            console.log('click');
+            var frame = parseInt(storage.get('frame'));
+
+console.log('got frame', frame);
+
+            if($(this).hasClass('next'))
+            {
+                console.log('next');
+                storage.frame(frame + 1);
+            }
+            else
+            {
+                console.log('prev');
+                storage.frame(frame - 1);
+            }
+        });
     }
 };
 
