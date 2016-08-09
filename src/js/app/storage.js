@@ -318,8 +318,6 @@ var storage =
     {
         // Make sure it's a number
         index = parseInt(index);
-
-console.log('the index', index);
         
         // Frames can't be negative!
         if(index < 0)
@@ -330,11 +328,8 @@ console.log('the index', index);
         // If this is a new frame, copy the elements from the previous frame
         if(project.data.frames[index] === undefined)
         {
-            console.log('its undefined');
             index = project.data.frames.push(project.data.frames.slice(-1)[0]) - 1;
         }
-
-console.log('the new index', index);
 
         project.data.frame = index;
 
