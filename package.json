@@ -6,6 +6,7 @@
   "dependencies": {
     "dragondrop": "^0.6.2",
     "extend": "^3.0.0",
+    "font-awesome": "^4.6.3",
     "wetfish-basic": "^0.7.11"
   },
   "devDependencies": {
