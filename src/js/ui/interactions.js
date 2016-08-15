@@ -93,8 +93,14 @@ var interactions =
                 // If the user is holding control while clicking
                 if(pressed.control)
                 {
+                    var position =
+                    {
+                        top: event.clientY + window.scrollY,
+                        left: event.clientX + window.scrollX
+                    };
+
                     var image = document.createElement('img');
-                    $(image).style({'top': event.clientY + 'px', 'left': event.clientX + 'px', 'z-index': helper.layers + 1});
+                    $(image).style({'top': position.top + 'px', 'left': position.left + 'px', 'z-index': helper.layers + 1});
                     $(image).addClass('hitmarker');
                     $(image).attr('src', 'img/hitmarker.png');
                     $('.workspace').el[0].appendChild(image);
