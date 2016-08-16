@@ -35,6 +35,18 @@ var menu =
             }
         });
 
+        $('.menu .toggle').on('click', function()
+        {
+            var text = this.textContent;
+            var toggle = $(this).data('toggle');
+            var rel = $(this).data('rel');
+
+            $(this).data('toggle', text);
+            $(this).text(toggle);
+
+            $(rel).toggle('hidden');
+        });
+
         // Project file menu
         $('.file .new').on('click', function()
         {

@@ -2,31 +2,35 @@
     <h1>Menu</h1>
 
     <button class="button-primary help" data-overlay=".help">Help</button>
-    <button class="button-primary file" data-overlay=".file">File</button>
-    <button class="button-primary tools" data-overlay=".tools">Tools</button>
-    <button class="button-primary presets" data-overlay=".presets">Presets</button>
     <button class="button-primary start-webcam">Start Webcam</button>
     <button class="button-primary stop-webcam hidden">Stop Webcam</button>
+    <button class="button-primary" data-overlay=".content">Add Content</button>
+    <button class="button-primary background" data-overlay=".background">Edit Background</button>
+
+    <a class="toggle" data-rel=".menu .advanced" data-toggle="▲ Hide Advanced Options">▼ Show Advanced Options</a>
+
+    <div class="advanced hidden">
+        <button class="button-primary file" data-overlay=".file">File</button>
+        <button class="button-primary frames" data-overlay=".frames">Edit Frames</button>
+
+        <div class="grid-row">
+            <button class="half button-primary prev">Prev</button>
+            <button class="half button-primary next">Next</button>
+        </div>
+
+        <button class="nope play">Play &emsp; ►</button>
+        <button class="nope pause hidden">Pause &emsp; ❙❙</button>
+    <button class="button-primary credits">Credits</button>
+    </div>
+
+<!--     <button class="button-primary tools" data-overlay=".tools">Tools</button
+    <button class="button-primary presets" data-overlay=".presets">Presets</button>
     <button class="button-primary add-image" data-overlay=".image">Add an Image</button>
     <button class="button-primary add-audio" data-overlay=".audio">Add a Sound</button>
     <button class="button-primary add-video" data-overlay=".video">Add a Video</button>
     <button class="button-primary add-text" data-overlay=".text">Add Text</button>
-    <button class="button-primary background" data-overlay=".background">Edit Background</button>
-    <button class="button-primary credits">Credits</button>
-    <hr>
-
-    <i>(in development)</i>
-    <button class="button-primary frames" data-overlay=".frames">Edit Frames</button>
-
-    <div class="grid-row">
-        <button class="half button-primary prev">Prev</button>
-        <button class="half button-primary next">Next</button>
-    </div>
-
-    <button class="nope play">Play &emsp; ►</button>
-    <button class="nope pause hidden">Pause &emsp; ❙❙</button>
-    <hr>
 
     <i>(soon ™)</i>
     <button class="nope add-drawing" data-overlay=".drawing">Add a Drawing</button>
+-->
 </div>
