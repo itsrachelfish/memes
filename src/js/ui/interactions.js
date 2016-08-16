@@ -1,7 +1,10 @@
 // Load wetfish basic
 var $ = require('wetfish-basic');
 
+// spawn dat shit
+
 // Load custom modules
+var tools = require('../app/tools');
 var storage = require('../app/storage');
 var helper = require('../app/helper');
 var pool = require('../plugins/pool');
