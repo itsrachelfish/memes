@@ -53,6 +53,25 @@ var interactions =
         pool.init(explosion, 'explosion', 16);
         pool.init(hitmarker, 'hitmarker', 7);
 
+        // Dragon menus
+        $('.workspace .dragon').on('mouseenter', function(event)
+        {
+            var zindex = parseInt($(event.target).style('z-index'));
+            var size = $(event.target).size();
+            var template = $('.dragon-menu.hidden').clone();
+
+            $(template).removeClass('hidden').addClass('active');
+            $(template).style({'height': size.height + 'px', 'width': size.width + 'px', 'z-index': zindex + 1});
+            $(template).transform(event.target.transform);
+
+            $(template).on('mouseleave', function()
+            {
+                $(template).remove();
+            });
+
+            $('.workspace').el[0].appendChild(template);
+        });
+
         // Hitmarkers
         $('body').on('mousedown touchstart', '.workspace, .workspace *', function(event)
         {
