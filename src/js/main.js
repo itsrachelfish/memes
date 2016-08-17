@@ -11,6 +11,7 @@ var tools = require('./app/tools');
 var menu = require('./ui/menu');
 var overlay = require('./ui/overlay');
 var interact = require('./ui/interactions');
+var hover = require('./ui/hover');
 
 $(document).ready(function()
 {
@@ -22,5 +23,6 @@ $(document).ready(function()
         menu.init();
         overlay.init();
         interact.init();
+        hover.init();
     });
 });
