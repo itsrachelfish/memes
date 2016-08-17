@@ -2,7 +2,6 @@ var $ = require('wetfish-basic');
 var line = require('./line');
 var extend = require('extend');
 var storage = require('../app/storage');
-var helper = require('../app/helper');
 
 var loaded = false;
 var transforming = false;
@@ -35,6 +34,7 @@ var transform =
 {
     load: function(element)
     {
+        $(window).on('mousedown', '.transform', transform.passthru);
         $(window).on('mousedown', '.transform .handle', transform.mousedown);
         $(window).on('mousemove', transform.mousemove);
         $(window).on('mouseup', transform.mouseup);
@@ -50,6 +50,7 @@ var transform =
         delete transform.dimension;
         delete transform.template;
         
+        $(window).off('mousedown', '.transform', transform.passthru);
         $(window).off('mousedown', '.transform .handle', transform.mousedown);
         $(window).off('mousemove', transform.mousemove);
         $(window).off('mouseup', transform.mouseup);
@@ -95,7 +96,7 @@ var transform =
         transform.dimension = (size.height > size.width) ? 'height' : 'width';
 
         $(template).removeClass('hidden');
-        $(template).style({'height': size.height + 'px', 'width': size.width + 'px', 'z-index': helper.layers + 1});
+        $(template).style({'height': size.height + 'px', 'width': size.width + 'px', 'z-index': parseInt($(element).style('z-index')) + 1});
         $(template).transform(element.transform);
 
         $('.workspace').el[0].appendChild(template);
@@ -104,15 +105,37 @@ var transform =
 
     stop: function(element)
     {
+        if(transform.template)
+        {
+            $(transform.template).remove();
+        }
+
         line.refresh();
-        $(transform.template).remove();
         transform.template = false;
         transform.element = false;
+    },
+
+    // When clicking on the transform wrapper, see if the click should be passed through to another element
+    passthru: function(event)
+    {
+        // Temporarilly reset the z-index
+        var zindex = $(transform.template).style('z-index');
+        $(transform.template).style({'z-index': -1});
+
+        // Now check if there is something to click on
+        var target = document.elementFromPoint(event.clientX, event.clientY);
+        $(target).trigger('click', {bubbles: true});
+
+        // Set the z-index back
+        $(transform.template).style({'z-index': zindex});
     },
 
     mousedown: function(event)
     {
         $(this).addClass('active');
+
+        // Disable pointer-events on content while transforming
+        $('.workspace .content').style({'pointer-events': 'none'})
 
         transform.offset = parseInt($(this).data('offset'));
         transforming = true;
@@ -139,6 +162,8 @@ var transform =
             var angle = degrees(Math.atan2(difference.y, difference.x)) + transform.offset;
             $(transform.template).transform('rotate', angle + 'deg').transform('scale', scale);
             $(transform.element).transform('rotate', angle + 'deg').transform('scale', scale);
+
+            $(transform.element).trigger('transformed');
         }
     },
 
@@ -146,6 +171,9 @@ var transform =
     {
         if(transforming)
         {
+            // Re-enable pointer-events
+            $('.workspace .content').style({'pointer-events': 'auto'})
+
             line.refresh();
             $('.transform .handle.active').removeClass('active');
             transforming = false;

@@ -1,6 +1,7 @@
 var $ = require('wetfish-basic');
 var helper = require('../app/helper');
 var storage = require('../app/storage');
+var transform = require('../plugins/transform');
 
 // Module which controls the menus that appear when hovering over content
 var hover =
@@ -60,6 +61,8 @@ var hover =
     
     start: function(element)
     {
+        hover.element = element;
+
         // Make a clone of the default hover template
         var template = $(hover.template).clone();
 
@@ -94,7 +97,7 @@ var hover =
             $('.workspace .content').style({'pointer-events': 'none'})
         });
 
-        $(template).on('dragmove', function(event)
+        $(template).on('dragmove', function()
         {
             $(element).transform(template.transform);
         });
@@ -105,6 +108,11 @@ var hover =
 
             // Re-enable pointer-events
             $('.workspace .content').style({'pointer-events': 'auto'})
+        });
+
+        $(element).on('transformed', function(evet)
+        {
+            $(template).transform(element.transform);
         });
 
         $(template).dragondrop();
@@ -123,6 +131,8 @@ var hover =
 
         // Remove any active menus
         $('.hover-menu.active').remove();
+
+        transform.stop();
     },
 
     initTools: function()
@@ -134,6 +144,15 @@ var hover =
         else
         {
             $('.hover-menu.active').addClass('disabled');
+        }
+
+        if(hover.tool == "transform")
+        {
+            transform.start(hover.element);
+        }
+        else
+        {
+            transform.stop();
         }
     }
 };

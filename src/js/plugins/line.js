@@ -38,7 +38,10 @@ var line =
 
     refresh: function()
     {
-        line.context.clearRect(0, 0, line.canvas.width, line.canvas.height);
+        if(line.context)
+        {
+            line.context.clearRect(0, 0, line.canvas.width, line.canvas.height);
+        }
     },
 };
 
