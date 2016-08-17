@@ -1,6 +1,6 @@
-// Load wetfish basic
 var $ = require('wetfish-basic');
-
+var helper = require('../app/helper');
+var storage = require('../app/storage');
 
 // Module which controls the menus that appear when hovering over content
 var hover =
@@ -53,6 +53,8 @@ var hover =
             // Update the saved menu template
             $(hover.template).find('.icon.active').removeClass('active');
             $(hover.template).find('.icon[data-tool="'+hover.tool+'"]').addClass('active');
+
+            hover.initTools();
         });
     },
     
@@ -71,18 +73,68 @@ var hover =
         $(template).style({'height': size.height + 'px', 'width': size.width + 'px', 'z-index': zindex + 1});
         $(template).transform(element.transform);
 
+        $(template).on('click', function(event)
+        {
+            console.log(event.target);
+        });
+
         $(template).on('mouseleave', function()
         {
             hover.stop();
         });
 
+        // Ensure the element being dragged is always on top
+        $(template).on('dragstart', function()
+        {
+            helper.layers++;
+            $(template).style({'z-index': helper.layers});
+            $(element).style({'z-index': helper.layers});
+
+            // Disable pointer-events on content while dragging
+            $('.workspace .content').style({'pointer-events': 'none'})
+        });
+
+        $(template).on('dragmove', function(event)
+        {
+            $(element).transform(template.transform);
+        });
+
+        $(template).on('dragend', function()
+        {
+            storage.update(element);
+
+            // Re-enable pointer-events
+            $('.workspace .content').style({'pointer-events': 'auto'})
+        });
+
+        $(template).dragondrop();
         $('.workspace').el[0].appendChild(template);
+
+        hover.initTools();
     },
 
     stop: function()
     {
+        // Prevent removing menus while dragging (this can happen if you move the mouse too quickly)
+        if($('.hover-menu.active').hasClass('dragging'))
+        {
+            return;
+        }
+
         // Remove any active menus
         $('.hover-menu.active').remove();
+    },
+
+    initTools: function()
+    {
+        if(hover.tool == "move")
+        {
+            $('.hover-menu.active').removeClass('disabled');
+        }
+        else
+        {
+            $('.hover-menu.active').addClass('disabled');
+        }
     }
 };
 

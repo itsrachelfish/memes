@@ -1,6 +1,5 @@
 // Load wetfish basic
 var $ = require('wetfish-basic');
-require('dragondrop');
 
 // Load other stuff
 var extend = require('extend');
@@ -45,21 +44,13 @@ var create =
         // Centered option automatically centers the new element in the middle of the page
         if(options.centered)
         {
-            $(element).style({
-                'position': 'absolute',
-                'left': ($(window).width() / 2 - $(element).width() / 2) + 'px',
-                'top': ($(window).height() / 2 - $(element).height() / 2) + 'px',
-            });
+            $(element).transform('translate', ($(window).width() / 2 - $(element).width() / 2) + 'px', ($(window).height() / 2 - $(element).height() / 2) + 'px');
         }
 
         // If a specific position was passed
         if(options.position)
         {
-            $(element).style({
-                'position': 'absolute',
-                'left': options.position.left + 'px',
-                'top': options.position.top + 'px',
-            });
+            $(element).transform('translate', options.position.left + 'px', options.position.top + 'px');
         }
 
         // If any transform options were passed
@@ -76,31 +67,7 @@ var create =
                 $(element).remove();
             }, options.duration);
         }
-
-        $(element).dragondrop();
-
-        // Add disabled class if we're currently in tool mode, to prevent users from dragging newly created elements while still using a tool
-        if($('body').hasClass('tool-mode'))
-        {
-            $(element).addClass('disabled');
-        }
-
-        // Ensure the element being dragged is always on top
-        $(element).on('dragstart', function()
-        {
-            helper.layers++;
-            $(this).style({'z-index': helper.layers});
-
-            // Trigger an event on the workspace
-            $('.workspace').trigger('start', element);
-        });
-
-        $(element).on('dragend', function()
-        {
-            // Trigger an event on the workspace
-            $('.workspace').trigger('dragend', element);
-        });
-
+ 
         $(element).addClass('content');
         $('.workspace').trigger('content-created', element);
     },

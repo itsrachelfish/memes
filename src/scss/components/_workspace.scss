@@ -4,6 +4,16 @@
     &.working {
         cursor: crosshair;
     }
+
+    .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .dragon {
+        pointer-events: auto !important;
+    }
 }
 
 .hover-menu {
