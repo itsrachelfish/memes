@@ -5,6 +5,8 @@ var $ = require('wetfish-basic');
 // Module which controls the menus that appear when hovering over content
 var hover =
 {
+    tool: 'edit',
+
     init: function()
     {
         // Create a clone of the hover menu html template
@@ -30,6 +32,27 @@ var hover =
             {
                 hover.start(event.target);
             });
+        });
+
+        $('.workspace').on('click', '.hover-menu .icon, .hover-menu .icon *', function()
+        {
+            var element = this;
+
+            // If the user clicks on the font icon instead of the wrapper element
+            if(!$(this).hasClass('icon'))
+            {
+                element = $(this).parents('.icon').el[0];
+            }
+
+            // Update the menu currently on the page
+            $('.hover-menu .icon.active').removeClass('active');
+            $(element).addClass('active');
+
+            hover.tool = $(element).data('tool');
+
+            // Update the saved menu template
+            $(hover.template).find('.icon.active').removeClass('active');
+            $(hover.template).find('.icon[data-tool="'+hover.tool+'"]').addClass('active');
         });
     },
     
