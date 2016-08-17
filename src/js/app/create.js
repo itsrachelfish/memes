@@ -100,6 +100,9 @@ var create =
             // Trigger an event on the workspace
             $('.workspace').trigger('dragend', element);
         });
+
+        $(element).addClass('content');
+        $('.workspace').trigger('content-created', element);
     },
 
     image: function(options)
