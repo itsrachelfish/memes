@@ -72,6 +72,9 @@ var transform =
             transform.stop();
         }
 
+        var template = $('.transform.hidden').clone();
+
+        transform.template = template;
         transform.element = element;
         line.init(element);
 
@@ -83,8 +86,6 @@ var transform =
 
         var size = $(element).size();
         transform.size = size;
-        
-        var template = $('.transform.hidden').clone();
 
         transform.center =
         {
@@ -99,8 +100,9 @@ var transform =
         $(template).style({'height': size.height + 'px', 'width': size.width + 'px', 'z-index': parseInt($(element).style('z-index')) + 1});
         $(template).transform(element.transform);
 
+        transform.resizeHandles();
+
         $('.workspace').el[0].appendChild(template);
-        transform.template = template;
     },
 
     stop: function(element)
@@ -163,6 +165,8 @@ var transform =
             $(transform.template).transform('rotate', angle + 'deg').transform('scale', scale);
             $(transform.element).transform('rotate', angle + 'deg').transform('scale', scale);
 
+            transform.resizeHandles();
+
             $(transform.element).trigger('transformed');
         }
     },
@@ -188,6 +192,15 @@ var transform =
         if(transforming)
         {
             line.init(transform.element);
+        }
+    },
+
+    // Preserve the original size of the transform handles
+    resizeHandles: function()
+    {
+        if(transform.element.transform.scale < 1)
+        {
+            $(transform.template).find('.handle').transform('scale', 1 / transform.element.transform.scale);
         }
     },
 };
