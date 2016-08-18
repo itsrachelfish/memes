@@ -74,7 +74,7 @@ var hover =
         // Make sure no other menus are still active
         hover.stop();
 
-        $(template).style({'height': size.height + 'px', 'width': size.width + 'px', 'z-index': zindex + 1});
+        $(template).style({'height': size.height + 'px', 'width': size.width + 'px', 'z-index': helper.layers + 1});
         $(template).transform(element.transform);
 
         $(template).on('click', function(event)
