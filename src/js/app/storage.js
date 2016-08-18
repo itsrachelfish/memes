@@ -305,6 +305,20 @@ var storage =
         return project.data;
     },
 
+    // Get data about a specific object
+    getObject: function(id)
+    {
+        if(project.data.objects[id] === undefined)
+        {
+            return;
+        }
+
+        var frame = project.data.frames[project.data.frame];
+        var options = extend(true, project.data.objects[id], frame[id]);
+
+        return options;
+    },
+
     reset: function()
     {
         project.data = storage.create();

@@ -87,13 +87,11 @@ var tools =
     {
         // Check if the element has a unique ID
         var id = $(element).attr('id');
-        var objects = storage.get('objects');
+        var object = storage.getObject(id);
 
         // Now make sure it actually exists in the project's save data
-        if(objects[id] !== undefined)
+        if(object !== undefined)
         {
-            var object = objects[id];
-
             if(object.type == 'image' || object.type == 'audio' || object.type == 'video')
             {
                 var selector = '.' + object.type;

@@ -49,16 +49,15 @@ var create =
             $(element).style({'z-index': helper.layers + 1});
         }
 
-        // Centered option automatically centers the new element in the middle of the page
-        if(options.centered)
-        {
-            $(element).transform('translate', ($(window).width() / 2 - $(element).width() / 2) + 'px', ($(window).height() / 2 - $(element).height() / 2) + 'px');
-        }
-
         // If a specific position was passed
         if(options.position)
         {
             $(element).transform('translate', options.position.left + 'px', options.position.top + 'px');
+        }
+        // Otherwise default to centering the new element in the middle of the page
+        else
+        {
+            $(element).transform('translate', ($(window).width() / 2 - $(element).width() / 2) + 'px', ($(window).height() / 2 - $(element).height() / 2) + 'px');
         }
 
         // If any transform options were passed
@@ -86,7 +85,6 @@ var create =
         var defaults =
         {
             type: 'image',
-            centered: true,
         };
 
         // Deep combine user given options with defaults
@@ -127,7 +125,6 @@ var create =
             autoplay: true,
             loop: true,
             controls: true,
-            centered: true,
         };
 
         // Deep combine user given options with defaults
@@ -169,7 +166,6 @@ var create =
             autoplay: true,
             loop: true,
             controls: true,
-            centered: true,
         };
 
         // Deep combine user given options with defaults
