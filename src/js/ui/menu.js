@@ -35,6 +35,16 @@ var menu =
             }
         });
 
+        // Sub-overlay buttons from within the content overlay
+        $('.content button').on('click', function()
+        {
+            if($(this).data('overlay'))
+            {
+                overlay.close();
+                overlay.open($(this).data('overlay'));
+            }
+        });
+
         $('.menu .toggle').on('click', function()
         {
             var text = this.textContent;

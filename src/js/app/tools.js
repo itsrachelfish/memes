@@ -109,7 +109,7 @@ var tools =
                 // Basic information that applies to all images, audio, and videos
                 $(form).find('input[name="url"]').value(object.url);
                 $(form).find('input[name="desc"]').value(object.desc);
-                $(form).find('input[name="license"]').value(object.license);
+                $(form).find('select[name="license"]').value(object.license);
 
                 // Options specific to audio and video elements
                 if(object.type == 'audio' || object.type == 'video')
