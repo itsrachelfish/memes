@@ -25,6 +25,9 @@ var keys =
     91: 'system',
 };
 
+// Timeouts for stuff
+var timeout = {};
+
 // Miscelaneous UI interactions
 var interactions =
 {
