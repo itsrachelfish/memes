@@ -1,6 +1,7 @@
 var $ = require('wetfish-basic');
 var helper = require('../app/helper');
 var storage = require('../app/storage');
+var tools = require('../app/tools');
 var transform = require('../plugins/transform');
 
 // Module which controls the menus that appear when hovering over content
@@ -78,7 +79,21 @@ var hover =
 
         $(template).on('click', function(event)
         {
-//            console.log(event.target);
+            // Only trigger click when clicking on the menu content (not the menu icons)
+            if($(event.target).hasClass('hover-menu'))
+            {
+                if(hover.tool == 'edit')
+                {
+                    tools.edit(hover.element);
+                }
+                else if(hover.tool == 'delete')
+                {
+                    storage.remove(hover.element);
+
+                    $(hover.element).remove();
+                    $(template).remove();
+                }
+            }
         });
 
         $(template).on('mouseleave', function()

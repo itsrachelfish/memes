@@ -83,7 +83,7 @@ var tools =
         transform.unload();
     },
 
-    select: function(element)
+    edit: function(element)
     {
         // Check if the element has a unique ID
         var id = $(element).attr('id');
@@ -142,7 +142,7 @@ var tools =
             }
             else
             {
-                alert('The object you selected cannot be modified by this tool. Special objects like interactive presets cannot be edited. Sorry!');
+                $(element).trigger('mousedown', {bubbles: true});
             }
         }
     },
