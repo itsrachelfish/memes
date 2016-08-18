@@ -78,7 +78,7 @@ var hover =
 
         $(template).on('click', function(event)
         {
-            console.log(event.target);
+//            console.log(event.target);
         });
 
         $(template).on('mouseleave', function()

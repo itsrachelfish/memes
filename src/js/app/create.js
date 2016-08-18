@@ -33,6 +33,14 @@ var create =
 
         if(options.layer)
         {
+            options.layer = parseInt(options.layer);
+
+            // Update the global layer count if this object is higher than it
+            if(options.layer > helper.layers)
+            {
+                helper.layers = options.layer;
+            }
+
             $(element).style({'z-index': options.layer});
         }
         else
