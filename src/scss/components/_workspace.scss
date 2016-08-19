@@ -28,9 +28,12 @@
         display: inline-block;
         padding: 0.25em 0.5em;
         cursor: pointer;
+        margin: 1px;
     }
 
     .active {
         background-color: rgba(#fff, 0.75);
+        border: 1px solid #ccc;
+        margin: 0;
     }
 }
