@@ -21,30 +21,40 @@ var TextMagick = function(text, options)
         }
     };
 
-    this.text = text || this.text;
+    // Set up basic options variables
+    this.text = text || 'sample text';
     this.options = extend(true, defaults, options);
+
+    // Set everything else up
     this.init();
 
     return this;
 }
 
-TextMagick.prototype.text = 'sample text';
-TextMagick.prototype.element = {};
-TextMagick.prototype.pattern = {};
-TextMagick.prototype.id = {};
-
 TextMagick.prototype.init = function()
 {
-    this.element.wrapper = $('.preload .textmagick').clone();
-    this.element.svg = $(this.element.wrapper).find('svg').el[0];
-    this.element.text = $(this.element.wrapper).find('text.text').el[0];
-    this.element.stroke = $(this.element.wrapper).find('text.stroke').el[0];
-    this.pattern.text = $(this.element.wrapper).find('pattern.text').el[0];
-    this.pattern.stroke = $(this.element.wrapper).find('pattern.stroke').el[0];
+    var wrapper = $('.preload .textmagick').clone();
+
+    this.element =
+    {
+        wrapper: wrapper,
+        svg: $(wrapper).find('svg').el[0],
+        text: $(wrapper).find('text.text').el[0],
+        stroke: $(wrapper).find('text.stroke').el[0]
+    };
+
+    this.pattern =
+    {
+        text: $(wrapper).find('pattern.text').el[0],
+        stroke: $(wrapper).find('pattern.stroke').el[0]
+    };
 
     // Generate randomized, unique IDs for the pattern elements
-    this.id.text = helper.randomString();
-    this.id.stroke = helper.randomString();
+    this.id =
+    {
+        text: helper.randomString(),
+        stroke: helper.randomString()
+    };
 
     $(this.pattern.text).attr('id', this.id.text);
     $(this.pattern.stroke).attr('id', this.id.stroke);
