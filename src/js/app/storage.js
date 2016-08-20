@@ -298,7 +298,15 @@ var storage =
         // If a specific property was passed
         if(property)
         {
-            return project.data[property];
+            // Get data about the background from the current frame
+            if(property == 'background')
+            {
+                return project.data.frames[project.data.frame].background;
+            }
+            else
+            {
+                return project.data[property];
+            }
         }
 
         // Default to returning the entire project

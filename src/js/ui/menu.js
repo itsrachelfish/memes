@@ -241,6 +241,20 @@ var menu =
             overlay.close('.text');
         });
 
+        // Populate saved information when the background overlay is opened
+        $('.background').on('overlay-opened', function()
+        {
+            var background = storage.get('background');
+            var form = '.background.overlay form';
+
+            // Add saved options into the form
+            $(form).find('input[name="background"]').value(background.background);
+            $(form).find('input[name="image"]').value(background.image);
+            $(form).find('select[name="repeat"]').value(background.repeat);
+            $(form).find('input[name="position"]').value(background.position);
+        });
+
+
         $('.background.overlay form').on('submit', function(event)
         {
             event.preventDefault();
