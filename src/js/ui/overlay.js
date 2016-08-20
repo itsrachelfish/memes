@@ -7,17 +7,15 @@ var overlay =
     init: function()
     {
         // Close all overlays when clicking outside of the overlay content
-        $('.overlay-wrap').on('click', function()
+        $('.overlay-wrap').on('click', function(event)
         {
-            $('body').removeClass('overlay-open');
-            $('.overlay.open').trigger('overlay-closed');
-            $('.overlay').removeClass('open');
-        });
-
-        // Prevent closing overlays when clicking inside of the overlay content
-        $('.overlay').on('click', function(event)
-        {
-            event.stopPropagation();
+            // Make sure we're actually clicking on the overlay wrap, otherwise click bubbling would trigger this
+            if($(event.target).hasClass('overlay-wrap'))
+            {
+                $('body').removeClass('overlay-open');
+                $('.overlay.open').trigger('overlay-closed');
+                $('.overlay').removeClass('open');
+            }
         });
     },
 

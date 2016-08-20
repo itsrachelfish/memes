@@ -197,7 +197,7 @@ var menu =
             }
         });
 
-        $('.text.overlay .border').on('click change', function()
+        $('body').on('click change', '.text.overlay .border', function()
         {
             if($(this).prop('checked'))
             {
@@ -208,7 +208,7 @@ var menu =
                 $('.text.overlay .use-border').addClass('hidden');
             }
         });
-        
+
         $('.text.overlay form').on('submit', function(event)
         {
             event.preventDefault();
