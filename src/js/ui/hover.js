@@ -7,7 +7,7 @@ var transform = require('../plugins/transform');
 // Module which controls the menus that appear when hovering over content
 var hover =
 {
-    tool: 'edit',
+    tool: 'move',
 
     init: function()
     {
@@ -104,7 +104,7 @@ var hover =
         // Ensure the element being dragged is always on top
         $(template).on('dragstart', function()
         {
-            helper.layers++;
+            helper.layers++
             $(template).style({'z-index': helper.layers});
             $(element).style({'z-index': helper.layers});
 
@@ -130,6 +130,8 @@ var hover =
             $(template).transform(element.transform);
         });
 
+        template = hover.showIcons(template);
+
         $(template).dragondrop();
         $('.workspace').el[0].appendChild(template);
 
@@ -148,6 +150,36 @@ var hover =
         $('.hover-menu.active').remove();
 
         transform.stop();
+    },
+
+    // Show icons based on the options available to different types of objects
+    showIcons: function(template)
+    {
+        // Get information about the current object
+        var id = $(hover.element).attr('id');
+        var object = storage.getObject(id);
+
+        // Map of icons sorted by type
+        var icons =
+        {
+            image: ['edit', 'move', 'transform', 'delete'],
+            audio: ['interact', 'edit', 'move', 'transform', 'delete'],
+            video: ['interact', 'edit', 'move', 'transform', 'delete'],
+            text: ['edit', 'move', 'transform', 'delete'],
+            preset: ['interact', 'move', 'transform', 'delete']
+        }
+
+        $(template).find('.icon').addClass('hidden');
+
+        if(Array.isArray(icons[object.type]))
+        {
+            icons[object.type].forEach(function(icon)
+            {
+                $(template).find('.icon[data-tool="'+ icon +'"]').removeClass('hidden');
+            });
+        }
+
+        return template;
     },
 
     initTools: function()
