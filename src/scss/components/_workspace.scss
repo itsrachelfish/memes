@@ -38,4 +38,26 @@
         border: 1px solid #ccc;
         margin: 0;
     }
+
+    .controls {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        background-color: rgba(#000, 0.5);
+        font-size: 1.5em;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0.2em;
+
+        .play, .pause {
+            color: #aaa;
+            margin: 0 0.4em;
+        }
+
+        progress {
+            flex:auto;
+            height: 1.5em;
+        }
+    }
 }

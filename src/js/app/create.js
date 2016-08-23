@@ -24,7 +24,6 @@ var create =
             $(element).attr('volume', options.volume);
             $(element).attr('autoplay', options.autoplay);
             $(element).attr('loop', options.loop);
-            $(element).attr('controls', options.controls);
         }
 
         // Add license information if provided

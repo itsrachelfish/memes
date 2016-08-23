@@ -12,11 +12,11 @@ var hover =
     init: function()
     {
         // Create a clone of the hover menu html template
-        var template = $('.hover-menu.hidden').clone();
-        $(template).removeClass('hidden').addClass('active');
+        var baseTemplate = $('.hover-menu.hidden').clone();
+        $(baseTemplate).removeClass('hidden').addClass('active');
 
         // Save it for later
-        hover.template = template;
+        hover.baseTemplate = baseTemplate;
 
         // Loop through any existing workspace content
         $('.workspace .content').each(function()
@@ -53,11 +53,30 @@ var hover =
             hover.tool = $(element).data('tool');
 
             // Update the saved menu template
-            $(hover.template).find('.icon.active').removeClass('active');
-            $(hover.template).find('.icon[data-tool="'+hover.tool+'"]').addClass('active');
+            $(hover.baseTemplate).find('.icon.active').removeClass('active');
+            $(hover.baseTemplate).find('.icon[data-tool="'+hover.tool+'"]').addClass('active');
 
             hover.initTools();
         });
+
+        // Bind to media (audio / video) events
+        document.addEventListener('play', function(event)
+        {
+            if(event.target == hover.element)
+            {
+                $(hover.template).find('.controls .pause').removeClass('hidden');
+                $(hover.template).find('.controls .play').addClass('hidden');
+            }
+        }, true);
+
+        document.addEventListener('pause', function(event)
+        {
+            if(event.target == hover.element)
+            {
+                $(hover.template).find('.controls .play').removeClass('hidden');
+                $(hover.template).find('.controls .pause').addClass('hidden');
+            }
+        }, true);
     },
     
     start: function(element)
@@ -65,7 +84,8 @@ var hover =
         hover.element = element;
 
         // Make a clone of the default hover template
-        var template = $(hover.template).clone();
+        var template = $(hover.baseTemplate).clone();
+        hover.template = template;
 
         // Get information about the current object
         var zindex = parseInt($(element).style('z-index'));
@@ -134,7 +154,7 @@ var hover =
             $(template).transform(element.transform);
         });
 
-        template = hover.showIcons(template);
+        hover.showControls();
 
         $(template).dragondrop();
         $('.workspace').el[0].appendChild(template);
@@ -156,8 +176,8 @@ var hover =
         transform.stop();
     },
 
-    // Show icons based on the options available to different types of objects
-    showIcons: function(template)
+    // Show controls based on the options available to different types of objects
+    showControls: function()
     {
         // Get information about the current object
         var id = $(hover.element).attr('id');
@@ -173,17 +193,22 @@ var hover =
             preset: ['interact', 'move', 'transform', 'delete']
         }
 
-        $(template).find('.icon').addClass('hidden');
+        $(hover.template).find('.icon').addClass('hidden');
 
         if(Array.isArray(icons[object.type]))
         {
             icons[object.type].forEach(function(icon)
             {
-                $(template).find('.icon[data-tool="'+ icon +'"]').removeClass('hidden');
+                $(hover.template).find('.icon[data-tool="'+ icon +'"]').removeClass('hidden');
             });
         }
 
-        return template;
+        if(object.controls)
+        {
+            $(hover.template).find('.controls').removeClass('hidden');
+        }
+
+        return hover.template;
     },
 
     initTools: function()
