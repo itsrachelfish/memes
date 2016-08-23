@@ -239,6 +239,12 @@ var hover =
         {
             transform.stop();
         }
+
+        if(hover.element.nodeName && hover.element.nodeName.toLowerCase() == 'audio' || hover.element.nodeName.toLowerCase() == 'video')
+        {
+            $(hover.template).find('.controls progress').attr('max', hover.element.duration);
+            $(hover.template).find('.controls progress').value(hover.element.currentTime);
+        }
     }
 };
 

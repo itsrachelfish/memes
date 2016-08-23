@@ -16,6 +16,13 @@
     .dragon {
         pointer-events: auto !important;
     }
+
+    audio {
+        display: inline-block;
+        width: 32em;
+        height: 8em;
+        background-color: #000;
+    }
 }
 
 .hover-menu {
