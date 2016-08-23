@@ -83,6 +83,28 @@ var tools =
         transform.unload();
     },
 
+    interact: function(element)
+    {
+        // If element is an audio or video element
+        if(element.nodeName && element.nodeName.toLowerCase() == 'audio' || element.nodeName.toLowerCase() == 'video')
+        {
+            // Toggle playing state
+            if(element.paused)
+            {
+                element.play();
+            }
+            else
+            {
+                element.pause();
+            }
+        }
+        // Otherwise just trigger a click
+        else
+        {
+            $(element).trigger('mousedown', {bubbles: true});
+        }
+    },
+
     edit: function(element)
     {
         // Check if the element has a unique ID

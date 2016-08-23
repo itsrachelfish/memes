@@ -82,7 +82,11 @@ var hover =
             // Only trigger click when clicking on the menu content (not the menu icons)
             if($(event.target).hasClass('hover-menu'))
             {
-                if(hover.tool == 'edit')
+                if(hover.tool == 'interact')
+                {
+                    tools.interact(hover.element);
+                }
+                else if(hover.tool == 'edit')
                 {
                     tools.edit(hover.element);
                 }

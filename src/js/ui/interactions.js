@@ -25,9 +25,6 @@ var keys =
     91: 'system',
 };
 
-// Timeouts for stuff
-var timeout = {};
-
 // Miscelaneous UI interactions
 var interactions =
 {
@@ -48,34 +45,6 @@ var interactions =
             // If left click was pressed, or this is a touch event
             if(!event.buttons || event.buttons == 1)
             {
-                // If the click timeout is defined, this must be a double click!
-                if(timeout.click)
-                {
-                    // If this is an audio or video element
-                    if(this.nodeName && this.nodeName.toLowerCase() == 'audio' || this.nodeName.toLowerCase() == 'video')
-                    {
-                        // Toggle playing state
-                        if(this.paused)
-                        {
-                            this.play();
-                        }
-                        else
-                        {
-                            this.pause();
-                        }
-                    }
-
-                    timeout.click = null;
-                }
-                else
-                {
-                    // Create a timeout to determine if the user is double clicking
-                    timeout.click = setTimeout(function()
-                    {
-                        timeout.click = null;
-                    }, 250);
-                }
-
                 // If the user is holding control while clicking
                 if(pressed.control)
                 {
