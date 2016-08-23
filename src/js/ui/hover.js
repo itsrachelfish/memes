@@ -77,6 +77,15 @@ var hover =
                 $(hover.template).find('.controls .pause').addClass('hidden');
             }
         }, true);
+
+        document.addEventListener('timeupdate', function(event)
+        {
+            if(event.target == hover.element)
+            {
+                $(hover.template).find('.controls progress').attr('max', hover.element.duration);
+                $(hover.template).find('.controls progress').value(hover.element.currentTime);
+            }
+        }, true);
     },
     
     start: function(element)
