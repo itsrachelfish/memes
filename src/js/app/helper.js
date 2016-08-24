@@ -7,6 +7,9 @@ var helper =
     // Used to stack elements ontop of eachother as you move them
     layers: 0,
 
+    // A map of currently pressed keys
+    pressed: {},
+
     randomInt: function(min, max)
     {
         return Math.round(Math.random() * (max - min)) + min;

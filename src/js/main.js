@@ -4,6 +4,7 @@ require('dragondrop');
 
 // Load custom modules
 var templates = require('./plugins/templates');
+var pool = require('./plugins/pool');
 
 var storage = require('./app/storage');
 var tools = require('./app/tools');
@@ -24,5 +25,9 @@ $(document).ready(function()
         overlay.init();
         interact.init();
         hover.init();
+
+        // Misc stuff
+        var explosion = $('.preload .explosion').el[0];
+        pool.init(explosion, 'explosion', 16);
     });
 });

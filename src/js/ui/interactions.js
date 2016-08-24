@@ -6,10 +6,8 @@ var tools = require('../app/tools');
 var storage = require('../app/storage');
 var helper = require('../app/helper');
 var pool = require('../plugins/pool');
+var explode = require('../plugins/explode');
 var overlay = require('./overlay');
-
-// A map of currently pressed keys
-var pressed = {};
 
 // Key codes for control characters
 var keys =
@@ -46,7 +44,7 @@ var interactions =
             if(!event.buttons || event.buttons == 1)
             {
                 // If the user is holding control while clicking
-                if(pressed.control)
+                if(helper.pressed.control)
                 {
                     var position =
                     {
@@ -71,6 +69,23 @@ var interactions =
             }
         });
 
+        // Random exploding things
+        $('body').on('mousedown touchstart', '.bomb', function(event)
+        {
+            // If the bomb is a link and you left clicked, make sure you still go to the link
+            if((!event.buttons || event.buttons == 1) && $(this).parents('a').el.length)
+            {
+                var url = $(this).parents('a').attr('href');
+
+                setTimeout(function()
+                {
+                    window.location = url;
+                }, 250);
+            }
+
+            explode(this);
+        });
+
         $('body').on('contextmenu', function(event)
         {
             // Is the current element the workspace or a child of it?
@@ -86,7 +101,7 @@ var interactions =
         $('body').on('keydown', function(event)
         {
             var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
-            pressed[key] = true;
+            helper.pressed[key] = true;
 
             // Keyboard shortcuts that trigger when a user presses escape
             if(key == 'escape')
@@ -108,7 +123,7 @@ var interactions =
         $('body').on('keyup', function(event)
         {
             var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
-            delete pressed[key];
+            delete helper.pressed[key];
         });
     },
 };

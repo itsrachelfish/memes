@@ -3,6 +3,7 @@ var helper = require('../app/helper');
 var storage = require('../app/storage');
 var tools = require('../app/tools');
 var transform = require('../plugins/transform');
+var explode = require('../plugins/explode');
 
 // Module which controls the menus that appear when hovering over content
 var hover =
@@ -122,9 +123,16 @@ var hover =
                 else if(hover.tool == 'delete')
                 {
                     storage.remove(hover.element);
-
-                    $(hover.element).remove();
                     $(template).remove();
+
+                    if(helper.pressed.control)
+                    {
+                        explode(hover.element);
+                    }
+                    else
+                    {
+                        $(hover.element).remove();
+                    }
                 }
             }
         });
