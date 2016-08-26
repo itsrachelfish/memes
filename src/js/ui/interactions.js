@@ -19,6 +19,10 @@ var keys =
     18: 'alt',
     20: 'caps',
     27: 'escape',
+    37: 'arrowleft',
+    38: 'arrowup',
+    39: 'arrowright',
+    40: 'arrowdown',
     46: 'delete',
     91: 'system',
 };
@@ -116,6 +120,21 @@ var interactions =
                 else
                 {
                     $('.menu').toggle('hidden');
+                }
+            }
+
+            // Shortcuts that require control to be pressed
+            if(helper.pressed.control)
+            {
+                var frame = parseInt(storage.get('frame'));
+
+                if(key == 'arrowright')
+                {
+                    storage.frame(frame + 1);
+                }
+                else if(key == 'arrowleft')
+                {
+                    storage.frame(frame - 1);
                 }
             }
         });
