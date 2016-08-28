@@ -81,6 +81,10 @@ var tools =
         // Make sure transformation is stopped
         transform.stop(tools.element);
         transform.unload();
+
+        // Set the menu text back to normal
+        $('h1.add').removeClass('hidden');
+        $('h1.edit').addClass('hidden');
     },
 
     interact: function(element)
@@ -117,10 +121,14 @@ var tools =
             if(object.type == 'image' || object.type == 'audio' || object.type == 'video')
             {
                 var selector = '.' + object.type;
+                var parent = '.overlay' + selector;
                 var form = '.overlay' + selector + ' form';
 
                 // Open the overlay for this type of object
                 overlay.open(selector);
+
+                $(parent).find('.add').addClass('hidden');
+                $(parent).find('.edit').removeClass('hidden');
 
                 // Set the original object data in a hidden field
                 $(form).append('<textarea class="temporary hidden" name="id">' + id + '</textarea>');
@@ -144,7 +152,11 @@ var tools =
             {
                 overlay.open('.text');
 
+                var parent = '.overlay.text';
                 var form = '.overlay.text form';
+
+                $(parent).find('.add').addClass('hidden');
+                $(parent).find('.edit').removeClass('hidden');
 
                 // Set the original object data in a hidden field
                 $(form).append('<textarea class="temporary hidden" name="id">' + id + '</textarea>');

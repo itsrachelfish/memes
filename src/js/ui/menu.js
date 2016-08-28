@@ -31,6 +31,10 @@ var menu =
         {
             if($(this).data('overlay'))
             {
+                // Make sure overlay titles are in "add mode"
+                $('h1.add').removeClass('hidden');
+                $('h1.edit').addClass('hidden');
+
                 overlay.open($(this).data('overlay'));
             }
         });
