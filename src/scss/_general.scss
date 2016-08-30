@@ -94,3 +94,24 @@ svg {
 .toggle {
     cursor: pointer;
 }
+
+.relative {
+    position: relative;
+}
+
+.picker {
+    label {
+        position: absolute;
+        color: #aaa;
+        font-weight: normal;
+        top: -2em;
+        left: 0;
+    }
+
+    input {
+        width: 100%;
+        height: 2.5em;
+        padding: 0.25em;
+        display: inline-block;
+    }
+}
