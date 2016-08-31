@@ -100,6 +100,10 @@ svg {
 }
 
 .picker {
+    &.padding {
+        margin-top: 2em;
+    }
+
     label {
         position: absolute;
         color: #aaa;

@@ -11,9 +11,16 @@
                 <input name="text" class="u-full-width" placeholder="sample text" id="text" type="text">
             </div>
 
-            <div class="twelve columns">
-                <label for="text-color">Color</label>
-                <input name="text-color" class="u-full-width" placeholder="Use words like 'red', 'green', or 'blue' -- Or use hex codes like '#A500FF'" id="text-color" type="text" value="white">
+            <div class="row">
+                <div class="ten columns">
+                    <label for="text-color">Color</label>
+                    <input name="text-color" class="u-full-width" placeholder="Use words like 'red', 'green', or 'blue' -- Or use hex codes like '#A500FF'" id="text-color" type="text" value="white">
+                </div>
+
+                <div class="two columns relative picker padding">
+                    <label>Color picker</label>
+                    <input name="picker" type="color" data-rel="#text-color">
+                </div>
             </div>
 
             <div class="twelve columns">
@@ -31,10 +38,18 @@
             </label>
 
             <div class="use-border">
-                <div class="twelve columns">
-                    <label for="border-color">Border Color</label>
-                    <input name="border-color" class="u-full-width" placeholder="Use words like 'red', 'green', or 'blue' -- Or use hex codes like '#A500FF'" id="border-color" type="text" value="black">
+                <div class="row">
+                    <div class="ten columns">
+                        <label for="border-color">Border Color</label>
+                        <input name="border-color" class="u-full-width" placeholder="Use words like 'red', 'green', or 'blue' -- Or use hex codes like '#A500FF'" id="border-color" type="text" value="black">
+                    </div>
+
+                    <div class="two columns relative picker padding">
+                        <label>Color picker</label>
+                        <input name="picker" type="color" data-rel="#border-color">
+                    </div>
                 </div>
+
 
                 <div class="twelve columns">
                     <label for="border-image">Border Image (Optional)</label>
