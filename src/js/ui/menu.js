@@ -258,6 +258,11 @@ var menu =
             $(form).find('input[name="position"]').value(background.position);
         });
 
+        $('.picker input').on('input change blur', function()
+        {
+            var rel = $(this).data('rel');
+            $(rel).value($(this).value());
+        });
 
         $('.background.overlay form').on('submit', function(event)
         {
