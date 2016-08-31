@@ -15,6 +15,33 @@ var credits = require('./credits');
 // Global webcam object
 var webcam;
 
+function textToHex(text)
+{
+    var number = parseInt(text);
+    var hex = number.toString(16);
+
+    if(hex.length < 2)
+    {
+        return '0' + hex;
+    }
+
+    return hex;
+}
+
+function rgbToHex(text)
+{
+    var match = text.match(/^rgba?\s*\((.*?)\)/);
+
+    if(match)
+    {
+        var colors = match[1].split(',');
+        return '#' + textToHex(colors[0]) + textToHex(colors[1]) + textToHex(colors[2]);
+    }
+
+    // Return black if nothing was matched
+    return '#000';
+}
+
 var menu =
 {
     pickers: function()
@@ -25,7 +52,14 @@ var menu =
             var rel = $(this).find('input').data('rel');
             var value = $(rel).value();
 
-            $(this).find('input').value(value);
+            // Add the color to a temporary hidden element
+            var temporary = document.createElement('div');
+            $(temporary).style({'color': value});
+
+            // Get the computed color of the element (allows support for non-hex values)
+            var color = rgbToHex(window.getComputedStyle(temporary).color);
+
+            $(this).find('input').value(color);
         });
     },
 
