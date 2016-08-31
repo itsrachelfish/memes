@@ -17,6 +17,18 @@ var webcam;
 
 var menu =
 {
+    pickers: function()
+    {
+        $('.picker').each(function()
+        {
+
+            var rel = $(this).find('input').data('rel');
+            var value = $(rel).value();
+
+            $(this).find('input').value(value);
+        });
+    },
+
     // Global menu event bindings when the page is loaded
     init: function()
     {
@@ -245,6 +257,11 @@ var menu =
             overlay.close('.text');
         });
 
+        $('.text').on('overlay-opened', function()
+        {
+            menu.pickers();
+        });
+
         // Populate saved information when the background overlay is opened
         $('.background').on('overlay-opened', function()
         {
@@ -256,7 +273,12 @@ var menu =
             $(form).find('input[name="image"]').value(background.image);
             $(form).find('select[name="repeat"]').value(background.repeat);
             $(form).find('input[name="position"]').value(background.position);
+
+            menu.pickers();
         });
+
+        // Populate color pickers on load
+        menu.pickers();
 
         $('.picker input').on('input change blur', function()
         {
