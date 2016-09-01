@@ -15,11 +15,15 @@
         pointer-events: auto !important;
     }
 
-    audio {
+    .audio-wrap {
         display: inline-block;
-        width: 32em;
-        height: 8em;
         background-color: #000;
+
+        .title {
+            font-size: 2em;
+            padding: 1em;
+            color: #fff;
+        }
     }
 }
 

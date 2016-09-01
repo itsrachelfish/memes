@@ -153,6 +153,10 @@ var create =
             $(audio).removeClass('hidden');
         }
 
+        // Add a default value for the audio description
+        options.desc = options.desc || 'untitled audio';
+
+        $(audio).find('.title').text(options.desc);
         $(audio).find('.element').attr('src', options.url);
 
         create.element(audio, options);
