@@ -90,16 +90,18 @@ var tools =
     interact: function(element)
     {
         // If element is an audio or video element
-        if(element.nodeName && element.nodeName.toLowerCase() == 'audio' || element.nodeName.toLowerCase() == 'video')
+        if($(element).hasClass('audio-wrap video-wrap', 'or'))
         {
+            var player = $(element).find('.element').el[0];
+
             // Toggle playing state
-            if(element.paused)
+            if(player.paused)
             {
-                element.play();
+                player.play();
             }
             else
             {
-                element.pause();
+                player.pause();
             }
         }
         // Otherwise just trigger a click

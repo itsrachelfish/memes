@@ -248,10 +248,10 @@ var hover =
             transform.stop();
         }
 
-        if(hover.element.nodeName && hover.element.nodeName.toLowerCase() == 'audio' || hover.element.nodeName.toLowerCase() == 'video')
+        if($(hover.element).hasClass('audio-wrap video-wrap', 'or'))
         {
-            $(hover.template).find('.controls progress').attr('max', hover.element.duration);
-            $(hover.template).find('.controls progress').value(hover.element.currentTime);
+            $(hover.template).find('.controls progress').attr('max', $(hover.element).find('.element').el[0].duration);
+            $(hover.template).find('.controls progress').value($(hover.element).find('.element').el[0].currentTime);
         }
     }
 };
