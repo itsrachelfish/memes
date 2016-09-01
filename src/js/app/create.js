@@ -21,9 +21,9 @@ var create =
         // Check if audio / video specific options need to be added
         if(options.type == 'audio' || options.type == 'video')
         {
-            $(element).attr('volume', options.volume);
-            $(element).attr('autoplay', options.autoplay);
-            $(element).attr('loop', options.loop);
+            $(element).find('.element').attr('volume', options.volume);
+            $(element).find('.element').attr('autoplay', options.autoplay);
+            $(element).find('.element').attr('loop', options.loop);
         }
 
         // Add license information if provided
@@ -147,9 +147,13 @@ var create =
             }
         }
 
+        if(audio === undefined)
+        {
+            audio = $('.audio-wrap.hidden').clone();
+            $(audio).removeClass('hidden');
+        }
 
-        audio = audio || document.createElement('audio');
-        $(audio).attr('src', options.url);
+        $(audio).find('.element').attr('src', options.url);
 
         create.element(audio, options);
         return {element: audio, options: options};
@@ -188,8 +192,13 @@ var create =
             }
         }
 
-        video = video || document.createElement('video');
-        $(video).attr('src', options.url);
+        if(video === undefined)
+        {
+            video = $('.video-wrap.hidden').clone();
+            $(video).removeClass('hidden');
+        }
+
+        $(video).find('.element').attr('src', options.url);
 
         create.element(video, options);
         return {element: video, options: options};
