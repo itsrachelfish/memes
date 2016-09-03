@@ -63,7 +63,9 @@ var hover =
         // Bind to media (audio / video) events
         document.addEventListener('play', function(event)
         {
-            if(event.target == hover.element)
+            var parent = $(event.target).parents('.content').el[0];
+
+            if(parent == hover.element)
             {
                 $(hover.template).find('.controls .pause').removeClass('hidden');
                 $(hover.template).find('.controls .play').addClass('hidden');
@@ -72,7 +74,9 @@ var hover =
 
         document.addEventListener('pause', function(event)
         {
-            if(event.target == hover.element)
+            var parent = $(event.target).parents('.content').el[0];
+
+            if(parent == hover.element)
             {
                 $(hover.template).find('.controls .play').removeClass('hidden');
                 $(hover.template).find('.controls .pause').addClass('hidden');
@@ -81,10 +85,12 @@ var hover =
 
         document.addEventListener('timeupdate', function(event)
         {
-            if(event.target == hover.element)
+            var parent = $(event.target).parents('.content').el[0];
+
+            if(parent == hover.element)
             {
-                $(hover.template).find('.controls progress').attr('max', hover.element.duration);
-                $(hover.template).find('.controls progress').value(hover.element.currentTime);
+                $(hover.template).find('.controls progress').attr('max', event.target.duration);
+                $(hover.template).find('.controls progress').value(event.target.currentTime);
             }
         }, true);
     },
