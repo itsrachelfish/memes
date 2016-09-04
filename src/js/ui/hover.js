@@ -63,13 +63,21 @@ var hover =
 
         $('.workspace').on('click', '.hover-menu .play, .hover-menu .play *', function()
         {
-            console.log('wwwwwwwww');
             $(hover.element).find('audio, video').el[0].play();
         });
 
         $('.workspace').on('click', '.hover-menu .pause, .hover-menu .pause *', function()
         {
             $(hover.element).find('audio, video').el[0].pause();
+        });
+
+        $('.workspace').on('click', '.hover-menu progress', function(event)
+        {
+            var media = $(hover.element).find('audio, video').el[0];
+            var progress = $(this).width() / event.layerX;
+            var seconds = media.duration / progress;
+
+            media.currentTime = seconds;
         });
 
         // Bind to media (audio / video) events
