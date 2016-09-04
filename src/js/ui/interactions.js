@@ -150,6 +150,14 @@ var interactions =
             // Reset which keys have been pressed if the mouse leaves the window (user switches tab, etc)
             helper.pressed = {};
         });
+
+        $('body').on('mouseenter', function(event)
+        {
+            if(event.ctrlKey)
+            {
+                helper.pressed['control'] = true;
+            }
+        });
     },
 };
 
