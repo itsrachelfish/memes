@@ -9,6 +9,7 @@ var explode = require('../plugins/explode');
 var hover =
 {
     tool: 'move',
+    element: false,
 
     init: function()
     {

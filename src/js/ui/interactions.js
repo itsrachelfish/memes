@@ -144,6 +144,12 @@ var interactions =
             var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
             delete helper.pressed[key];
         });
+
+        $('body').on('mouseleave', function(event)
+        {
+            // Reset which keys have been pressed if the mouse leaves the window (user switches tab, etc)
+            helper.pressed = {};
+        });
     },
 };
 
