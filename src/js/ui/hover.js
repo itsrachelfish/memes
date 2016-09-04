@@ -249,6 +249,20 @@ var hover =
         if(object.controls && hover.tool == "interact")
         {
             $(hover.template).find('.controls').removeClass('hidden');
+
+            // Make sure the right icon is displayed for playing / pausing media
+            var media = $(hover.element).find('audio, video').el[0];
+
+            if(media.paused)
+            {
+                $(hover.template).find('.controls .pause').addClass('hidden');
+                $(hover.template).find('.controls .play').removeClass('hidden');
+            }
+            else
+            {
+                $(hover.template).find('.controls .pause').removeClass('hidden');
+                $(hover.template).find('.controls .play').addClass('hidden');
+            }
         }
         else
         {
