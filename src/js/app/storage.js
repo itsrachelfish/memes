@@ -22,7 +22,7 @@ var project =
         author: 'Anonymous',
         camera: false,
         frame: 0,
-        frames: [],
+        frames: [{}],
         objects: {},
     },
 
@@ -301,7 +301,12 @@ var storage =
             // Get data about the background from the current frame
             if(property == 'background')
             {
-                return project.data.frames[project.data.frame].background;
+                if(project.data.frames[project.data.frame] !== undefined)
+                {
+                    return project.data.frames[project.data.frame].background;
+                }
+
+                return false;
             }
             else
             {
