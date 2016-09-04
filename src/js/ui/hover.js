@@ -58,6 +58,18 @@ var hover =
             $(hover.baseTemplate).find('.icon[data-tool="'+hover.tool+'"]').addClass('active');
 
             hover.initTools();
+            hover.showControls();
+        });
+
+        $('.workspace').on('click', '.hover-menu .play, .hover-menu .play *', function()
+        {
+            console.log('wwwwwwwww');
+            $(hover.element).find('audio, video').el[0].play();
+        });
+
+        $('.workspace').on('click', '.hover-menu .pause, .hover-menu .pause *', function()
+        {
+            $(hover.element).find('audio, video').el[0].pause();
         });
 
         // Bind to media (audio / video) events
@@ -226,9 +238,13 @@ var hover =
             });
         }
 
-        if(object.controls)
+        if(object.controls && hover.tool == "interact")
         {
             $(hover.template).find('.controls').removeClass('hidden');
+        }
+        else
+        {
+            $(hover.template).find('.controls').addClass('hidden');
         }
 
         return hover.template;
