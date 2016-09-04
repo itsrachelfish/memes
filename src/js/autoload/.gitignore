@@ -1,0 +1,4 @@
+# Ignore all the files in here, except this one and the example save file
+*
+!.gitignore
+!example.js
