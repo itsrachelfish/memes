@@ -33,7 +33,7 @@ var project =
 var storage =
 {
     // Initialize any saved project data when the page loads
-    init: function()
+    init: function(config)
     {
         // Check local storage for any saved data
         var data = localStorage.getItem('project');
@@ -44,8 +44,16 @@ var storage =
         }
         else
         {
-            // Use default project data if none is found
-            project.data = storage.create();
+            if(config.autoload.enabled)
+            {
+                // If autoload is enabled
+                project.data = config.autoload.data;
+            }
+            else
+            {
+                // Otherwise load a blank project
+                project.data = storage.create();
+            }
         }
 
         storage.load();

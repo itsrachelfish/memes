@@ -3,7 +3,7 @@ var config =
     autoload:
     {
         enabled: true,
-        file: require('./autoload/example.js')
+        data: require('./autoload/example.js')
     }
 };
 

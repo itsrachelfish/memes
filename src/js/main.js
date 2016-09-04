@@ -13,12 +13,13 @@ var menu = require('./ui/menu');
 var overlay = require('./ui/overlay');
 var interact = require('./ui/interactions');
 var hover = require('./ui/hover');
+var config = require('./config');
 
 $(document).ready(function()
 {
     templates.ready(function()
     {
-        storage.init();
+        storage.init(config);
         tools.init();
 
         menu.init();
