@@ -104,48 +104,68 @@ var storage =
                 $('body').attr('style', false);
             }
 
+            // Mark all content as pending deletion
+            $('.workspace .content').addClass('pending-deletion');
+
             for(var id in frame)
             {
                 if(project.data.objects[id] !== undefined)
                 {
                     // Combine any additional frame data with the saved element's options
                     var options = extend(true, project.data.objects[id], frame[id]);
-                    var created = false;
+                    var exists = $('#' + id);
 
-                    if(options.type == 'image')
+                    // If the element already exists on the page
+                    if(exists.el.length)
                     {
-                        created = create.image(options);
+                        // Update the existing element
+                        create.element(exists.el[0], options);
+                        exists.removeClass('pending-deletion');
                     }
-                    else if(options.type == 'audio')
-                    {
-                        created = create.audio(options);
-                    }
-                    else if(options.type == 'video')
-                    {
-                        created = create.video(options);
-                    }
-                    else if(options.type == 'text')
-                    {
-                        created = create.text(options);
-                    }
-                    else if(options.type == 'preset' && presets[options.preset] !== undefined)
-                    {
-                        presets[options.preset].init();
-                        created = presets[options.preset].create(null, options);
-                    }
+
+                    // Otherwise create a new one
                     else
                     {
-                        console.log("Object '" + id + "' failed to load, no handler function matched.");
-                    }
+                        var created = false;
 
-                    // If an element was created
-                    if(created)
-                    {
-                        // Add the unique ID to the DOM
-                        $(created.element).attr('id', id);
+                        if(options.type == 'image')
+                        {
+                            created = create.image(options);
+                        }
+                        else if(options.type == 'audio')
+                        {
+                            created = create.audio(options);
+                        }
+                        else if(options.type == 'video')
+                        {
+                            created = create.video(options);
+                        }
+                        else if(options.type == 'text')
+                        {
+                            created = create.text(options);
+                        }
+                        else if(options.type == 'preset' && presets[options.preset] !== undefined)
+                        {
+                            presets[options.preset].init();
+                            created = presets[options.preset].create(null, options);
+                        }
+                        else
+                        {
+                            console.log("Object '" + id + "' failed to load, no handler function matched.");
+                        }
+
+                        // If an element was created
+                        if(created)
+                        {
+                            // Add the unique ID to the DOM
+                            $(created.element).attr('id', id);
+                        }
                     }
                 }
             }
+
+            // Remove all remaining elements pending deletion
+            $('.workspace .content.pending-deletion').remove();
         }
     },
 
@@ -391,7 +411,6 @@ var storage =
             }
 
             // Redraw the project
-            $('.workspace').html('');
             storage.load();
             storage.persist();
 
@@ -419,7 +438,6 @@ var storage =
             project.data.frame = index;
 
             // Redraw the project
-            $('.workspace').html('');
             storage.load();
         },
     },
