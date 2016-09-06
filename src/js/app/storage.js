@@ -372,6 +372,32 @@ var storage =
             $('.workspace').trigger('frames-changed');
         },
 
+        // Delete a frame
+        delete: function(index)
+        {
+            project.data.frames.splice(index, 1);
+
+            if(index > 0)
+            {
+                project.data.frame = index - 1;
+            }
+            else
+            {
+                // Make sure there is always 1 frame left
+                if(project.data.frames.length === 0)
+                {
+                    storage.frame.create();
+                }
+            }
+
+            // Redraw the project
+            $('.workspace').html('');
+            storage.load();
+            storage.persist();
+
+            $('.workspace').trigger('frames-changed');
+        },
+
         // Switch to another frame
         goto: function(index)
         {

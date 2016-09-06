@@ -36,6 +36,7 @@ var frames =
                 $(frame).find('.objects').text(objectCount + ' objects');
 
                 $(frame).on('click', frames.click);
+                $(frame).find('.delete').on('click', frames.delete);
 
                 $('.frame-list').el[0].appendChild(frame);
             });
@@ -59,14 +60,27 @@ var frames =
         });
     },
 
-    click: function()
+    click: function(event)
     {
-        // Switch the frame to whichever frame was clicked on
+        // Switch the frame to whichever one was clicked on
         var index = $(this).index();
         storage.frame.goto(index);
 
         $('.frame-list .frame.active').removeClass('active');
         $(this).addClass('active');
+    },
+
+    delete: function(event)
+    {
+        event.stopPropagation();
+
+        var sure = confirm("Are you sure you want to delete this entire frame?");
+
+        if(sure)
+        {
+            var index = $(this).parents('.frame').index();
+            storage.frame.delete(index);
+        }
     },
 };
 
