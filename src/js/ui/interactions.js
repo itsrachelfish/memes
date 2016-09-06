@@ -130,11 +130,11 @@ var interactions =
 
                 if(key == 'arrowright')
                 {
-                    storage.frame(frame + 1);
+                    storage.frame.goto(frame + 1);
                 }
                 else if(key == 'arrowleft')
                 {
-                    storage.frame(frame - 1);
+                    storage.frame.goto(frame - 1);
                 }
             }
         });

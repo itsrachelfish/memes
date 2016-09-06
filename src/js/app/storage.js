@@ -99,6 +99,10 @@ var storage =
             {
                 create.background(frame.background);
             }
+            else
+            {
+                $('body').attr('style', false);
+            }
 
             for(var id in frame)
             {
@@ -348,30 +352,50 @@ var storage =
         storage.persist();
     },
 
-    // Switch to another frame
-    frame: function(index)
+    frame:
     {
-        // Make sure it's a number
-        index = parseInt(index);
-        
-        // If the requested index is negative, use the first one
-        if(index < 0)
+        // Create a new frame
+        create: function()
         {
-            index = 0;
-        }
+            project.data.frames.splice(project.data.frame + 1, 0, {});
+            storage.persist();
 
-        // If the index is higher than the last frame, use the last frame
-        else if(index >= project.data.frames.length)
+            $('.workspace').trigger('frames-changed');
+        },
+
+        // Copy an existing frame
+        copy: function(index)
         {
-            index = project.data.frames.length - 1;
-        }
+            project.data.frames.splice(index + 1, 0, project.data.frames[index]);
+            storage.persist();
 
-        project.data.frame = index;
+            $('.workspace').trigger('frames-changed');
+        },
 
-        // Redraw the project
-        $('.workspace').html('');
-        $('body').attr('style', false);
-        storage.load();
+        // Switch to another frame
+        goto: function(index)
+        {
+            // Make sure it's a number
+            index = parseInt(index);
+
+            // If the requested index is negative, use the first one
+            if(index < 0)
+            {
+                index = 0;
+            }
+
+            // If the index is higher than the last frame, use the last frame
+            else if(index >= project.data.frames.length)
+            {
+                index = project.data.frames.length - 1;
+            }
+
+            project.data.frame = index;
+
+            // Redraw the project
+            $('.workspace').html('');
+            storage.load();
+        },
     },
 };
 

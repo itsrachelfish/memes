@@ -414,11 +414,11 @@ var menu =
 
             if($(this).hasClass('next'))
             {
-                storage.frame(frame + 1);
+                storage.frame.goto(frame + 1);
             }
             else
             {
-                storage.frame(frame - 1);
+                storage.frame.goto(frame - 1);
             }
         });
     }
