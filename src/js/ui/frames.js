@@ -32,7 +32,7 @@ var frames =
                     objectCount--;
                 }
 
-                $(frame).find('.title').text('Frame ' + (index + 1));
+                $(frame).find('.title .text').text('Frame ' + (index + 1));
                 $(frame).find('.objects').text(objectCount + ' objects');
 
                 $(frame).on('click', frames.click);
