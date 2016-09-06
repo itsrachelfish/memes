@@ -1,0 +1,25 @@
+.frame-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.frame {
+    flex: auto;
+    margin: 1.2em;
+    padding: 0.5em;
+    cursor: pointer;
+
+    .title {
+        font-weight: bold;
+    }
+
+    &.active {
+        border: 0.2em solid gold;
+        margin: 1em;
+    }
+
+    &:hover {
+        border: 0.2em dashed gold;
+        margin: 1em;
+    }
+}

@@ -22,7 +22,7 @@ var frames =
                 
                 if(index == project.frame)
                 {
-                    $(frame).style({'border': '2px solid gold'});
+                    $(frame).addClass('active');
                 }
 
                 var objectCount = Object.keys(data).length;
@@ -32,7 +32,7 @@ var frames =
                     objectCount--;
                 }
 
-                $(frame).find('.count').text('Frame ' + (index + 1));
+                $(frame).find('.title').text('Frame ' + (index + 1));
                 $(frame).find('.objects').text(objectCount + ' objects');
                 $('.frame-list').append(frame);
             });
