@@ -108,6 +108,39 @@ var menu =
             $(this).text(toggle);
 
             $(rel).toggle('hidden');
+
+            // Save toggle value in localstorage
+            var toggleState = localStorage.getItem('toggle') || '{}';
+            toggleState = JSON.parse(toggleState);
+
+            if($(rel).hasClass('hidden'))
+            {
+                toggleState[rel] = 1;
+            }
+            else
+            {
+                toggleState[rel] = 0;
+            }
+
+            localStorage.setItem('toggle', JSON.stringify(toggleState));
+        });
+
+        // Populate saved toggles on page load
+        var toggleState = localStorage.getItem('toggle') || '{}';
+        toggleState = JSON.parse(toggleState);
+
+        Object.keys(toggleState).forEach(function(rel)
+        {
+            var hidden = toggleState[rel];
+
+            if(hidden)
+            {
+                $(rel).addClass('hidden');
+            }
+            else
+            {
+                $(rel).removeClass('hidden');
+            }
         });
 
         // Project file menu
