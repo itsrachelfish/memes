@@ -354,16 +354,16 @@ var storage =
         // Make sure it's a number
         index = parseInt(index);
         
-        // Frames can't be negative!
+        // If the requested index is negative, use the first one
         if(index < 0)
         {
             index = 0;
         }
 
-        // If this is a new frame, copy the elements from the previous frame
-        if(project.data.frames[index] === undefined)
+        // If the index is higher than the last frame, use the last frame
+        else if(index >= project.data.frames.length)
         {
-            index = project.data.frames.push(project.data.frames.slice(-1)[0]) - 1;
+            index = project.data.frames.length - 1;
         }
 
         project.data.frame = index;
