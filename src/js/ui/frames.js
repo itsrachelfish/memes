@@ -34,11 +34,23 @@ var frames =
 
                 $(frame).find('.title').text('Frame ' + (index + 1));
                 $(frame).find('.objects').text(objectCount + ' objects');
-                $('.frame-list').append(frame);
+
+                $(frame).on('click', frames.click);
+
+                $('.frame-list').el[0].appendChild(frame);
             });
         });
+    },
 
-    }
+    click: function()
+    {
+        // Switch the frame to whichever frame was clicked on
+        var index = $(this).index();
+        storage.frame(index);
+
+        $('.frame-list .frame.active').removeClass('active');
+        $(this).addClass('active');
+    },
 };
 
 module.exports = frames;
