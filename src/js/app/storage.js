@@ -176,6 +176,10 @@ var storage =
         var id = $(element).attr('id') || helper.randomString();
         $(element).attr('id', id);
 
+        // Remove frame-specific data from saved options
+        delete options.transform;
+        delete options.layer;
+
         project.data.objects[id] = options;
 
         if(project.data.frames[project.data.frame] === undefined)
@@ -203,14 +207,15 @@ var storage =
         // if the element is hidden?
         // custom styles?
 
-        var data =
+        // Use stringify / parse to make sure the saved data is passed by value, not by reference
+        var data = JSON.parse(JSON.stringify(
         {
             // Save any transformations
             'transform': element.transform,
 
             // Save what layer the element is on
             'layer': $(element).style('z-index')
-        };
+        }));
 
         project.data.frames[project.data.frame][id] = data;
         storage.persist();
@@ -229,12 +234,11 @@ var storage =
         if(text !== undefined)
         {
             project.data.title = text;
+            storage.persist();
         }
 
         $('title').text(project.data.title);
         $('.file .title').value(project.data.title);
-
-        storage.persist();
     },
 
     author: function(text)
@@ -242,10 +246,10 @@ var storage =
         if(text !== undefined)
         {
             project.data.author = text;
+            storage.persist();
         }
 
         $('.file .author').value(project.data.author);
-        storage.persist();
     },
 
     camera: function(recording)
@@ -379,7 +383,10 @@ var storage =
         // Copy an existing frame
         copy: function(index)
         {
-            project.data.frames.splice(index + 1, 0, project.data.frames[index]);
+            // Use stringify / parse to make sure the saved data is passed by value, not by reference
+            var frame = JSON.parse(JSON.stringify(project.data.frames[index]));
+
+            project.data.frames.splice(index + 1, 0, frame);
             storage.persist();
 
             $('.workspace').trigger('frames-changed');

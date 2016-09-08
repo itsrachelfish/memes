@@ -128,8 +128,12 @@ var transform =
         var target = document.elementFromPoint(event.clientX, event.clientY);
         $(target).trigger('click', {bubbles: true});
 
-        // Set the z-index back
-        $(transform.template).style({'z-index': zindex});
+        // Make sure the transform template still exists
+        if(transform.template)
+        {
+            // Set the z-index back
+            $(transform.template).style({'z-index': zindex});
+        }
     },
 
     mousedown: function(event)
