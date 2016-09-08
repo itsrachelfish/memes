@@ -21,7 +21,7 @@ var create =
         // Check if audio / video specific options need to be added
         if(options.type == 'audio' || options.type == 'video')
         {
-            $(element).find('.element').attr('volume', options.volume);
+            $(element).find('.element').prop('volume', options.volume);
             $(element).find('.element').attr('autoplay', options.autoplay);
             $(element).find('.element').attr('loop', options.loop);
         }

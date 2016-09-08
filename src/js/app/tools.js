@@ -144,7 +144,7 @@ var tools =
                 // Options specific to audio and video elements
                 if(object.type == 'audio' || object.type == 'video')
                 {
-                    $(form).find('input[name="volume"]').value(object.url);
+                    $(form).find('input[name="volume"]').value(object.volume);
                     $(form).find('input[name="controls"]').prop('checked', object.controls);
                     $(form).find('input[name="autoplay"]').prop('checked', object.autoplay);
                     $(form).find('input[name="loop"]').prop('checked', object.loop);
