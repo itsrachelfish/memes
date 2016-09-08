@@ -205,13 +205,6 @@ var storage =
 
         var data =
         {
-            // Save the element's position
-            'position':
-            {
-                'left': parseFloat(element.transform.translate[0]), // Because wetfish basic is awesome <3
-                'top': parseFloat(element.transform.translate[1])
-            },
-
             // Save any transformations
             'transform': element.transform,
 
