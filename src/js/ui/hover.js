@@ -81,6 +81,12 @@ var hover =
             media.currentTime = seconds;
         });
 
+        // Remove hover menu when changing frames
+        $('.workspace').on('frames-changed', function(event)
+        {
+            hover.stop();
+        });
+
         // Bind to media (audio / video) events
         document.addEventListener('play', function(event)
         {

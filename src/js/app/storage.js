@@ -439,6 +439,8 @@ var storage =
 
             // Redraw the project
             storage.load();
+
+            $('.workspace').trigger('frames-changed');
         },
     },
 };
