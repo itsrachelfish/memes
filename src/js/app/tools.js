@@ -126,9 +126,6 @@ var tools =
                 var parent = '.overlay' + selector;
                 var form = '.overlay' + selector + ' form';
 
-                // Open the overlay for this type of object
-                overlay.open(selector);
-
                 $(parent).find('.add').addClass('hidden');
                 $(parent).find('.edit').removeClass('hidden');
 
@@ -149,11 +146,12 @@ var tools =
                     $(form).find('input[name="autoplay"]').prop('checked', object.autoplay);
                     $(form).find('input[name="loop"]').prop('checked', object.loop);
                 }
+
+                // Open the overlay for this type of object
+                overlay.open(selector);
             }
             else if(object.type == 'text')
             {
-                overlay.open('.text');
-
                 var parent = '.overlay.text';
                 var form = '.overlay.text form';
 
@@ -166,13 +164,15 @@ var tools =
 
                 // Add saved options into the form
                 $(form).find('input[name="text"]').value(object.text);
-                $(form).find('input[name="text-color"]').value(object['text-color']);
-                $(form).find('input[name="text-image"]').value(object['text-image']);
-                $(form).find('input[name="text-size"]').value(object['text-size']);
+                $(form).find('input[name="text-color"]').value(object.color);
+                $(form).find('input[name="text-image"]').value(object.image);
+                $(form).find('input[name="text-size"]').value(object.size);
                 $(form).find('input[name="border"]').prop('checked', object.border.enabled).trigger('change', {bubbles: true});
-                $(form).find('input[name="border-color"]').value(object['border-color']);
-                $(form).find('input[name="border-image"]').value(object['border-image']);
-                $(form).find('input[name="border-size"]').value(object['border-size']);
+                $(form).find('input[name="border-color"]').value(object.border.color);
+                $(form).find('input[name="border-image"]').value(object.border.image);
+                $(form).find('input[name="border-size"]').value(object.border.size);
+
+                overlay.open('.text');
             }
             else
             {

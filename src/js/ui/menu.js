@@ -49,7 +49,6 @@ var menu =
     {
         $('.picker').each(function()
         {
-
             var rel = $(this).find('input').data('rel');
             var value = $(rel).value();
 
