@@ -1,13 +1,13 @@
 {
-  "name": "youtube-junk",
+  "name": "memes",
   "version": "0.0.0",
-  "description": "Miscelaneous things related to my youtube channel",
+  "description": "The meme machine.",
   "author": "Rachel Fish <rachel@wetfish.net> (https://wetfish.net)",
   "dependencies": {
     "dragondrop": "github:wetfish/dragondrop",
     "extend": "^3.0.0",
     "font-awesome": "^4.6.3",
-    "wetfish-basic": "^0.7.11"
+    "wetfish-basic": "github:wetfish/basic"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
