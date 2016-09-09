@@ -1,6 +1,6 @@
 {
   "name": "memes",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The meme machine.",
   "author": "Rachel Fish <rachel@wetfish.net> (https://wetfish.net)",
   "dependencies": {
