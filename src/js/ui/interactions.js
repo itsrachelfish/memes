@@ -126,15 +126,15 @@ var interactions =
             // Shortcuts that require control to be pressed
             if(helper.pressed.control)
             {
-                var frame = parseInt(storage.get('frame'));
+                var slide = parseInt(storage.get('slide'));
 
                 if(key == 'arrowright')
                 {
-                    storage.frame.goto(frame + 1);
+                    storage.slide.goto(slide + 1);
                 }
                 else if(key == 'arrowleft')
                 {
-                    storage.frame.goto(frame - 1);
+                    storage.slide.goto(slide - 1);
                 }
             }
         });

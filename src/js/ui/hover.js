@@ -32,6 +32,7 @@ var hover =
         // Bind to the creation of new content
         $('.workspace').on('content-created', function(event)
         {
+            console.log("Detail", event, event.detail);
             $(event.detail).on('mouseenter', function(event)
             {
                 hover.start(event.target);
@@ -81,8 +82,8 @@ var hover =
             media.currentTime = seconds;
         });
 
-        // Remove hover menu when changing frames
-        $('.workspace').on('frames-changed', function(event)
+        // Remove hover menu when changing slides
+        $('.workspace').on('slides-changed', function(event)
         {
             hover.stop();
         });

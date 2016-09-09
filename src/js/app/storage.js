@@ -21,8 +21,8 @@ var project =
         title: 'Untitled Project',
         author: 'Anonymous',
         camera: false,
-        frame: 0,
-        frames: [{}],
+        slide: 0,
+        slides: [{}],
         objects: {},
     },
 
@@ -90,14 +90,14 @@ var storage =
             $('.start-webcam').trigger('click');
         }
 
-        // If there is saved data for the current frame
-        if(project.data.frames[project.data.frame] !== undefined)
+        // If there is saved data for the current slide
+        if(project.data.slides[project.data.slide] !== undefined)
         {
-            var frame = project.data.frames[project.data.frame];
+            var slide = project.data.slides[project.data.slide];
 
-            if(frame.background)
+            if(slide.background)
             {
-                create.background(frame.background);
+                create.background(slide.background);
             }
             else
             {
@@ -107,12 +107,12 @@ var storage =
             // Mark all content as pending deletion
             $('.workspace .content').addClass('pending-deletion');
 
-            for(var id in frame)
+            for(var id in slide)
             {
                 if(project.data.objects[id] !== undefined)
                 {
-                    // Combine any additional frame data with the saved element's options
-                    var options = extend(true, project.data.objects[id], frame[id]);
+                    // Combine any additional slide data with the saved element's options
+                    var options = extend(true, project.data.objects[id], slide[id]);
                     var exists = $('#' + id);
 
                     // If the element already exists on the page
@@ -176,18 +176,18 @@ var storage =
         var id = $(element).attr('id') || helper.randomString();
         $(element).attr('id', id);
 
-        // Remove frame-specific data from saved options
+        // Remove slide-specific data from saved options
         delete options.transform;
         delete options.layer;
 
         project.data.objects[id] = options;
 
-        if(project.data.frames[project.data.frame] === undefined)
+        if(project.data.slides[project.data.slide] === undefined)
         {
-            project.data.frames[project.data.frame] = {};
+            project.data.slides[project.data.slide] = {};
         }
 
-        project.data.frames[project.data.frame][id] = {};
+        project.data.slides[project.data.slide][id] = {};
         storage.update(element);
     },
 
@@ -217,14 +217,14 @@ var storage =
             'layer': $(element).style('z-index')
         }));
 
-        project.data.frames[project.data.frame][id] = data;
+        project.data.slides[project.data.slide][id] = data;
         storage.persist();
     },
 
-    // Update the background of the current frame
+    // Update the background of the current slide
     background: function(data)
     {
-        project.data.frames[project.data.frame].background = data;
+        project.data.slides[project.data.slide].background = data;
         storage.persist();
     },
 
@@ -271,7 +271,7 @@ var storage =
             return;
         }
 
-        delete project.data.frames[project.data.frame][id];
+        delete project.data.slides[project.data.slide][id];
         delete project.data.objects[id];
 
         storage.persist();
@@ -327,12 +327,12 @@ var storage =
         // If a specific property was passed
         if(property)
         {
-            // Get data about the background from the current frame
+            // Get data about the background from the current slide
             if(property == 'background')
             {
-                if(project.data.frames[project.data.frame] !== undefined)
+                if(project.data.slides[project.data.slide] !== undefined)
                 {
-                    return project.data.frames[project.data.frame].background;
+                    return project.data.slides[project.data.slide].background;
                 }
 
                 return false;
@@ -355,8 +355,8 @@ var storage =
             return;
         }
 
-        var frame = project.data.frames[project.data.frame];
-        var options = extend(true, project.data.objects[id], frame[id]);
+        var slide = project.data.slides[project.data.slide];
+        var options = extend(true, project.data.objects[id], slide[id]);
 
         return options;
     },
@@ -369,44 +369,44 @@ var storage =
         storage.persist();
     },
 
-    frame:
+    slide:
     {
-        // Create a new frame
+        // Create a new slide
         create: function()
         {
-            project.data.frames.splice(project.data.frame + 1, 0, {});
+            project.data.slides.splice(project.data.slide + 1, 0, {});
             storage.persist();
 
-            $('.workspace').trigger('frames-changed');
+            $('.workspace').trigger('slides-changed');
         },
 
-        // Copy an existing frame
+        // Copy an existing slide
         copy: function(index)
         {
             // Use stringify / parse to make sure the saved data is passed by value, not by reference
-            var frame = JSON.parse(JSON.stringify(project.data.frames[index]));
+            var slide = JSON.parse(JSON.stringify(project.data.slides[index]));
 
-            project.data.frames.splice(index + 1, 0, frame);
+            project.data.slides.splice(index + 1, 0, slide);
             storage.persist();
 
-            $('.workspace').trigger('frames-changed');
+            $('.workspace').trigger('slides-changed');
         },
 
-        // Delete a frame
+        // Delete a slide
         delete: function(index)
         {
-            project.data.frames.splice(index, 1);
+            project.data.slides.splice(index, 1);
 
             if(index > 0)
             {
-                project.data.frame = index - 1;
+                project.data.slide = index - 1;
             }
             else
             {
-                // Make sure there is always 1 frame left
-                if(project.data.frames.length === 0)
+                // Make sure there is always 1 slide left
+                if(project.data.slides.length === 0)
                 {
-                    storage.frame.create();
+                    storage.slide.create();
                 }
             }
 
@@ -414,10 +414,10 @@ var storage =
             storage.load();
             storage.persist();
 
-            $('.workspace').trigger('frames-changed');
+            $('.workspace').trigger('slides-changed');
         },
 
-        // Switch to another frame
+        // Switch to another slide
         goto: function(index)
         {
             // Make sure it's a number
@@ -429,18 +429,18 @@ var storage =
                 index = 0;
             }
 
-            // If the index is higher than the last frame, use the last frame
-            else if(index >= project.data.frames.length)
+            // If the index is higher than the last slide, use the last slide
+            else if(index >= project.data.slides.length)
             {
-                index = project.data.frames.length - 1;
+                index = project.data.slides.length - 1;
             }
 
-            project.data.frame = index;
+            project.data.slide = index;
 
             // Redraw the project
             storage.load();
 
-            $('.workspace').trigger('frames-changed');
+            $('.workspace').trigger('slides-changed');
         },
     },
 };

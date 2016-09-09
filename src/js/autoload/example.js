@@ -2,8 +2,8 @@ module.exports = {
     "title": "Example project",
     "author": "",
     "camera": false,
-    "frame": 0,
-    "frames": [
+    "slide": 0,
+    "slides": [
         {
             "background": {
                 "background": "linear-gradient(45deg, #f06, yellow)",
@@ -13,10 +13,6 @@ module.exports = {
                 "position": ""
             },
             "s4o2g3imk9": {
-                "position": {
-                    "left": 446,
-                    "top": 96
-                },
                 "transform": {
                     "translate": [
                         "446px",
@@ -26,10 +22,6 @@ module.exports = {
                 "layer": "2"
             },
             "byqcz5ap2j": {
-                "position": {
-                    "left": 358,
-                    "top": 9
-                },
                 "transform": {
                     "translate": [
                         "358px",
@@ -53,33 +45,11 @@ module.exports = {
                 "size": "10",
                 "color": "black",
                 "image": "img/rainbow-spiral.gif"
-            },
-            "position": {
-                "left": 446,
-                "top": 96
-            },
-            "transform": {
-                "translate": [
-                    "446px",
-                    "96px"
-                ]
-            },
-            "layer": "2"
+            }
         },
         "byqcz5ap2j": {
             "type": "image",
-            "url": "img/sparkles.gif",
-            "position": {
-                "left": 427,
-                "top": 82
-            },
-            "transform": {
-                "translate": [
-                    "427px",
-                    "82px"
-                ]
-            },
-            "layer": "5"
+            "url": "img/sparkles.gif"
         }
     },
     "created": "2016-09-04T13:56:36.260Z",

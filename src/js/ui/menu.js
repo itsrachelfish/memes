@@ -11,7 +11,7 @@ var presets = require('../app/presets');
 
 var overlay = require('./overlay');
 var credits = require('./credits');
-var frames = require('./frames');
+var slides = require('./slides');
 
 // Global webcam object
 var webcam;
@@ -66,7 +66,7 @@ var menu =
     // Global menu event bindings when the page is loaded
     init: function()
     {
-        frames.init();
+        slides.init();
 
         // Make sure the menu is on top when you're mousing over it
         $('.menu').on('mouseenter touchstart', function()
@@ -409,15 +409,15 @@ var menu =
 
         $('.menu .next, .menu .prev').on('click', function()
         {
-            var frame = parseInt(storage.get('frame'));
+            var slide = parseInt(storage.get('slide'));
 
             if($(this).hasClass('next'))
             {
-                storage.frame.goto(frame + 1);
+                storage.slide.goto(slide + 1);
             }
             else
             {
-                storage.frame.goto(frame - 1);
+                storage.slide.goto(slide - 1);
             }
         });
     }
