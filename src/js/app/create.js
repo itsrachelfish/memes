@@ -16,6 +16,7 @@ var create =
         {
             // Add the new element to the workspace
             $('.workspace').el[0].appendChild(element);
+            $('.workspace').trigger('content-created', element);
         }
 
         // Check if audio / video specific options need to be added
@@ -69,7 +70,7 @@ var create =
         }
  
         $(element).addClass('content');
-        $('.workspace').trigger('content-created', element);
+        $('.workspace').trigger('content-updated', element);
     },
 
     image: function(options)
