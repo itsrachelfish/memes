@@ -10,36 +10,7 @@ var slides =
 
         $('.slides').on('overlay-opened', function()
         {
-            // Clear any previous slides
-            $('.slide-list .slide').remove();
-
-            // Get the current project data
-            var project = storage.get();
-
-            project.slides.forEach(function(data, index)
-            {
-                var slide = $(slides.template).clone();
-
-                if(index == project.slide)
-                {
-                    $(slide).addClass('active');
-                }
-
-                var objectCount = Object.keys(data).length;
-
-                if(data.background !== undefined)
-                {
-                    objectCount--;
-                }
-
-                $(slide).find('.title .text').text('Frame ' + (index + 1));
-                $(slide).find('.objects').text(objectCount + ' objects');
-
-                $(slide).on('click', slides.click);
-                $(slide).find('.delete').on('click', slides.delete);
-
-                $('.slide-list').el[0].appendChild(slide);
-            });
+            slides.populate();
         });
 
         $('.slides .create').on('click', function()
@@ -56,7 +27,44 @@ var slides =
         // Refresh which slides are displayed
         $('.workspace').on('slides-changed', function()
         {
-            $('.slides').trigger('overlay-opened');
+            slides.populate();
+        });
+    },
+
+    // Populate the list of slides
+    populate: function()
+    {
+        // Clear any previous slides
+        $('.slide-list .slide').remove();
+
+        // Get the current project data
+        var project = storage.get();
+
+        project.slides.forEach(function(data, index)
+        {
+            var slide = $(slides.template).clone();
+
+            if(index == project.slide)
+            {
+                $(slide).addClass('active');
+            }
+
+            var objectCount = Object.keys(data).length;
+
+            if(data.background !== undefined)
+            {
+                objectCount--;
+            }
+
+            $(slide).find('.title .text').text('Slide ' + (index + 1));
+            $(slide).find('.objects').text(objectCount + ' objects');
+
+            $(slide).on('click', slides.click);
+            $(slide).find('.delete').on('click', slides.delete);
+
+            $(slide).dragondrop({'handle': '.move span', 'position': 'static'});
+
+            $('.slide-list').el[0].appendChild(slide);
         });
     },
 
