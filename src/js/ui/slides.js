@@ -21,6 +21,29 @@ var slides =
         {
             // Populate modal title
             $('.slide-edit .number').text('' + slides.editing);
+
+            // Populate form content
+            var project = storage.get();
+            var slide = project.slides[slides.editing - 1];
+            var form = '.slide-edit form';
+
+            // Make sure default values are set
+            if(slide.autoplay === undefined)
+            {
+                slide.autoplay = {'enabled': false};
+            }
+
+            if(slide.transition === undefined)
+            {
+                slide.transition = {'enabled': false};
+            }
+
+            $(form).find('input[name="desc"]').value(slide.desc);
+            $(form).find('input[name="autoplay"]').prop('checked', slide.autoplay.enabled).trigger('change', {bubbles: true});
+            $(form).find('input[name="duration"]').value(slide.autoplay.duration);
+            $(form).find('input[name="goto"]').value(slide.autoplay.goto);
+            $(form).find('input[name="transition"]').prop('checked', slide.transition.enabled).trigger('change', {bubbles: true});
+            $(form).find('input[name="transition-duration"]').value(slide.transition.duration);
         });
 
         $('.slides .create').on('click', function()
@@ -82,6 +105,7 @@ var slides =
                 {
                     enabled: input['autoplay'],
                     duration: input['duration'],
+                    goto: input['goto'],
                 },
                 transition:
                 {
@@ -122,6 +146,15 @@ var slides =
                 objectCount--;
             }
 
+            if(data.desc)
+            {
+                $(slide).find('.desc').text(data.desc);
+            }
+            else
+            {
+                $(slide).find('.desc').text('');
+            }
+
             $(slide).find('.title .text').text('Slide ' + (index + 1));
             $(slide).find('.objects').text(objectCount + ' objects');
 
@@ -145,9 +178,6 @@ var slides =
         // Switch the slide to whichever one was clicked on
         var index = $(this).index();
         storage.slide.goto(index);
-
-        $('.slide-list .slide.active').removeClass('active');
-        $(this).addClass('active');
     },
 
     edit: function(event)

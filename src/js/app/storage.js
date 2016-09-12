@@ -479,6 +479,7 @@ var storage =
 
             // Redraw the project
             storage.load();
+            storage.persist();
 
             $('.workspace').trigger('slides-changed');
         },

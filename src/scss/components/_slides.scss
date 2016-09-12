@@ -9,6 +9,10 @@
     padding: 0.5em;
     cursor: pointer;
 
+    .desc {
+        min-width: 12em;
+    }
+
     .title {
         font-weight: bold;
         margin: -0.5em;
