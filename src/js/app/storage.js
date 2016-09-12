@@ -210,6 +210,8 @@ var storage =
         // Use stringify / parse to make sure the saved data is passed by value, not by reference
         var data = JSON.parse(JSON.stringify(
         {
+            'content': true,
+
             // Save any transformations
             'transform': element.transform,
 

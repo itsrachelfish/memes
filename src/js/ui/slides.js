@@ -28,15 +28,9 @@ var slides =
             var form = '.slide-edit form';
 
             // Make sure default values are set
-            if(slide.autoplay === undefined)
-            {
-                slide.autoplay = {'enabled': false};
-            }
-
-            if(slide.transition === undefined)
-            {
-                slide.transition = {'enabled': false};
-            }
+            slide.desc = slide.desc || '';
+            slide.autoplay = slide.autoplay || {'enabled': false};
+            slide.transition = slide.transition || {'enabled': false};
 
             $(form).find('input[name="desc"]').value(slide.desc);
             $(form).find('input[name="autoplay"]').prop('checked', slide.autoplay.enabled).trigger('change', {bubbles: true});
@@ -130,46 +124,49 @@ var slides =
         // Get the current project data
         var project = storage.get();
 
-        project.slides.forEach(function(data, index)
+        project.slides.forEach(function(slide, index)
         {
-            var slide = $(slides.template).clone();
+            var template = $(slides.template).clone();
 
             if(index == project.slide)
             {
-                $(slide).addClass('active');
+                $(template).addClass('active');
             }
 
-            var objectCount = Object.keys(data).length;
+            var objects = 0;
 
-            if(data.background !== undefined)
+            for(var property in slide)
             {
-                objectCount--;
+                if(typeof slide[property] === "object" && slide[property].content)
+                {
+                    objects++;
+                }
             }
 
-            if(data.desc)
+            if(slide.desc)
             {
-                $(slide).find('.desc').text(data.desc);
+                $(template).find('.desc').text(slide.desc);
             }
             else
             {
-                $(slide).find('.desc').text('');
+                $(template).find('.desc').text('');
             }
 
-            $(slide).find('.title .text').text('Slide ' + (index + 1));
-            $(slide).find('.objects').text(objectCount + ' objects');
+            $(template).find('.title .text').text('Slide ' + (index + 1));
+            $(template).find('.objects').text(objects + ' objects');
 
             // When clicking on the slide itself
-            $(slide).on('click', slides.click);
+            $(template).on('click', slides.click);
 
             // When clicking on a slide icon
-            $(slide).find('.edit').on('click', slides.edit);
-            $(slide).find('.delete').on('click', slides.delete);
+            $(template).find('.edit').on('click', slides.edit);
+            $(template).find('.delete').on('click', slides.delete);
 
             // When dragging the move icon
-            $(slide).dragondrop({'handle': '.move', 'position': 'static'});
-            $(slide).on('dragend', slides.move);
+            $(template).dragondrop({'handle': '.move', 'position': 'static'});
+            $(template).on('dragend', slides.move);
 
-            $('.slide-list').el[0].appendChild(slide);
+            $('.slide-list').el[0].appendChild(template);
         });
     },
 
