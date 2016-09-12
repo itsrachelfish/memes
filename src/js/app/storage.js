@@ -411,6 +411,27 @@ var storage =
             $('.workspace').trigger('slides-changed');
         },
 
+        // Save slide options
+        save: function(options)
+        {
+            if(typeof options.desc === "string")
+            {
+                project.data.slides[project.data.slide].desc = options.desc;
+            }
+
+            if(typeof options.autoplay === "object")
+            {
+                project.data.slides[project.data.slide].autoplay = options.autoplay;
+            }
+
+            if(typeof options.transition === "object")
+            {
+                project.data.slides[project.data.slide].transition = options.transition;
+            }
+
+            storage.persist();
+        },
+
         // Delete a slide
         delete: function(index)
         {

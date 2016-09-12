@@ -43,18 +43,29 @@
             </div>
 
             <label>
-                <input name="controls" type="checkbox" class="autoplay"> <span class="label-body">Autoplay this slide</span>
+                <input name="autoplay" type="checkbox" class="autoplay"> <span class="label-body">Autoplay this slide</span>
             </label>
 
             <div class="use-autoplay hidden">
+                <label>
+                    <input name="transition" type="checkbox" class="transition"> <span class="label-body">Transition smoothly to next slide</span>
+                </label>
+
                 <div class="twelve columns">
-                    <label for="slide-duration">Duration</label>
+                    <label for="slide-duration">Slide Duration</label>
                     <input name="duration" class="u-full-width" id="slide-duration" type="number" placeholder="How long before going to the next slide (in seconds)">
                 </div>
 
                 <div class="twelve columns">
-                    <label for="slide-goto">Go to slide</label>
-                    <input name="goto" class="u-full-width" id="slide-goto" type="number" placeholder="Optional. If left blank the next slide will be used">
+                    <label for="slide-goto">Next slide</label>
+                    <input name="goto" class="u-full-width" id="slide-goto" type="number" placeholder="Optional. Enter a slide number to go to after the duration">
+                </div>
+
+                <div class="use-transition hidden">
+                    <div class="twelve columns">
+                        <label for="slide-transition-duration">Transition duration</label>
+                        <input name="transition-duration" class="u-full-width" id="slide-transition-duration" type="number" placeholder="Optional. Duration of the animation between frames (defaults to 1 second)">
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,5 +73,6 @@
         <hr>
 
         <input class="button-primary" value="Submit" type="submit">
+        <input class="button-primary view-all" value="View All Slides" type="button">
     </form>
 </div>

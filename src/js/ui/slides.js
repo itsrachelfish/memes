@@ -1,7 +1,7 @@
 var $ = require('wetfish-basic');
 var storage = require('../app/storage');
 var overlay = require('./overlay');
-
+var helper = require('../app/helper');
 
 var slides =
 {
@@ -19,7 +19,7 @@ var slides =
 
         $('.slide-edit').on('overlay-opened', function()
         {
-            // lol typecasting
+            // Populate modal title
             $('.slide-edit .number').text('' + slides.editing);
         });
 
@@ -40,6 +40,12 @@ var slides =
             slides.populate();
         });
 
+        $('body').on('click', '.slide-edit .view-all', function()
+        {
+            overlay.close('.slide-edit');
+            overlay.open('.slides');
+        });
+
         $('body').on('click change', '.slide-edit .autoplay', function()
         {
             if($(this).prop('checked'))
@@ -50,6 +56,44 @@ var slides =
             {
                 $('.slide-edit .use-autoplay').addClass('hidden');
             }
+        });
+
+        $('body').on('click change', '.slide-edit .transition', function()
+        {
+            if($(this).prop('checked'))
+            {
+                $('.slide-edit .use-transition').removeClass('hidden');
+            }
+            else
+            {
+                $('.slide-edit .use-transition').addClass('hidden');
+            }
+        });
+
+        $('body').on('submit', '.slide-edit form', function(event)
+        {
+            event.preventDefault();
+
+            var input = helper.serialize(this);
+            var options =
+            {
+                desc: input['desc'],
+                autoplay:
+                {
+                    enabled: input['autoplay'],
+                    duration: input['duration'],
+                },
+                transition:
+                {
+                    enabled: input['transition'],
+                    duration: input['transition-duration'],
+                },
+            };
+
+            storage.slide.save(options);
+
+            overlay.close('.slide-edit');
+            overlay.open('.slides');
         });
     },
 
