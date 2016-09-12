@@ -62,7 +62,8 @@ var slides =
             $(slide).on('click', slides.click);
             $(slide).find('.delete').on('click', slides.delete);
 
-            $(slide).dragondrop({'handle': '.move span', 'position': 'static'});
+            $(slide).dragondrop({'handle': '.move', 'position': 'static'});
+            $(slide).on('dragend', slides.move);
 
             $('.slide-list').el[0].appendChild(slide);
         });
@@ -89,6 +90,12 @@ var slides =
             var index = $(this).parents('.slide').index();
             storage.slide.delete(index);
         }
+    },
+
+    move: function(event)
+    {
+        var index = event.detail;
+        storage.slide.move(index.old, index.new);
     },
 };
 

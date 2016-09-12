@@ -381,12 +381,31 @@ var storage =
         },
 
         // Copy an existing slide
-        copy: function(index)
+        //  index - slide to copy
+        //  destination - (optional) place it should be copied too
+        //  remove - (optional) remove the original slide after copying it
+        copy: function(index, destination, remove)
         {
+            // If there's no specific destination, put the copy after the current
+            if(typeof destination != "number")
+            {
+                destination = index + 1;
+            }
+
             // Use stringify / parse to make sure the saved data is passed by value, not by reference
             var slide = JSON.parse(JSON.stringify(project.data.slides[index]));
 
-            project.data.slides.splice(index + 1, 0, slide);
+            if(remove)
+            {
+                // Remove the original slide
+                project.data.slides.splice(index, 1);
+            }
+
+            // Create a new slide from the saved data
+            project.data.slides.splice(destination, 0, slide);
+
+            // Redraw the project
+            storage.load();
             storage.persist();
 
             $('.workspace').trigger('slides-changed');
@@ -442,6 +461,20 @@ var storage =
 
             $('.workspace').trigger('slides-changed');
         },
+
+        // Move an existing slide to a new position
+        move: function(oldIndex, newIndex)
+        {
+            if(project.data.slides[oldIndex])
+            {
+                storage.slide.copy(oldIndex, newIndex, 'delete');
+                $('.workspace').trigger('slides-changed');
+
+                return true;
+            }
+
+            return false;
+        }
     },
 };
 
