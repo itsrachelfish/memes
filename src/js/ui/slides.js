@@ -1,8 +1,12 @@
 var $ = require('wetfish-basic');
 var storage = require('../app/storage');
+var overlay = require('./overlay');
+
 
 var slides =
 {
+    editing: false,
+
     init: function()
     {
         slides.template = $('.slide.hidden').clone();
@@ -11,6 +15,12 @@ var slides =
         $('.slides').on('overlay-opened', function()
         {
             slides.populate();
+        });
+
+        $('.slide-edit').on('overlay-opened', function()
+        {
+            // lol typecasting
+            $('.slide-edit .number').text('' + slides.editing);
         });
 
         $('.slides .create').on('click', function()
@@ -28,6 +38,18 @@ var slides =
         $('.workspace').on('slides-changed', function()
         {
             slides.populate();
+        });
+
+        $('body').on('click change', '.slide-edit .autoplay', function()
+        {
+            if($(this).prop('checked'))
+            {
+                $('.slide-edit .use-autoplay').removeClass('hidden');
+            }
+            else
+            {
+                $('.slide-edit .use-autoplay').addClass('hidden');
+            }
         });
     },
 
@@ -59,9 +81,14 @@ var slides =
             $(slide).find('.title .text').text('Slide ' + (index + 1));
             $(slide).find('.objects').text(objectCount + ' objects');
 
+            // When clicking on the slide itself
             $(slide).on('click', slides.click);
+
+            // When clicking on a slide icon
+            $(slide).find('.edit').on('click', slides.edit);
             $(slide).find('.delete').on('click', slides.delete);
 
+            // When dragging the move icon
             $(slide).dragondrop({'handle': '.move', 'position': 'static'});
             $(slide).on('dragend', slides.move);
 
@@ -79,6 +106,22 @@ var slides =
         $(this).addClass('active');
     },
 
+    edit: function(event)
+    {
+        event.stopPropagation();
+
+        slides.editing = $(event.target).parents('.dragon').index() + 1;
+
+        overlay.close('.slides');
+        overlay.open('.slide-edit');
+    },
+
+    move: function(event)
+    {
+        var index = event.detail;
+        storage.slide.move(index.old, index.new);
+    },
+
     delete: function(event)
     {
         event.stopPropagation();
@@ -90,12 +133,6 @@ var slides =
             var index = $(this).parents('.slide').index();
             storage.slide.delete(index);
         }
-    },
-
-    move: function(event)
-    {
-        var index = event.detail;
-        storage.slide.move(index.old, index.new);
     },
 };
 

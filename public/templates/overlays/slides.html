@@ -29,3 +29,38 @@
         </div>
     </div>
 </div>
+
+<div class="overlay slide-edit">
+    <h1>Editing Slide <span class="number">MissingNo.</span></h1>
+
+    <i class="note">You must really like pressing buttons huh?</i>
+
+    <form>
+        <div class="row">
+            <div class="twelve columns">
+                <label for="slide-desc">Description</label>
+                <input name="desc" class="u-full-width" placeholder="Act II: The Butthole Menace" id="slide-desc" type="text">
+            </div>
+
+            <label>
+                <input name="controls" type="checkbox" class="autoplay"> <span class="label-body">Autoplay this slide</span>
+            </label>
+
+            <div class="use-autoplay hidden">
+                <div class="twelve columns">
+                    <label for="slide-duration">Duration</label>
+                    <input name="duration" class="u-full-width" id="slide-duration" type="number" placeholder="How long before going to the next slide (in seconds)">
+                </div>
+
+                <div class="twelve columns">
+                    <label for="slide-goto">Go to slide</label>
+                    <input name="goto" class="u-full-width" id="slide-goto" type="number" placeholder="Optional. If left blank the next slide will be used">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <input class="button-primary" value="Submit" type="submit">
+    </form>
+</div>
