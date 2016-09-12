@@ -6,6 +6,7 @@ var helper = require('../app/helper');
 var slides =
 {
     editing: false,
+    filter: false,
 
     init: function()
     {
@@ -49,6 +50,21 @@ var slides =
         {
             var slide = parseInt(storage.get('slide'));
             storage.slide.copy(slide);
+        });
+
+        $('.slides .filter').on('click', function()
+        {
+            // Toggle the value of slides.filter
+            slides.filter = !slides.filter;
+
+            // Toggle the text of the button
+            var text = this.textContent;
+            var toggle = $(this).data('toggle');
+
+            $(this).text(toggle);
+            $(this).data('toggle', text);
+
+            slides.populate();
         });
 
         // Refresh which slides are displayed
@@ -126,6 +142,11 @@ var slides =
 
         project.slides.forEach(function(slide, index)
         {
+            if(slides.filter && !slide.desc)
+            {
+                return;
+            }
+
             var template = $(slides.template).clone();
 
             if(index == project.slide)
