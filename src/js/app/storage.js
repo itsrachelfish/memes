@@ -508,12 +508,29 @@ var storage =
             if(!playing || !timeout.nextSlide)
             {
                 playing = true;
+                $('body').style({'overflow': 'hidden'});
 
                 // Check if the current slide should play
                 var slide = project.data.slides[project.data.slide];
 
                 if(slide.autoplay.enabled)
                 {
+                    if(slide.transition.enabled)
+                    {
+                        var transitionDuration = parseFloat(slide.transition.duration);
+
+                        if(isNaN(transitionDuration))
+                        {
+                            transitionDuration = 0.3;
+                        }
+
+                        $('.content').style({'transition': 'all ' + transitionDuration + 's'});
+                    }
+                    else
+                    {
+                        $('.content').style({'transition': 'none'});
+                    }
+
                     timeout.nextSlide = setTimeout(function()
                     {
                         var next = parseInt(slide.autoplay.goto);
@@ -541,9 +558,13 @@ var storage =
         {
             if(playing)
             {
+                $('body').style({'overflow': 'auto'});
+
                 playing = false;
                 clearTimeout(timeout.nextSlide);
                 delete timeout.nextSlide;
+
+                $('.content').style({'transition': 'none'});
             }
         }
     },
