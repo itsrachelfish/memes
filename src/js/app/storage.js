@@ -29,6 +29,9 @@ var project =
     data: {}
 };
 
+var playing = false;
+var timeout = {};
+
 // Public object with data manipulation functions
 var storage =
 {
@@ -498,6 +501,50 @@ var storage =
             }
 
             return false;
+        },
+
+        play: function()
+        {
+            if(!playing || !timeout.nextSlide)
+            {
+                playing = true;
+
+                // Check if the current slide should play
+                var slide = project.data.slides[project.data.slide];
+
+                if(slide.autoplay.enabled)
+                {
+                    timeout.nextSlide = setTimeout(function()
+                    {
+                        var next = parseInt(slide.autoplay.goto);
+
+                        // Play next slide if no goto is provided
+                        if(isNaN(next))
+                        {
+                            next = project.data.slide + 1;
+                        }
+                        // Subtract 1 from the goto frame because of 0 indexing
+                        else
+                        {
+                            next--;
+                        }
+
+                        storage.slide.goto(next);
+                        delete timeout.nextSlide;
+                        storage.slide.play();
+                    }, slide.autoplay.duration * 1000);
+                }
+            }
+        },
+
+        pause: function()
+        {
+            if(playing)
+            {
+                playing = false;
+                clearTimeout(timeout.nextSlide);
+                delete timeout.nextSlide;
+            }
         }
     },
 };

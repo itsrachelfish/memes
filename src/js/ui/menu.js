@@ -227,12 +227,16 @@ var menu =
         {
             $(this).addClass('hidden');
             $('.pause').removeClass('hidden');
+
+            storage.slide.play();
         });
 
         $('.pause').on('click', function()
         {
             $(this).addClass('hidden');
             $('.play').removeClass('hidden');
+
+            storage.slide.pause();
         });
 
         $('.image.overlay form').on('submit', function(event)
