@@ -202,24 +202,36 @@ var menu =
             $('.date-modified').value(modified.toLocaleDateString() + " - " + modified.toLocaleTimeString());
         });
 
+        var recording = false;
+
         // Webcam stuff
         $('.start-webcam').on('click', function()
         {
-            $(this).addClass('hidden');
-            $('.stop-webcam').removeClass('hidden');
+            if(!recording)
+            {
+                $(this).addClass('hidden');
+                $('.stop-webcam').removeClass('hidden');
 
-            storage.camera(true);
-            webcam = new Webcam('.webcam');
+                storage.camera(true);
+                webcam = new Webcam('.webcam');
+
+                recording = true;
+            }
         });
 
         $('.stop-webcam').on('click', function()
         {
-            $(this).addClass('hidden');
-            $('.start-webcam').removeClass('hidden');
+            if(recording)
+            {
+                $(this).addClass('hidden');
+                $('.start-webcam').removeClass('hidden');
 
-            storage.camera(false);
-            webcam.stop();
-            $('.webcam').attr('src', '');
+                storage.camera(false);
+                webcam.stop();
+                $('.webcam').attr('src', '');
+
+                recording = false;
+            }
         });
 
         // Slideshow playback
