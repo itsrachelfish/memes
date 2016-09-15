@@ -63,6 +63,13 @@ var menu =
         });
     },
 
+    // Switch between different menu modes (which sections are displayed)
+    mode: function(mode)
+    {
+        $('.menu section').addClass('hidden');
+        $('.menu section.' + mode).removeClass('hidden');
+    },
+
     // Global menu event bindings when the page is loaded
     init: function()
     {
@@ -235,20 +242,22 @@ var menu =
         });
 
         // Slideshow playback
-        $('.play').on('click', function()
+        $('button.play').on('click', function()
         {
-            $(this).addClass('hidden');
-            $('.pause').removeClass('hidden');
+            $('button.play').addClass('hidden');
+            $('button.pause').removeClass('hidden');
 
             storage.slide.play();
+            menu.mode('play');
         });
 
-        $('.pause').on('click', function()
+        $('button.pause').on('click', function()
         {
-            $(this).addClass('hidden');
-            $('.play').removeClass('hidden');
+            $('button.pause').addClass('hidden');
+            $('button.play').removeClass('hidden');
 
             storage.slide.pause();
+            menu.mode('edit');
         });
 
         $('.image.overlay form').on('submit', function(event)

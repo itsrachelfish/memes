@@ -1,16 +1,34 @@
 <div class="menu">
-    <h1>Menu</h1>
+    <section class="edit">
+        <h1>Menu</h1>
 
-    <button class="button-primary help" data-overlay=".help">Help</button>
-    <button class="button-primary start-webcam">Start Webcam</button>
-    <button class="button-primary stop-webcam hidden">Stop Webcam</button>
-    <button class="button-primary" data-overlay=".content">Add Content</button>
-    <button class="button-primary background" data-overlay=".background">Edit Background</button>
+        <button class="button-primary help" data-overlay=".help">Help</button>
+        <button class="button-primary start-webcam">Start Webcam</button>
+        <button class="button-primary stop-webcam hidden">Stop Webcam</button>
+        <button class="button-primary" data-overlay=".content">Add Content</button>
+        <button class="button-primary background" data-overlay=".background">Edit Background</button>
 
-    <a class="toggle" data-rel=".menu .advanced" data-toggle="▲ Hide Advanced Options">▼ Show Advanced Options</a>
+        <a class="toggle" data-rel=".menu .advanced" data-toggle="▲ Hide Advanced Options">▼ Show Advanced Options</a>
 
-    <div class="advanced hidden">
-        <button class="button-primary file" data-overlay=".file">File</button>
+        <div class="advanced hidden">
+            <button class="button-primary file" data-overlay=".file">File</button>
+            <button class="nope animate">Animate</button>
+            <button class="button-primary slides" data-overlay=".slides">View Slides</button>
+
+            <div class="grid-row">
+                <button class="half button-primary prev">Prev</button>
+                <button class="half button-primary next">Next</button>
+            </div>
+
+            <button class="button-primary play">Play &emsp; ►</button>
+            <button class="button-primary pause hidden">Pause &emsp; ❙❙</button>
+            <button class="button-primary credits">Credits</button>
+        </div>
+    </section>
+
+    <section class="play hidden">
+        <h1>Menu</h1>
+
         <button class="button-primary slides" data-overlay=".slides">View Slides</button>
 
         <div class="grid-row">
@@ -21,5 +39,9 @@
         <button class="button-primary play">Play &emsp; ►</button>
         <button class="button-primary pause hidden">Pause &emsp; ❙❙</button>
         <button class="button-primary credits">Credits</button>
-    </div>
+    </section>
+
+    <section class="animate hidden">
+        <h1>Animate</h1>
+    </section>
 </div>
