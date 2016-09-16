@@ -43,5 +43,47 @@
 
     <section class="animate hidden">
         <h1>Animate</h1>
+
+        <p class="element">Click on an element to get started</p>
+
+        <div class="element-selected hidden">
+            <button class="button-primary new">Create New Animation</button>
+
+            <div class="animations hidden">
+                <select>
+                    <option>Select Animation</option>
+                    <option>----</option>
+                </select>
+
+                <div class="animation-selected hidden">
+                    <button class="button-primary delete">Delete This Animation</button>
+
+                    <label>
+                        <input type="checkbox" class="enabled"> <span class="label-body">Play</span>
+                    </label>
+
+                    <label>
+                        <input type="checkbox" class="loop"> <span class="label-body">Loop</span>
+                    </label>
+
+                    <div>
+                        <label for="frame">Duration</label>
+                        <input name="frame" id="frame" type="range" min="0" max="60" step="0.1" value="10">
+                    </div>
+
+                    <div>
+                        <label for="frame">Frames</label>
+                        <input name="frame" id="frame" type="range" min="0" max="1" step="1" value="0">
+                    </div>
+
+                    <div class="grid-row">
+                        <button class="half button-primary prev">New</button>
+                        <button class="half button-primary next">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="button-primary cancel">Cancel</button>
     </section>
 </div>

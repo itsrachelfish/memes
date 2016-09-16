@@ -445,6 +445,16 @@ var menu =
                 storage.slide.goto(slide - 1);
             }
         });
+
+        $('.menu button.animate').on('click', function()
+        {
+            menu.mode('animate');
+        });
+
+        $('.menu .animate .cancel').on('click', function()
+        {
+            menu.mode('edit');
+        });
     }
 };
 
