@@ -63,6 +63,12 @@ var helper =
 
         return true;
     },
+
+    // Options for controlling the hover menu
+    hover:
+    {
+        enabled: true,
+    }
 };
 
 

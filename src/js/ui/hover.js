@@ -125,8 +125,8 @@ var hover =
     
     start: function(element)
     {
-        // Disable creation of hover menus when in playback mode
-        if(storage.slide.status() == 'playing')
+        // Check if hover menus are currently disabled
+        if(!helper.hover.enabled)
         {
             return;
         }

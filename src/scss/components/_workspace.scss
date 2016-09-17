@@ -9,6 +9,7 @@
         position: absolute;
         top: 0;
         left: 0;
+        margin: 1px;
     }
 
     .dragon {
@@ -23,6 +24,13 @@
             font-size: 2em;
             padding: 1em;
             color: #fff;
+        }
+    }
+
+    &.highlight-content {
+        .content:hover {
+            border: 1px dashed #ccc;
+            margin: 0;
         }
     }
 }

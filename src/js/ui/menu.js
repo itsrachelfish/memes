@@ -12,6 +12,7 @@ var presets = require('../app/presets');
 var overlay = require('./overlay');
 var credits = require('./credits');
 var slides = require('./slides');
+var animate = require('./animate');
 
 // Global webcam object
 var webcam;
@@ -66,6 +67,16 @@ var menu =
     // Switch between different menu modes (which sections are displayed)
     mode: function(mode)
     {
+        // Make sure hover menus are only enabled when in edit mode
+        if(mode == 'edit')
+        {
+            helper.hover.enabled = true;
+        }
+        else
+        {
+            helper.hover.enabled = false;
+        }
+
         $('.menu section').addClass('hidden');
         $('.menu section.' + mode).removeClass('hidden');
     },
@@ -74,6 +85,7 @@ var menu =
     init: function()
     {
         slides.init();
+        animate.init();
 
         // Make sure the menu is on top when you're mousing over it
         $('.menu').on('mouseenter touchstart', function()
@@ -449,11 +461,13 @@ var menu =
         $('.menu button.animate').on('click', function()
         {
             menu.mode('animate');
+            animate.start();
         });
 
         $('.menu .animate .cancel').on('click', function()
         {
             menu.mode('edit');
+            animate.stop();
         });
     }
 };
