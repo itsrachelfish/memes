@@ -125,6 +125,12 @@ var hover =
     
     start: function(element)
     {
+        // Disable creation of hover menus when in playback mode
+        if(storage.slide.status() == 'playing')
+        {
+            return;
+        }
+
         hover.element = element;
 
         // Make a clone of the default hover template

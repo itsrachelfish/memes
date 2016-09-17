@@ -566,6 +566,16 @@ var storage =
 
                 $('.content').style({'transition': 'none'});
             }
+        },
+
+        status: function()
+        {
+            if(playing)
+            {
+                return 'playing';
+            }
+
+            return 'paused';
         }
     },
 };
