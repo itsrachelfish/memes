@@ -5,6 +5,7 @@ var animate =
 {
     active: false,
     element: false,
+    object: false,
 
     init: function()
     {
@@ -15,8 +16,10 @@ var animate =
         {
             var element = this;
 
+            // If we clicked on a child element
             if(!$(element).hasClass('content'))
             {
+                // Find the parent content element
                 element = $(this).parents('.content').el[0];
             }
 
@@ -27,6 +30,24 @@ var animate =
                 animate.menu();
             }
         });
+
+        $('.animate .new').on('click', function()
+        {
+             var name = prompt("Please enter a memorable name for this animation.");
+
+             if(animate.object.animation !== undefined && animate.object.animation[name] !== undefined)
+             {
+                var replace = confirm("An animation named '" + name + "' already exists. Are you sure you want to overwrite it?");
+
+                if(!replace)
+                {
+                    return;
+                }
+             }
+
+            animate.name = name;
+            storage.animation.save(animate.element, animate.name, []);
+        });
     },
 
     // Populate data from saved object
@@ -34,6 +55,8 @@ var animate =
     {
         var id = $(animate.element).attr('id');
         var object = storage.getObject(id);
+
+        animate.object = object;
 
         var  desc = object.desc || 'untitled ' + object.type;
         $('.menu .animate .element').text(desc);
@@ -63,6 +86,7 @@ var animate =
         $('.workspace').removeClass('highlight-content');
         animate.active = false;
         animate.element = false;
+        animate.object = false;
 
         $('.menu .animate .element').text(animate.defaultText);
     }

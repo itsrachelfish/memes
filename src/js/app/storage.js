@@ -200,7 +200,7 @@ var storage =
         // Check if this element has a unique ID
         var id = $(element).attr('id');
 
-        // We can't remove something without an ID
+        // We can't update something without an ID
         if(!id)
         {
             return;
@@ -224,6 +224,29 @@ var storage =
 
         project.data.slides[project.data.slide][id] = data;
         storage.persist();
+    },
+
+    animation:
+    {
+        save: function(element, name, data)
+        {
+            // Check if this element has a unique ID
+            var id = $(element).attr('id');
+
+            // We can't animate something without an ID
+            if(!id)
+            {
+                return;
+            }
+
+            if(project.data.objects[id].animation === undefined)
+            {
+                project.data.objects[id].animation = {};
+            }
+
+            project.data.objects[id].animation[name] = data;
+            storage.persist();
+        },
     },
 
     // Update the background of the current slide
