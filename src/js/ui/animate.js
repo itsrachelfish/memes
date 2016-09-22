@@ -47,6 +47,7 @@ var animate =
 
             animate.name = name;
             storage.animation.save(animate.element, animate.name, []);
+            animate.populate();
         });
     },
 
@@ -60,6 +61,26 @@ var animate =
 
         var  desc = object.desc || 'untitled ' + object.type;
         $('.menu .animate .element').text(desc);
+
+        if(object.animation !== undefined && Object.keys(object.animation).length)
+        {
+            // Remove any previously created animations
+            $('.animate .animations .custom').remove();
+            $('.animate .animations').removeClass('hidden');
+
+            // Loop through saved animatinos and populate the dropdown
+            Object.keys(object.animation).forEach(function(name)
+            {
+                var option = document.createElement('option');
+                $(option).addClass('custom');
+                $(option).text(name);
+                $('.animate .animations select').append(option);
+            });
+        }
+        else
+        {
+            $('.animate .animations').addClass('hidden');
+        }
     },
 
     // Display menu options based on the current animation state
