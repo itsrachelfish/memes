@@ -49,6 +49,27 @@ var animate =
             storage.animation.save(animate.element, animate.name, []);
             animate.populate();
         });
+
+        $('.animate .animations select').on('change', function(event)
+        {
+            var animation = $(this).value();
+
+            // Only trigger when an actual animation is selected
+            if(animation)
+            {
+                $('.animation-selected').removeClass('hidden');
+                animate.name = animation;
+            }
+            else
+            {
+                $('.animation-selected').addClass('hidden');
+            }
+        });
+
+        $('.animate .delete').on('click', function()
+        {
+            $('.
+        });
     },
 
     // Populate data from saved object
@@ -74,7 +95,7 @@ var animate =
                 var option = document.createElement('option');
                 $(option).addClass('custom');
                 $(option).text(name);
-                $('.animate .animations select').append(option);
+                $('.animate .animations select').append(option).trigger('change');
             });
         }
         else
