@@ -247,6 +247,27 @@ var storage =
             project.data.objects[id].animation[name] = data;
             storage.persist();
         },
+
+        delete: function(element, name)
+        {
+            // Check if this element has a unique ID
+            var id = $(element).attr('id');
+
+            // We can't animate something without an ID
+            if(!id)
+            {
+                return;
+            }
+
+            // If there are no animations, we can't delete anything
+            if(project.data.objects[id].animation === undefined)
+            {
+                return;
+            }
+
+            delete project.data.objects[id].animation[name];
+            storage.persist();
+        }
     },
 
     // Update the background of the current slide

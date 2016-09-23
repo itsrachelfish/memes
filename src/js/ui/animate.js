@@ -68,7 +68,8 @@ var animate =
 
         $('.animate .delete').on('click', function()
         {
-            $('.
+            storage.animation.delete(animate.element, animate.name);
+            animate.populate();
         });
     },
 
