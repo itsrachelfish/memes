@@ -63,10 +63,12 @@ var animate =
             // Only trigger when an actual animation is selected
             if(animation)
             {
-                $('.animation-selected').removeClass('hidden');
                 animate.name = animation;
                 animate.frame = 0;
                 animate.frames = animate.object.animation[animate.name];
+
+                $('.animation-selected').removeClass('hidden');
+                $('#frame').attr('max', animate.frames.length - 1);
 
                 helper.hover.enabled = true;
             }
@@ -77,6 +79,16 @@ var animate =
             }
         });
 
+        $('.animate .new-frame').on('click', function()
+        {
+            console.log('new?');
+            animate.frame++;
+            animate.frames.push({});
+
+            $('#frame').attr('max', animate.frames.length - 1);
+        });
+
+        // Delete an entire animation
         $('.animate .delete').on('click', function()
         {
             storage.animation.delete(animate.element, animate.name);
