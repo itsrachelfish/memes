@@ -1,5 +1,6 @@
 var $ = require('wetfish-basic');
 var storage = require('../app/storage');
+var helper = require('../app/helper');
 
 var animate =
 {
@@ -65,11 +66,14 @@ var animate =
                 $('.animation-selected').removeClass('hidden');
                 animate.name = animation;
                 animate.frame = 0;
-                animate.frames = animate.object[animate.name];
+                animate.frames = animate.object.animation[animate.name];
+
+                helper.hover.enabled = true;
             }
             else
             {
                 $('.animation-selected').addClass('hidden');
+                helper.hover.enabled = false;
             }
         });
 
@@ -128,6 +132,7 @@ var animate =
         // Get the current computed transform style
         var transform = $(animate.element).style('transform');
         animate.frames[animate.frame] = transform;
+        animate.object.animation[animate.name] = animate.frames;
 
         storage.animation.save(animate.element, animate.name, animate.frames);
     },
