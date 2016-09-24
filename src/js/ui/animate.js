@@ -6,6 +6,8 @@ var animate =
     active: false,
     element: false,
     object: false,
+    frame: 0,
+    frames: [],
 
     init: function()
     {
@@ -46,7 +48,10 @@ var animate =
              }
 
             animate.name = name;
-            storage.animation.save(animate.element, animate.name, []);
+            animate.frame = 0;
+            animate.frames = [];
+
+            storage.animation.save(animate.element, animate.name, animate.frames);
             animate.populate();
         });
 
@@ -59,6 +64,8 @@ var animate =
             {
                 $('.animation-selected').removeClass('hidden');
                 animate.name = animation;
+                animate.frame = 0;
+                animate.frames = animate.object[animate.name];
             }
             else
             {
@@ -70,6 +77,16 @@ var animate =
         {
             storage.animation.delete(animate.element, animate.name);
             animate.populate();
+        });
+
+        $('.workspace').on('content-updated', function(event)
+        {
+            var updatedElement = event.detail;
+
+            if(animate.element == updatedElement)
+            {
+                animate.save();
+            }
         });
     },
 
@@ -103,6 +120,16 @@ var animate =
         {
             $('.animate .animations').addClass('hidden');
         }
+    },
+
+    // Save current transform data
+    save: function()
+    {
+        // Get the current computed transform style
+        var transform = $(animate.element).style('transform');
+        animate.frames[animate.frame] = transform;
+
+        storage.animation.save(animate.element, animate.name, animate.frames);
     },
 
     // Display menu options based on the current animation state

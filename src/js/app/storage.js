@@ -224,6 +224,8 @@ var storage =
 
         project.data.slides[project.data.slide][id] = data;
         storage.persist();
+
+        $('.workspace').trigger('content-updated', element);
     },
 
     animation:
