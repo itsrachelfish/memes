@@ -9,6 +9,8 @@ var animate =
     object: false,
     frame: 0,
     frames: [],
+    animation: false,
+    duration: 5000,
 
     init: function()
     {
@@ -52,8 +54,8 @@ var animate =
             animate.frame = 0;
             animate.frames = [];
 
-            storage.animation.save(animate.element, animate.name, animate.frames);
             animate.populate();
+            animate.save();
         });
 
         $('.animate .animations select').on('change', function(event)
@@ -71,6 +73,8 @@ var animate =
                 $('#frame').attr('max', animate.frames.length - 1);
 
                 helper.hover.enabled = true;
+
+                animate.refresh();
             }
             else
             {
@@ -81,11 +85,26 @@ var animate =
 
         $('.animate .new-frame').on('click', function()
         {
-            console.log('new?');
+            // Add a new frame after the current position
+            animate.frames.splice(animate.frame + 1, 0, {});            
             animate.frame++;
-            animate.frames.push({});
 
             $('#frame').attr('max', animate.frames.length - 1);
+            $('#frame').value(animate.frame);
+
+            animate.save();
+        });
+
+        $('#frame').on('input change', function()
+        {
+            // If the frame has changed and there is more than one frame
+            if(animate.frame != $(this).value())
+            {
+
+                // Set the current time of the animation to match the value of the slider
+                animate.frame = parseInt($(this).value());
+                animate.refresh();
+            }
         });
 
         // Delete an entire animation
@@ -102,6 +121,14 @@ var animate =
             if(animate.element == updatedElement)
             {
                 animate.save();
+            }
+        });
+
+        $('.workspace').on('mouseenter', function()
+        {
+            if(animate.animation)
+            {
+                animate.animation.cancel();
             }
         });
     },
@@ -147,6 +174,33 @@ var animate =
         animate.object.animation[animate.name] = animate.frames;
 
         storage.animation.save(animate.element, animate.name, animate.frames);
+    },
+
+    refresh: function()
+    {
+        if(animate.frames.length > 1)
+        {
+            try
+            {
+                animate.animation = animate.element.animate({'transform': animate.frames}, {'duration': animate.duration, 'iterations': Infinity});
+
+                var durationPerFrame = animate.duration / (animate.frames.length - 1);
+                var currentTime = durationPerFrame * animate.frame;
+
+                if(currentTime > 1)
+                {
+                    currentTime--;
+                }
+
+                animate.animation.currentTime = currentTime;
+                animate.animation.pause();
+            }
+            catch(exception)
+            {
+                console.log(exception);
+                animate.animation = false;
+            }
+        }
     },
 
     // Display menu options based on the current animation state

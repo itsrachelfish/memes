@@ -7,6 +7,7 @@
     "dragondrop": "github:wetfish/dragondrop",
     "extend": "^3.0.0",
     "font-awesome": "^4.6.3",
+    "web-animations-js": "^2.2.2",
     "wetfish-basic": "github:wetfish/basic"
   },
   "devDependencies": {
