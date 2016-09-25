@@ -114,6 +114,20 @@ var animate =
             animate.populate();
         });
 
+        $('.animate .enabled').on('click', function()
+        {
+            console.log('wauuoooah?', this.checked);
+            if(this.checked)
+            {
+                console.log('play?');
+                animate.play();
+            }
+            else
+            {
+                animate.pause();
+            }
+        });
+
         $('.workspace').on('content-updated', function(event)
         {
             var updatedElement = event.detail;
@@ -172,9 +186,48 @@ var animate =
     {
         var frame = animate.frames[animate.frame];
         $(animate.element).transform(frame.basic);
+    },
 
-//                animate.animation = animate.element.animate({'transform': animate.frames}, {'duration': animate.duration, 'iterations': Infinity});
-     },
+    play: function()
+    {
+        try
+        {
+            var frames = [];
+
+            animate.frames.forEach(function(frame)
+            {
+                frames.push(frame.computed);
+            });
+
+            animate.animation = animate.element.animate({'transform': frames}, {'duration': animate.duration, 'iterations': Infinity});
+
+            var durationPerFrame = animate.duration / (animate.frames.length - 1);
+            var currentTime = durationPerFrame * animate.frame;
+
+            if(currentTime > 1)
+            {
+                currentTime--;
+            }
+
+            animate.animation.currentTime = currentTime;
+            helper.hover.enabled = false;
+        }
+        catch(exception)
+        {
+            console.log(exception);
+            animate.animation = false;
+            helper.hover.enabled = true;
+        }
+    },
+
+    pause: function()
+    {
+        if(animate.animation)
+        {
+            animate.animation.cancel();
+            helper.hover.enabled = true;
+        }
+    },
 
     // Display menu options based on the current animation state
     menu: function()
