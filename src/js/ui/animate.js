@@ -123,14 +123,6 @@ var animate =
                 animate.save();
             }
         });
-
-        $('.workspace').on('mouseenter', function()
-        {
-            if(animate.animation)
-            {
-                animate.animation.cancel();
-            }
-        });
     },
 
     // Populate data from saved object
@@ -170,7 +162,7 @@ var animate =
     {
         // Get the current computed transform style
         var transform = $(animate.element).style('transform');
-        animate.frames[animate.frame] = transform;
+        animate.frames[animate.frame] = JSON.parse(JSON.stringify({'computed': transform, 'basic': animate.element.transform}));
         animate.object.animation[animate.name] = animate.frames;
 
         storage.animation.save(animate.element, animate.name, animate.frames);
@@ -178,30 +170,11 @@ var animate =
 
     refresh: function()
     {
-        if(animate.frames.length > 1)
-        {
-            try
-            {
-                animate.animation = animate.element.animate({'transform': animate.frames}, {'duration': animate.duration, 'iterations': Infinity});
+        var frame = animate.frames[animate.frame];
+        $(animate.element).transform(frame.basic);
 
-                var durationPerFrame = animate.duration / (animate.frames.length - 1);
-                var currentTime = durationPerFrame * animate.frame;
-
-                if(currentTime > 1)
-                {
-                    currentTime--;
-                }
-
-                animate.animation.currentTime = currentTime;
-                animate.animation.pause();
-            }
-            catch(exception)
-            {
-                console.log(exception);
-                animate.animation = false;
-            }
-        }
-    },
+//                animate.animation = animate.element.animate({'transform': animate.frames}, {'duration': animate.duration, 'iterations': Infinity});
+     },
 
     // Display menu options based on the current animation state
     menu: function()
@@ -220,6 +193,7 @@ var animate =
     {
         $('.workspace').addClass('highlight-content');
         animate.active = true;
+        helper.storage.update = false;
     },
 
     stop: function()
@@ -228,6 +202,7 @@ var animate =
         animate.active = false;
         animate.element = false;
         animate.object = false;
+        helper.storage.update = true;
 
         $('.menu .animate .element').text(animate.defaultText);
     }

@@ -210,20 +210,23 @@ var storage =
         // if the element is hidden?
         // custom styles?
 
-        // Use stringify / parse to make sure the saved data is passed by value, not by reference
-        var data = JSON.parse(JSON.stringify(
+        if(helper.storage.update !== false)
         {
-            'content': true,
+            // Use stringify / parse to make sure the saved data is passed by value, not by reference
+            var data = JSON.parse(JSON.stringify(
+            {
+                'content': true,
 
-            // Save any transformations
-            'transform': element.transform,
+                // Save any transformations
+                'transform': element.transform,
 
-            // Save what layer the element is on
-            'layer': $(element).style('z-index')
-        }));
+                // Save what layer the element is on
+                'layer': $(element).style('z-index')
+            }));
 
-        project.data.slides[project.data.slide][id] = data;
-        storage.persist();
+            project.data.slides[project.data.slide][id] = data;
+            storage.persist();
+        }
 
         $('.workspace').trigger('content-updated', element);
     },

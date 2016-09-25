@@ -68,6 +68,12 @@ var helper =
     hover:
     {
         enabled: true,
+    },
+
+    // Storage options
+    storage:
+    {
+        update: true
     }
 };
 
