@@ -87,6 +87,16 @@ var animate =
 
                 $('#duration').value(animate.object.animation[animate.name].duration).trigger('change');
 
+                if(animate.object.animations.indexOf(animation) > -1)
+                {
+                    $('.animate .enabled').prop('checked', true).trigger('change');
+                }
+                else
+                {
+                    $('.animate .enabled').prop('checked', false).trigger('change');
+                }
+
+
                 helper.hover.enabled = true;
 
                 animate.update();
@@ -328,6 +338,7 @@ var animate =
     stop: function()
     {
         $('.workspace').removeClass('highlight-content');
+        animate.pause();
         animate.active = false;
         animate.element = false;
         animate.object = false;

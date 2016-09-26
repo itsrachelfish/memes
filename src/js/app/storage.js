@@ -288,6 +288,11 @@ var storage =
             storage.persist();
         },
 
+        play: function()
+        {
+            
+        },
+
         delete: function(element, name)
         {
             // Check if this element has a unique ID
