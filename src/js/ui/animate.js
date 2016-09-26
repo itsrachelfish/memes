@@ -10,7 +10,7 @@ var animate =
     frame: 0,
     frames: [],
     animation: false,
-    duration: 5000,
+    duration: 1000,
 
     init: function()
     {
@@ -93,6 +93,11 @@ var animate =
             $('#frame').value(animate.frame);
 
             animate.save();
+        });
+
+        $('#duration').on('input change', function()
+        {
+            animate.duration = parseInt($(this).value());
         });
 
         $('#frame').on('input change', function()
