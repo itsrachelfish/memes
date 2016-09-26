@@ -96,9 +96,6 @@ var animate =
                     $('.animate .enabled').prop('checked', false).trigger('change');
                 }
 
-
-                helper.hover.enabled = true;
-
                 animate.update();
             }
             else
@@ -202,6 +199,7 @@ var animate =
             // Remove any previously created animations
             $('.animate .animations .custom').remove();
             $('.animate .animations').removeClass('hidden');
+            $('.animate select option').eq(0).prop('selected', true);
 
             // Loop through saved animatinos and populate the dropdown
             Object.keys(object.animation).forEach(function(name)
@@ -338,6 +336,9 @@ var animate =
     stop: function()
     {
         $('.workspace').removeClass('highlight-content');
+        $('.element-selected').addClass('hidden');
+        $('.animation-selected').addClass('hidden');
+
         animate.pause();
         animate.active = false;
         animate.element = false;
