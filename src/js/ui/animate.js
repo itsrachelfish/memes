@@ -11,6 +11,7 @@ var animate =
     frames: [],
     animation: false,
     duration: 1000,
+    iterations: Infinity,
 
     init: function()
     {
@@ -55,7 +56,7 @@ var animate =
             animate.frames = [];
 
             animate.populate();
-            animate.save();
+            animate.persist();
         });
 
         $('.animate .animations select').on('change', function(event)
@@ -74,7 +75,7 @@ var animate =
 
                 helper.hover.enabled = true;
 
-                animate.refresh();
+                animate.update();
             }
             else
             {
@@ -92,12 +93,13 @@ var animate =
             $('#frame').attr('max', animate.frames.length - 1);
             $('#frame').value(animate.frame);
 
-            animate.save();
+            animate.persist();
         });
 
         $('#duration').on('input change', function()
         {
             animate.duration = parseInt($(this).value());
+            animate.refresh();
         });
 
         $('#frame').on('input change', function()
@@ -108,7 +110,7 @@ var animate =
 
                 // Set the current time of the animation to match the value of the slider
                 animate.frame = parseInt($(this).value());
-                animate.refresh();
+                animate.update();
             }
         });
 
@@ -119,12 +121,10 @@ var animate =
             animate.populate();
         });
 
-        $('.animate .enabled').on('click', function()
+        $('.animate .enabled').on('click change', function()
         {
-            console.log('wauuoooah?', this.checked);
             if(this.checked)
             {
-                console.log('play?');
                 animate.play();
             }
             else
@@ -133,13 +133,27 @@ var animate =
             }
         });
 
+        $('.animate .loop').on('click change', function()
+        {
+            if(this.checked)
+            {
+                animate.iterations = Infinity;
+            }
+            else
+            {
+                animate.iterations = 1;
+            }
+
+            animate.refresh();
+        });
+
         $('.workspace').on('content-updated', function(event)
         {
             var updatedElement = event.detail;
 
             if(animate.element == updatedElement)
             {
-                animate.save();
+                animate.persist();
             }
         });
     },
@@ -177,7 +191,7 @@ var animate =
     },
 
     // Save current transform data
-    save: function()
+    persist: function()
     {
         // Get the current computed transform style
         var transform = $(animate.element).style('transform');
@@ -187,7 +201,8 @@ var animate =
         storage.animation.save(animate.element, animate.name, animate.frames);
     },
 
-    refresh: function()
+    // Update animation element with the values of the current frame
+    update: function()
     {
         var frame = animate.frames[animate.frame];
         $(animate.element).transform(frame.basic);
@@ -204,7 +219,12 @@ var animate =
                 frames.push(frame.computed);
             });
 
-            animate.animation = animate.element.animate({'transform': frames}, {'duration': animate.duration, 'iterations': Infinity});
+            if(animate.animation)
+            {
+                animate.animation.cancel();
+            }
+
+            animate.animation = animate.element.animate({'transform': frames}, {'duration': animate.duration, 'iterations': animate.iterations, 'fill': 'forwards'});
 
             var durationPerFrame = animate.duration / (animate.frames.length - 1);
             var currentTime = durationPerFrame * animate.frame;
@@ -222,6 +242,15 @@ var animate =
             console.log(exception);
             animate.animation = false;
             helper.hover.enabled = true;
+        }
+    },
+
+    // Refresh animation if currently playing
+    refresh: function()
+    {
+        if(animate.animation && animate.animation.playState == 'running')
+        {
+            animate.play();
         }
     },
 
