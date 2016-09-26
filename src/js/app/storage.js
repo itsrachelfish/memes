@@ -224,6 +224,12 @@ var storage =
                 'layer': $(element).style('z-index')
             }));
 
+            // Check if any animations have already been saved for this object in this slide
+            if(project.data.slides[project.data.slide][id] && project.data.slides[project.data.slide][id].animations)
+            {
+                data.animations = project.data.slides[project.data.slide][id].animations;
+            }
+
             project.data.slides[project.data.slide][id] = data;
             storage.persist();
         }
@@ -247,6 +253,35 @@ var storage =
             if(project.data.objects[id].animation === undefined)
             {
                 project.data.objects[id].animation = {};
+            }
+
+            // If the animation is playing
+            if(data.playing !== undefined)
+            {
+                if(project.data.slides[project.data.slide][id].animations === undefined)
+                {
+                    project.data.slides[project.data.slide][id].animations = [];
+                }
+
+                var index = project.data.slides[project.data.slide][id].animations.indexOf(name);
+                
+                // Save the playback state in the data for the current slide
+                if(data.playing)
+                {
+                    if(index == -1)
+                    {
+                        project.data.slides[project.data.slide][id].animations.push(name);
+                    }
+                }
+                else
+                {
+                    if(index != -1)
+                    {
+                        project.data.slides[project.data.slide][id].animations.splice(index, 1);
+                    }
+                }
+
+                delete data.playing;
             }
 
             project.data.objects[id].animation[name] = data;

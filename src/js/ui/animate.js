@@ -12,6 +12,7 @@ var animate =
     animation: false,
     duration: 1000,
     iterations: Infinity,
+    playing: false,
 
     init: function()
     {
@@ -68,10 +69,23 @@ var animate =
             {
                 animate.name = animation;
                 animate.frame = 0;
-                animate.frames = animate.object.animation[animate.name];
+                animate.frames = animate.object.animation[animate.name].frames;
 
                 $('.animation-selected').removeClass('hidden');
+
+                $('#frame').value(0);
                 $('#frame').attr('max', animate.frames.length - 1);
+
+                if(animate.object.animation[animate.name].iterations == 'Infinity')
+                {
+                    $('.animate .loop').prop('checked', true);
+                }
+                else
+                {
+                    $('.animate .loop').prop('checked', false);
+                }
+
+                $('#duration').value(animate.object.animation[animate.name].duration).trigger('change');
 
                 helper.hover.enabled = true;
 
@@ -99,6 +113,7 @@ var animate =
         $('#duration').on('input change', function()
         {
             animate.duration = parseInt($(this).value());
+            animate.persist();
             animate.refresh();
         });
 
@@ -131,6 +146,8 @@ var animate =
             {
                 animate.pause();
             }
+
+            animate.persist();
         });
 
         $('.animate .loop').on('click change', function()
@@ -144,6 +161,7 @@ var animate =
                 animate.iterations = 1;
             }
 
+            animate.persist();
             animate.refresh();
         });
 
@@ -193,12 +211,32 @@ var animate =
     // Save current transform data
     persist: function()
     {
-        // Get the current computed transform style
-        var transform = $(animate.element).style('transform');
-        animate.frames[animate.frame] = JSON.parse(JSON.stringify({'computed': transform, 'basic': animate.element.transform}));
-        animate.object.animation[animate.name] = animate.frames;
+        // If the animation is not currently playing
+        if(!animate.animation || (animate.animation && animate.animation.playState != 'running'))
+        {
+            // Get the current computed transform style
+            var transform = $(animate.element).style('transform');
 
-        storage.animation.save(animate.element, animate.name, animate.frames);
+            // Update the saved animation object
+            animate.frames[animate.frame] = JSON.parse(JSON.stringify({'computed': transform, 'basic': animate.element.transform}));
+            animate.object.animation[animate.name] = animate.frames;
+        }
+
+        // Build object of data to be saved
+        var data =
+        {
+            duration: animate.duration,
+            iterations: animate.iterations,
+            frames: animate.frames,
+            playing: animate.playing
+        };
+
+        if(animate.iterations === Infinity)
+        {
+            data.iterations = 'Infinity';
+        }
+
+        storage.animation.save(animate.element, animate.name, data);
     },
 
     // Update animation element with the values of the current frame
@@ -236,12 +274,15 @@ var animate =
 
             animate.animation.currentTime = currentTime;
             helper.hover.enabled = false;
+            animate.playing = true;
         }
         catch(exception)
         {
             console.log(exception);
+
             animate.animation = false;
             helper.hover.enabled = true;
+            animate.playing = false;
         }
     },
 
@@ -260,6 +301,7 @@ var animate =
         {
             animate.animation.cancel();
             helper.hover.enabled = true;
+            animate.playing = false;
         }
     },
 
