@@ -33,6 +33,10 @@
             margin: 0;
         }
     }
+
+    .animating {
+        transition: none !important;
+    }
 }
 
 .hover-menu {

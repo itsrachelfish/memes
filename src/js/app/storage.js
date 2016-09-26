@@ -31,6 +31,7 @@ var project =
 
 var playing = false;
 var timeout = {};
+var animations = [];
 
 // Public object with data manipulation functions
 var storage =
@@ -290,7 +291,52 @@ var storage =
 
         play: function()
         {
-            
+            // Loop through all objects in the current slide
+            var slide = project.data.slides[project.data.slide];
+
+            for(var id in slide)
+            {
+                if(project.data.objects[id] !== undefined)
+                {
+                    var element = $('#' + id).el[0];
+                    var object = project.data.objects[id];
+
+                    // Loop through all animations for this object start them
+                    if(slide[id].animations && slide[id].animations.length)
+                    {
+                        slide[id].animations.forEach(function(name)
+                        {
+                            var frames = [];
+                            var animation = object.animation[name];
+
+                            animation.frames.forEach(function(frame)
+                            {
+                                frames.push(frame.computed);
+                            });
+
+                            var iterations = animation.iterations;
+
+                            if(iterations == "Infinity")
+                            {
+                                iterations = Infinity;
+                            }
+
+                            $(element).addClass('animating');
+                            animations.push({'element': element, 'animation': element.animate({'transform': frames}, {'duration': animation.duration, 'iterations': iterations, 'fill': 'forwards'})});
+                        });
+                    }
+                }
+            }
+        },
+
+        stop: function()
+        {
+            // Loop through all animations and cancel them
+            animations.forEach(function(saved)
+            {
+                $(saved.element).removeClass('animating');
+                saved.animation.cancel();
+            });
         },
 
         delete: function(element, name)
@@ -598,6 +644,7 @@ var storage =
             {
                 playing = true;
                 $('body').style({'overflow': 'hidden'});
+                storage.animation.play();
 
                 // Check if the current slide should play
                 var slide = project.data.slides[project.data.slide];
@@ -635,6 +682,7 @@ var storage =
                             next--;
                         }
 
+                        storage.animation.stop();
                         storage.slide.goto(next);
                         delete timeout.nextSlide;
                         storage.slide.play();
@@ -652,6 +700,7 @@ var storage =
                 playing = false;
                 clearTimeout(timeout.nextSlide);
                 delete timeout.nextSlide;
+                storage.animation.stop();
 
                 $('.content').style({'transition': 'none'});
             }
