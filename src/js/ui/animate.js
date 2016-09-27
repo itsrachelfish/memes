@@ -50,14 +50,18 @@ var animate =
                 {
                     return;
                 }
-             }
+            }
+            else
+            {
+                animate.object.animation = {};
+            }
 
             animate.name = name;
             animate.frame = 0;
             animate.frames = [];
 
-            animate.populate();
             animate.persist();
+            animate.populate();
         });
 
         $('.animate .animations select').on('change', function(event)
@@ -207,7 +211,13 @@ var animate =
                 var option = document.createElement('option');
                 $(option).addClass('custom');
                 $(option).text(name);
-                $('.animate .animations select').append(option).trigger('change');
+                $('.animate select').append(option);
+
+                // Make sure the current option is selected
+                if(name == animate.name)
+                {
+                    $('.animate select').value(name).trigger('change');
+                }
             });
         }
         else
