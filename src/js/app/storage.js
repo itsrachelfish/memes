@@ -411,8 +411,25 @@ var storage =
             return;
         }
 
+        // Selete this object from the current slide
         delete project.data.slides[project.data.slide][id];
-        delete project.data.objects[id];
+
+        // Check how many other slides this object appears on
+        var slides = 0;
+
+        project.data.slides.forEach(function(slide)
+        {
+            if(slide[id])
+            {
+                slides++;
+            }
+        });
+
+        // Only delete this object if it doesn't exist in any other slides
+        if(!slides)
+        {
+            delete project.data.objects[id];
+        }
 
         storage.persist();
     },
