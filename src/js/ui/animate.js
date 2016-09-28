@@ -42,18 +42,18 @@ var animate =
         {
              var name = prompt("Please enter a memorable name for this animation.");
 
-             if(animate.object.animation !== undefined && animate.object.animation[name] !== undefined)
-             {
+            if(animate.object.animation === undefined)
+            {
+                animate.object.animation = {};
+            }
+            else if(animate.object.animation !== undefined && animate.object.animation[name] !== undefined)
+            {
                 var replace = confirm("An animation named '" + name + "' already exists. Are you sure you want to overwrite it?");
 
                 if(!replace)
                 {
                     return;
                 }
-            }
-            else
-            {
-                animate.object.animation = {};
             }
 
             animate.name = name;
