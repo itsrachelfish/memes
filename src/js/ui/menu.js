@@ -116,7 +116,7 @@ var menu =
             }
         });
 
-        $('.menu .toggle').on('click', function()
+        $('.menu .toggle, .overlay .toggle').on('click', function()
         {
             var text = this.textContent;
             var toggle = $(this).data('toggle');
