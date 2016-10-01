@@ -130,8 +130,10 @@ var tools =
                 $(parent).find('.edit').removeClass('hidden');
 
                 // Set the original object data in a hidden field
-                $(form).append('<textarea class="temporary hidden" name="id">' + id + '</textarea>');
-                $(form).append('<textarea class="temporary hidden" name="saved">' + JSON.stringify(object) + '</textarea>');
+                var fragment = document.createDocumentFragment();
+                $(fragment).append('<textarea class="temporary hidden" name="id">' + id + '</textarea>');
+                $(fragment).append('<textarea class="temporary hidden" name="saved">' + JSON.stringify(object) + '</textarea>');
+                $(form).append(fragment);
 
                 // Basic information that applies to all images, audio, and videos
                 $(form).find('input[name="url"]').value(object.url);
@@ -161,8 +163,10 @@ var tools =
                 $(parent).find('.edit').removeClass('hidden');
 
                 // Set the original object data in a hidden field
-                $(form).append('<textarea class="temporary hidden" name="id">' + id + '</textarea>');
-                $(form).append('<textarea class="temporary hidden" name="saved">' + JSON.stringify(object) + '</textarea>');
+                var fragment = document.createDocumentFragment();
+                $(fragment).append('<textarea class="temporary hidden" name="id">' + id + '</textarea>');
+                $(fragment).append('<textarea class="temporary hidden" name="saved">' + JSON.stringify(object) + '</textarea>');
+                $(form).append(fragment);
 
                 // Add saved options into the form
                 $(form).find('input[name="text"]').value(object.text);

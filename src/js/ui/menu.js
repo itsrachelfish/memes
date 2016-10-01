@@ -388,13 +388,9 @@ var menu =
 
         // Populate color pickers on load
         menu.pickers();
-
-console.log('uhhh', $('.picker'));
-
+ 
         $('.picker input').on('input change blur', function()
         {
-            console.log('it changed?');
-
             var rel = $(this).data('rel');
             $(rel).value($(this).value());
         });
