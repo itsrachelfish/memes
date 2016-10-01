@@ -146,31 +146,41 @@ var hover =
         $(template).style({'height': size.height + 'px', 'width': size.width + 'px', 'z-index': zindex});
         $(template).transform(element.transform);
 
-        $(template).on('click', function(event)
+        $(template).on('mousedown', function(event)
         {
             // Only trigger click when clicking on the menu content (not the menu icons)
             if($(event.target).hasClass('hover-menu'))
             {
-                if(hover.tool == 'interact')
+                // If right click was pressed
+                if(event.buttons == 2)
                 {
-                    tools.interact(hover.element);
+                    // Move element to the bottom layer
+                    $(hover.element).style({'z-index': 0});
+                    storage.update(hover.element);
                 }
-                else if(hover.tool == 'edit')
+                else
                 {
-                    tools.edit(hover.element);
-                }
-                else if(hover.tool == 'delete')
-                {
-                    storage.remove(hover.element);
-                    $(template).remove();
-
-                    if(helper.pressed.control)
+                    if(hover.tool == 'interact')
                     {
-                        explode(hover.element);
+                        tools.interact(hover.element);
                     }
-                    else
+                    else if(hover.tool == 'edit')
                     {
-                        $(hover.element).remove();
+                        tools.edit(hover.element);
+                    }
+                    else if(hover.tool == 'delete')
+                    {
+                        storage.remove(hover.element);
+                        $(template).remove();
+
+                        if(helper.pressed.control)
+                        {
+                            explode(hover.element);
+                        }
+                        else
+                        {
+                            $(hover.element).remove();
+                        }
                     }
                 }
             }
