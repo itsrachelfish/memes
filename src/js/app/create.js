@@ -27,10 +27,6 @@ var create =
             $(element).find('.element').attr('loop', options.loop);
         }
 
-        // Add license information if provided
-        $(element).data('desc', options.desc);
-        $(element).data('license', options.license);
-
         if(options.layer)
         {
             options.layer = parseInt(options.layer);
@@ -149,9 +145,9 @@ var create =
         }
 
         // Add a default value for the audio description
-        options.desc = options.desc || 'untitled audio';
+        options.title = options.title || 'untitled audio';
 
-        $(audio).find('.title').text(options.desc);
+        $(audio).find('.title').text(options.title);
         $(audio).find('.element').attr('src', options.url);
 
         create.element(audio, options);

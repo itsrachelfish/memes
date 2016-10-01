@@ -195,8 +195,8 @@ var animate =
 
         animate.object = object;
 
-        var  desc = object.desc || 'untitled ' + object.type;
-        $('.menu .animate .element').text(desc);
+        var title = object.title || 'untitled ' + object.type;
+        $('.menu .animate .element').text(title);
 
         if(object.animation !== undefined && Object.keys(object.animation).length)
         {

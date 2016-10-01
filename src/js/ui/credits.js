@@ -26,8 +26,8 @@ var credits =
             if(['image', 'audio', 'video'].indexOf(object.type) > -1)
             {
                 // Make sure required vars are set
-                var desc = object.desc || 'Untitled ' + object.type;
-                var url = object.url;
+                var title = object.tile || 'Untitled ' + object.type;
+                var desc = object.desc || object.url;
                 var license = object.license || 'unknown';
 
                 // Get the human readable version of the license
@@ -35,8 +35,8 @@ var credits =
                 license = option.innerText || option.textContent;
 
                 var template = $(credits.template).clone();
-                $(template).find('label').text(desc);
-                $(template).find('.url').text(url);
+                $(template).find('label').text(title);
+                $(template).find('.desc').text(desc);
                 $(template).find('.license').text(license);
 
                 sources.appendChild(template);
