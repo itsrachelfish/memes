@@ -319,19 +319,19 @@ var menu =
             }
         });
 
-        $('body').on('click change', '.text.overlay .border', function()
+        $('body').on('click change', '.headline.overlay .border', function()
         {
             if($(this).prop('checked'))
             {
-                $('.text.overlay .use-border').removeClass('hidden');
+                $('.headline.overlay .use-border').removeClass('hidden');
             }
             else
             {
-                $('.text.overlay .use-border').addClass('hidden');
+                $('.headline.overlay .use-border').addClass('hidden');
             }
         });
 
-        $('.text.overlay form').on('submit', function(event)
+        $('.headline.overlay form').on('submit', function(event)
         {
             event.preventDefault();
             var input = helper.serialize(this);
@@ -357,13 +357,13 @@ var menu =
             // Remove any temporary input fields (automatically generated under certain conditions, like when tools are used)
             $(this).find('.temporary').remove();
 
-            var text = create.text(options);
-            storage.save(text.element, text.options);
+            var headline = create.headline(options);
+            storage.save(headline.element, headline.options);
 
-            overlay.close('.text');
+            overlay.close('.headline');
         });
 
-        $('.text').on('overlay-opened', function()
+        $('.headline').on('overlay-opened', function()
         {
             menu.pickers();
         });
@@ -389,8 +389,12 @@ var menu =
         // Populate color pickers on load
         menu.pickers();
 
+console.log('uhhh', $('.picker'));
+
         $('.picker input').on('input change blur', function()
         {
+            console.log('it changed?');
+
             var rel = $(this).data('rel');
             $(rel).value($(this).value());
         });

@@ -144,9 +144,9 @@ var storage =
                         {
                             created = create.video(options);
                         }
-                        else if(options.type == 'text')
+                        else if(options.type == 'headline')
                         {
-                            created = create.text(options);
+                            created = create.headline(options);
                         }
                         else if(options.type == 'preset' && presets[options.preset] !== undefined)
                         {

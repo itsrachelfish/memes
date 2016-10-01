@@ -199,13 +199,13 @@ var create =
         return {element: video, options: options};
     },
 
-    text: function(options)
+    headline: function(options)
     {
         var text;
         var element;
         var defaults =
         {
-            type: 'text',
+            type: 'headline',
             centered: true,
         };
 
@@ -227,23 +227,23 @@ var create =
             if($('#' + id).el.length)
             {
                 element = $('#' + id).el[0];
-                text = element.textmagick;
+                headline = element.textmagick;
 
-                text.setText(options.text);
-                text.setOptions(options);
+                headline.setText(options.text);
+                headline.setOptions(options);
             }
         }
         else
         {
-            text = new TextMagick(options.text, options);
-            element = text.getElement();
+            headline = new TextMagick(options.text, options);
+            element = headline.getElement();
 
             create.element(element, options);
         }
 
-        text.resize();
+        headline.resize();
 
-        return {element: element, text: text, options: options};
+        return {element: element, options: options};
     },
 
     background: function(options)

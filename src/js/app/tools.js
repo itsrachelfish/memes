@@ -152,10 +152,10 @@ var tools =
                 // Open the overlay for this type of object
                 overlay.open(selector);
             }
-            else if(object.type == 'text')
+            else if(object.type == 'headline')
             {
-                var parent = '.overlay.text';
-                var form = '.overlay.text form';
+                var parent = '.overlay.headline';
+                var form = '.overlay.headline form';
 
                 $(parent).find('.add').addClass('hidden');
                 $(parent).find('.edit').removeClass('hidden');
@@ -174,7 +174,7 @@ var tools =
                 $(form).find('input[name="border-image"]').value(object.border.image);
                 $(form).find('input[name="border-size"]').value(object.border.size);
 
-                overlay.open('.text');
+                overlay.open('.headline');
             }
             else
             {
