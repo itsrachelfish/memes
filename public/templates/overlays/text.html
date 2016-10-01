@@ -1,0 +1,41 @@
+<div class="overlay text">
+    <h1 class="add">Add Text</h1>
+    <h1 class="edit hidden">Edit Text</h1>
+
+    <i class="note">This tool lets you add blocks of text to the page. For big text with borders, check out the headline menu.</i>
+
+    <form>
+        <div class="row">
+            <div class="twelve columns">
+                <label for="text">Text</label>
+                <textarea name="text" class="u-full-width" placeholder="I'd just like to interject for a moment. What you're referring to as Linux, is in fact, GNU/Linux, or as I've recently taken to calling it, GNU plus Linux. Linux is not an operating system unto itself, but rather another free component of a fully functioning GNU system made useful by the GNU corelibs, shell utilities and vital system components comprising a full OS as defined by POSIX." id="text"></textarea>
+            </div>
+
+            <div class="row">
+                <div class="ten columns">
+                    <label for="text-color">Color</label>
+                    <input name="text-color" class="u-full-width" placeholder="Use words like 'red', 'green', or 'blue' -- Or use hex codes like '#A500FF'" id="text-color" type="text" value="black">
+                </div>
+
+                <div class="two columns relative picker padding">
+                    <label>Color picker</label>
+                    <input name="picker" type="color" data-rel="#text-color">
+                </div>
+            </div>
+
+            <div class="twelve columns">
+                <label for="text-font">Font</label>
+                <input name="text-font" class="u-full-width" placeholder="Comic Sans" id="text-font" type="text">
+            </div>
+
+            <div class="twelve columns">
+                <label for="text-size">Size</label>
+                <input name="text-size" id="text-size" type="range" min="5" max="100" step="1" value="12">
+            </div>
+        </div>
+
+        <hr>
+
+        <input class="button-primary" value="Submit" type="submit">
+    </form>
+</div>
