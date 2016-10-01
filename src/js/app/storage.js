@@ -638,6 +638,12 @@ var storage =
             storage.load();
             storage.persist();
 
+            // Start animations after loading this slide if we are currently in playback mode
+            if(playing)
+            {
+                storage.slide.play();
+            }
+
             $('.workspace').trigger('slides-changed');
         },
 
@@ -702,7 +708,7 @@ var storage =
                         storage.animation.stop();
                         storage.slide.goto(next);
                         delete timeout.nextSlide;
-                        storage.slide.play();
+
                     }, slide.autoplay.duration * 1000);
                 }
             }
