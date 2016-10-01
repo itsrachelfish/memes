@@ -281,6 +281,7 @@ var create =
         {
             'font-family': options.font || 'inherit',
             'font-size': options.size + 'pt' || '12pt',
+            'line-height': options.height + 'em' || '1em',
             'color': options.color || 'black',
         };
 

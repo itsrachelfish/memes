@@ -371,6 +371,7 @@ var menu =
             {
                 text: input['text'],
                 size: input['text-size'],
+                height: input['text-height'],
                 color: input['text-color'],
                 font: input['text-font'],
 

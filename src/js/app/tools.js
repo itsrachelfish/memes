@@ -202,6 +202,7 @@ var tools =
                 $(form).find('input[name="text-color"]').value(object.color);
                 $(form).find('input[name="text-font"]').value(object.font);
                 $(form).find('input[name="text-size"]').value(object.size);
+                $(form).find('input[name="text-height"]').value(object.height);
 
                 overlay.open('.text');
             }
