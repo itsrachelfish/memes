@@ -22,11 +22,17 @@ var credits =
         {
             var object = data.objects[id];
 
+            // If this object is excluded from credits, continue
+            if(object.exclude)
+            {
+                return;
+            }
+
             // Only certain elements have cited sources
             if(['image', 'audio', 'video'].indexOf(object.type) > -1)
             {
                 // Make sure required vars are set
-                var title = object.tile || 'Untitled ' + object.type;
+                var title = object.title || 'Untitled ' + object.type;
                 var desc = object.desc || object.url;
                 var license = object.license || 'unknown';
 
@@ -36,7 +42,7 @@ var credits =
 
                 var template = $(credits.template).clone();
                 $(template).find('label').text(title);
-                $(template).find('.desc').text(desc);
+                $(template).find('.desc span').text(desc);
                 $(template).find('.license').text(license);
 
                 sources.appendChild(template);
