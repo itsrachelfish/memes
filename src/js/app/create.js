@@ -246,6 +246,53 @@ var create =
         return {element: element, options: options};
     },
 
+    text: function(options)
+    {
+        var text;
+        var element;
+        var defaults =
+        {
+            type: 'text',
+            centered: true,
+        };
+
+        // Deep combine user given options with defaults
+        options = extend(true, defaults, options);
+
+        // Check if any old save data was provided in the options
+        if(options.id && options.saved)
+        {
+            var id = options.id;
+            var saved = JSON.parse(options.saved);
+            delete options.id;
+            delete options.saved;
+
+            // Combine old save data with new form data
+            options = extend(true, saved, options);
+
+            // And now check if the saved element ID actually exists on the page
+            if($('#' + id).el.length)
+            {
+                text = $('#' + id).el[0];
+            }
+        }
+
+        var style =
+        {
+            'font-family': options.font || 'inherit',
+            'font-size': options.size + 'pt' || '12pt',
+            'color': options.color || 'black',
+        };
+
+        text = text || document.createElement('div');
+        $(text).addClass('text');
+        $(text).text(options.text);
+        $(text).style(style);
+
+        create.element(text, options);
+        return {element: text, options: options};
+    },
+
     background: function(options)
     {
         if(options.background)

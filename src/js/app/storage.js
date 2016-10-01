@@ -148,6 +148,10 @@ var storage =
                         {
                             created = create.headline(options);
                         }
+                        else if(options.type == 'text')
+                        {
+                            created = create.text(options);
+                        }
                         else if(options.type == 'preset' && presets[options.preset] !== undefined)
                         {
                             presets[options.preset].init();

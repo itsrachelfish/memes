@@ -255,6 +255,7 @@ var hover =
             image: ['edit', 'move', 'transform', 'delete'],
             audio: ['interact', 'edit', 'move', 'transform', 'delete'],
             video: ['interact', 'edit', 'move', 'transform', 'delete'],
+            text: ['edit', 'move', 'transform', 'delete'],
             headline: ['edit', 'move', 'transform', 'delete'],
             preset: ['interact', 'move', 'transform', 'delete']
         }

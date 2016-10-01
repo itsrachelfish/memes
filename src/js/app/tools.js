@@ -130,9 +130,10 @@ var tools =
                 $(parent).find('.edit').removeClass('hidden');
 
                 // Set the original object data in a hidden field
-                var fragment = document.createDocumentFragment();
-                $(fragment).append('<textarea class="temporary hidden" name="id">' + id + '</textarea>');
-                $(fragment).append('<textarea class="temporary hidden" name="saved">' + JSON.stringify(object) + '</textarea>');
+                var fragment = document.createElement('div');
+                $(fragment).addClass('temporary');
+                $(fragment).append('<textarea class="hidden" name="id">' + id + '</textarea>');
+                $(fragment).append('<textarea class="hidden" name="saved">' + JSON.stringify(object) + '</textarea>');
                 $(form).append(fragment);
 
                 // Basic information that applies to all images, audio, and videos
@@ -163,9 +164,10 @@ var tools =
                 $(parent).find('.edit').removeClass('hidden');
 
                 // Set the original object data in a hidden field
-                var fragment = document.createDocumentFragment();
-                $(fragment).append('<textarea class="temporary hidden" name="id">' + id + '</textarea>');
-                $(fragment).append('<textarea class="temporary hidden" name="saved">' + JSON.stringify(object) + '</textarea>');
+                var fragment = document.createElement('div');
+                $(fragment).addClass('temporary');
+                $(fragment).append('<textarea class="hidden" name="id">' + id + '</textarea>');
+                $(fragment).append('<textarea class="hidden" name="saved">' + JSON.stringify(object) + '</textarea>');
                 $(form).append(fragment);
 
                 // Add saved options into the form
@@ -179,6 +181,29 @@ var tools =
                 $(form).find('input[name="border-size"]').value(object.border.size);
 
                 overlay.open('.headline');
+            }
+            else if(object.type == 'text')
+            {
+                var parent = '.overlay.text';
+                var form = '.overlay.text form';
+
+                $(parent).find('.add').addClass('hidden');
+                $(parent).find('.edit').removeClass('hidden');
+
+                // Set the original object data in a hidden field
+                var fragment = document.createElement('div');
+                $(fragment).addClass('temporary');
+                $(fragment).append('<textarea class="hidden" name="id">' + id + '</textarea>');
+                $(fragment).append('<textarea class="hidden" name="saved">' + JSON.stringify(object) + '</textarea>');
+                $(form).append(fragment);
+
+                // Add saved options into the form
+                $(form).find('textarea[name="text"]').value(object.text);
+                $(form).find('input[name="text-color"]').value(object.color);
+                $(form).find('input[name="text-font"]').value(object.font);
+                $(form).find('input[name="text-size"]').value(object.size);
+
+                overlay.open('.text');
             }
             else
             {

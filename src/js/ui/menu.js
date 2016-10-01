@@ -363,7 +363,32 @@ var menu =
             overlay.close('.headline');
         });
 
-        $('.headline').on('overlay-opened', function()
+        $('.text.overlay form').on('submit', function(event)
+        {
+            event.preventDefault();
+            var input = helper.serialize(this);
+            var options =
+            {
+                text: input['text'],
+                size: input['text-size'],
+                color: input['text-color'],
+                font: input['text-font'],
+
+                // Special options only set when editing existing text
+                id: input.id,
+                saved: input.saved
+            };
+
+            // Remove any temporary input fields (automatically generated under certain conditions, like when tools are used)
+            $(this).find('.temporary').remove();
+
+            var text = create.text(options);
+            storage.save(text.element, text.options);
+
+            overlay.close('.text');
+        });
+
+        $('.headline, .text').on('overlay-opened', function()
         {
             menu.pickers();
         });
