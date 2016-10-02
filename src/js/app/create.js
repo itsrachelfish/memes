@@ -64,6 +64,12 @@ var create =
                 $(element).remove();
             }, options.duration);
         }
+
+        // Custom classes
+        if(options.class)
+        {
+            $(element).addClass(options.class);
+        }
  
         $(element).addClass('content');
         $('.workspace').trigger('content-updated', element);

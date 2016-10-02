@@ -143,6 +143,10 @@ var tools =
                 $(form).find('select[name="license"]').value(object.license);
                 $(form).find('input[name="exclude"]').prop('checked', object.exclude);
 
+                // Misc options
+                $(form).find('input[name="class"]').value(object.class);
+                $(form).find('input[name="goto"]').value(object.goto);
+
                 // Options specific to audio and video elements
                 if(object.type == 'audio' || object.type == 'video')
                 {
@@ -180,6 +184,10 @@ var tools =
                 $(form).find('input[name="border-image"]').value(object.border.image);
                 $(form).find('input[name="border-size"]').value(object.border.size);
 
+                // Misc options
+                $(form).find('input[name="class"]').value(object.class);
+                $(form).find('input[name="goto"]').value(object.goto);
+
                 overlay.open('.headline');
             }
             else if(object.type == 'text')
@@ -203,6 +211,10 @@ var tools =
                 $(form).find('input[name="text-font"]').value(object.font);
                 $(form).find('input[name="text-size"]').value(object.size);
                 $(form).find('input[name="text-height"]').value(object.height);
+
+                // Misc options
+                $(form).find('input[name="class"]').value(object.class);
+                $(form).find('input[name="goto"]').value(object.goto);
 
                 overlay.open('.text');
             }
