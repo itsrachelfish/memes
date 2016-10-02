@@ -17,6 +17,18 @@ var overlay =
                 $('.overlay').removeClass('open');
             }
         });
+
+        $('.overlay .toggle').on('click', function()
+        {
+            var text = this.textContent;
+            var toggle = $(this).data('toggle');
+            var rel = $(this).data('rel');
+
+            $(this).data('toggle', text);
+            $(this).text(toggle);
+
+            $(rel).toggle('hidden');
+        });
     },
 
     // Open an overlay
