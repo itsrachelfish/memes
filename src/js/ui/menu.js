@@ -349,6 +349,9 @@ var menu =
                     image: input['border-image'],
                 },
 
+                class: input['class'],
+                goto: input['goto'],
+
                 // Special options only set when editing existing text
                 id: input.id,
                 saved: input.saved
@@ -374,6 +377,9 @@ var menu =
                 height: input['text-height'],
                 color: input['text-color'],
                 font: input['text-font'],
+
+                class: input['class'],
+                goto: input['goto'],
 
                 // Special options only set when editing existing text
                 id: input.id,

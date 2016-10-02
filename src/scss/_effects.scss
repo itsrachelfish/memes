@@ -1,0 +1,34 @@
+.typing {
+    animation: typing 0.5s steps(20, end); 
+    animation-fill-mode: backwards;
+    overflow: hidden;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+} 
+
+.delay-500 {
+   animation-delay: 500ms;
+}
+
+.delay-1000 {
+    animation-delay: 1000ms;
+}
+
+.delay-1500 {
+    animation-delay: 1500ms;
+}
+
+.delay-2000 {
+    animation-delay: 2000ms;
+}
+
+.delay-2500 {
+    animation-delay: 2500ms;
+}
+
+.delay-3000 {
+    animation-delay: 3000ms;
+}
