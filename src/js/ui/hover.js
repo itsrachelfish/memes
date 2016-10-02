@@ -8,7 +8,7 @@ var explode = require('../plugins/explode');
 // Module which controls the menus that appear when hovering over content
 var hover =
 {
-    tool: 'move',
+    tool: 'edit',
     element: false,
 
     init: function()
