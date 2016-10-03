@@ -116,7 +116,7 @@ var storage =
                 if(project.data.objects[id] !== undefined)
                 {
                     // Combine any additional slide data with the saved element's options
-                    var options = extend(true, project.data.objects[id], slide[id]);
+                    var options = extend(true, {}, project.data.objects[id], slide[id]);
                     var exists = $('#' + id);
 
                     // If the element already exists on the page
@@ -517,7 +517,7 @@ var storage =
         }
 
         var slide = project.data.slides[project.data.slide];
-        var options = extend(true, project.data.objects[id], slide[id]);
+        var options = extend(true, {}, project.data.objects[id], slide[id]);
 
         return options;
     },
@@ -677,7 +677,7 @@ var storage =
                 // Check if the current slide should play
                 var slide = project.data.slides[project.data.slide];
 
-                if(slide.autoplay.enabled)
+                if(slide.autoplay && slide.autoplay.enabled)
                 {
                     if(slide.transition.enabled)
                     {

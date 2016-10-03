@@ -71,7 +71,6 @@ var create =
         }
  
         $(element).addClass('content');
-        $('.workspace').trigger('content-updated', element);
     },
 
     image: function(options)
