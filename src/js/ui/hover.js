@@ -369,6 +369,8 @@ var hover =
 
             $(hover.template).transform(hover.template.transform);
             $(hover.element).transform(hover.template.transform);
+
+            storage.update(hover.element);
         }
     }
 };
