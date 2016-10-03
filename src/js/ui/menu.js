@@ -102,6 +102,9 @@ var menu =
                 $('h1.add').removeClass('hidden');
                 $('h1.edit').addClass('hidden');
 
+                // Remove any hidden temporary fields
+                $('.overlay .temporary').remove();
+
                 overlay.open($(this).data('overlay'));
             }
         });
@@ -113,6 +116,9 @@ var menu =
             {
                 overlay.close();
                 overlay.open($(this).data('overlay'));
+
+                // Remove any hidden temporary fields
+                $('.overlay .temporary').remove();
             }
         });
 
