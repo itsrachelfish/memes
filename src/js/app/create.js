@@ -23,7 +23,6 @@ var create =
         if(options.type == 'audio' || options.type == 'video')
         {
             $(element).find('.element').prop('volume', options.volume);
-            $(element).find('.element').attr('autoplay', options.autoplay);
             $(element).find('.element').attr('loop', options.loop);
         }
 

@@ -672,6 +672,7 @@ var storage =
                 playing = true;
                 $('body').style({'overflow': 'hidden'});
                 storage.animation.play();
+                storage.media.play();
 
                 // Check if the current slide should play
                 var slide = project.data.slides[project.data.slide];
@@ -728,6 +729,7 @@ var storage =
                 clearTimeout(timeout.nextSlide);
                 delete timeout.nextSlide;
                 storage.animation.stop();
+                storage.media.stop();
 
                 $('.content').style({'transition': 'none'});
             }
@@ -743,6 +745,38 @@ var storage =
             return 'paused';
         }
     },
+
+    // Functions to control playback of media elements (audio / video)
+    media:
+    {
+        play: function()
+        {
+            // Loop through all objects in the current slide
+            var slide = project.data.slides[project.data.slide];
+
+            for(var id in slide)
+            {
+                if(project.data.objects[id] !== undefined)
+                {
+                    var element = $('#' + id).el[0];
+                    var object = project.data.objects[id];
+
+                    if(object.autoplay)
+                    {
+                        $(element).find('audio, video').el[0].play();
+                    }
+                }
+            }
+        },
+
+        stop: function()
+        {
+            $('.workspace audio, .workspace .video').each(function()
+            {
+                this.pause();
+            });
+        }
+    }
 };
 
 module.exports = storage;
