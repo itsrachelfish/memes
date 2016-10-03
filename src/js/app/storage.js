@@ -710,9 +710,9 @@ var storage =
                             next--;
                         }
 
+                        delete timeout.nextSlide;
                         storage.animation.stop();
                         storage.slide.goto(next);
-                        delete timeout.nextSlide;
 
                     }, slide.autoplay.duration * 1000);
                 }

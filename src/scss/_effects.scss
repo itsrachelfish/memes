@@ -1,3 +1,8 @@
+.animating {
+    transition: none !important;
+    animation-fill-mode: both;
+}
+
 .typing {
     animation: typing 0.5s steps(20, end); 
     animation-fill-mode: backwards;

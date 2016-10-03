@@ -193,7 +193,8 @@ var animate =
         var id = $(animate.element).attr('id');
         var object = storage.getObject(id);
 
-        animate.object = object;
+        // Clone the saved object so we don't mess with it
+        animate.object = JSON.parse(JSON.stringify(object));
 
         var title = object.title || 'untitled ' + object.type;
         $('.menu .animate .element').text(title);
