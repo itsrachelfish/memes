@@ -87,6 +87,41 @@ var hover =
             hover.stop();
         });
 
+        // Using shift + arrow keys should move the element you're hovering over
+        $('body').on('keydown', function(event)
+        {
+            if(helper.pressed.shift)
+            {
+                var x = 0;
+                var y = 0;
+
+                if(helper.pressed.arrowright)
+                {
+                    x++;
+                }
+
+                if(helper.pressed.arrowleft)
+                {
+                    x--;
+                }
+
+                if(helper.pressed.arrowup)
+                {
+                    y--;
+                }
+
+                if(helper.pressed.arrowdown)
+                {
+                    y++;
+                }
+
+                if(x || y)
+                {
+                    hover.move(x, y);
+                }
+            }
+        });
+
         // Bind to media (audio / video) events
         document.addEventListener('play', function(event)
         {
@@ -320,6 +355,20 @@ var hover =
         {
             $(hover.template).find('.controls progress').attr('max', $(hover.element).find('.element').el[0].duration);
             $(hover.template).find('.controls progress').value($(hover.element).find('.element').el[0].currentTime);
+        }
+    },
+
+    // Function to move the current element specific distances
+    move: function(x, y)
+    {
+        // Only move if we're in move mode
+        if(hover.tool == "move")
+        {
+            hover.template.transform.translate[0] = (parseInt(hover.template.transform.translate[0]) + x) + 'px';
+            hover.template.transform.translate[1] = (parseInt(hover.template.transform.translate[1]) + y) + 'px';
+
+            $(hover.template).transform(hover.template.transform);
+            $(hover.element).transform(hover.template.transform);
         }
     }
 };
