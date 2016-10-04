@@ -112,12 +112,25 @@ var animate =
         $('.animate .new-frame').on('click', function()
         {
             // Add a new frame after the current position
-            animate.frames.splice(animate.frame + 1, 0, {});            
+            animate.frames.splice(animate.frame + 1, 0, {});
             animate.frame++;
 
             $('#frame').attr('max', animate.frames.length - 1);
             $('#frame').value(animate.frame);
 
+            animate.persist();
+        });
+
+        $('.animate .delete-frame').on('click', function()
+        {
+            // Delete the current frame
+            animate.frames.splice(animate.frame, 1);
+            animate.frame--;
+
+            $('#frame').attr('max', animate.frames.length - 1);
+            $('#frame').value(animate.frame);
+
+            animate.update();
             animate.persist();
         });
 
