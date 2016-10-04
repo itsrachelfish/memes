@@ -59,6 +59,7 @@ var animate =
             animate.name = name;
             animate.frame = 0;
             animate.frames = [];
+            animate.object.animation[animate.name] = {};
 
             animate.persist();
             animate.populate();
