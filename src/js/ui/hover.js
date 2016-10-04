@@ -189,9 +189,25 @@ var hover =
                 // If right click was pressed
                 if(event.buttons == 2)
                 {
-                    // Move element to the bottom layer
-                    $(hover.element).style({'z-index': 0});
-                    storage.update(hover.element);
+                    // If ctrl is also pressed
+                    if(helper.pressed.control)
+                    {
+                        var slide = parseInt(storage.get('slide'));
+                        var slides = storage.get('slides');
+
+                        // Make sure there actually is another slide
+                        if(slides[slide + 1] !== undefined)
+                        {
+                            // Copy the element to the next slide
+                            storage.update(hover.element, slide + 1);
+                        }
+                    }
+                    else
+                    {
+                        // Move element to the bottom layer
+                        $(hover.element).style({'z-index': 0});
+                        storage.update(hover.element);
+                    }
                 }
                 else
                 {

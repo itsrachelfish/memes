@@ -200,8 +200,13 @@ var storage =
     },
 
     // Update information from the DOM about an object in storage
-    update: function(element)
+    update: function(element, slide)
     {
+        if(slide === undefined)
+        {
+            slide = project.data.slide;
+        }
+
         // Check if this element has a unique ID
         var id = $(element).attr('id');
 
@@ -230,12 +235,12 @@ var storage =
             }));
 
             // Check if any animations have already been saved for this object in this slide
-            if(project.data.slides[project.data.slide][id] && project.data.slides[project.data.slide][id].animations)
+            if(project.data.slides[slide][id] && project.data.slides[slide][id].animations)
             {
-                data.animations = project.data.slides[project.data.slide][id].animations;
+                data.animations = project.data.slides[slide][id].animations;
             }
 
-            project.data.slides[project.data.slide][id] = data;
+            project.data.slides[slide][id] = data;
             storage.persist();
         }
 
