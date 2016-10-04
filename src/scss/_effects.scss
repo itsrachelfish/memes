@@ -37,3 +37,7 @@
 .delay-3000 {
     animation-delay: 3000ms;
 }
+
+.no-transition {
+    transition: none !important;
+}

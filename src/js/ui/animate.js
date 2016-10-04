@@ -73,7 +73,8 @@ var animate =
             {
                 animate.name = animation;
                 animate.frame = 0;
-                animate.frames = animate.object.animation[animate.name].frames;
+                animate.frames = JSON.parse(JSON.stringify(animate.object.animation[animate.name].frames));
+                animate.update();
 
                 $('.animation-selected').removeClass('hidden');
 
@@ -99,8 +100,6 @@ var animate =
                 {
                     $('.animate .enabled').prop('checked', false).trigger('change');
                 }
-
-                animate.update();
             }
             else
             {
@@ -238,7 +237,7 @@ var animate =
 
             // Update the saved animation object
             animate.frames[animate.frame] = JSON.parse(JSON.stringify({'computed': transform, 'basic': animate.element.transform}));
-            animate.object.animation[animate.name] = animate.frames;
+            animate.object.animation[animate.name].frames = JSON.parse(JSON.stringify(animate.frames));
         }
 
         // Build object of data to be saved
@@ -351,6 +350,7 @@ var animate =
         $('.animation-selected').addClass('hidden');
 
         animate.pause();
+        animate.name = false;
         animate.active = false;
         animate.element = false;
         animate.object = false;
