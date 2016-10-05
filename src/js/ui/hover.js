@@ -245,9 +245,14 @@ var hover =
         // Ensure the element being dragged is always on top
         $(template).on('dragstart', function()
         {
-            helper.layers++
-            $(template).style({'z-index': helper.layers});
-            $(element).style({'z-index': helper.layers});
+            // If shift is pressed, keep the element on its current layer
+            if(!helper.pressed.shift)
+            {
+                // Otherwise move it to the top
+                helper.layers++
+                $(template).style({'z-index': helper.layers});
+                $(element).style({'z-index': helper.layers});
+            }
 
             // Disable pointer-events on content while dragging
             $('.workspace .content').style({'pointer-events': 'none'})
