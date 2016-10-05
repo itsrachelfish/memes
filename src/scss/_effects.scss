@@ -41,3 +41,44 @@
 .no-transition {
     transition: none !important;
 }
+
+.invisible {
+    opacity: 0;
+}
+
+.trippy-fast {
+    animation: trippy 1s linear infinite;
+}
+
+.trippy {
+    animation: trippy 4s linear infinite;
+}
+
+.trippy-slow {
+    animation: trippy 20s linear infinite;
+}
+
+@keyframes trippy {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
+}
+
+.invert {
+    filter: invert(100%);
+}
+
+.grayscale {
+    filter: grayscale(100%);
+}
+
+.blur-less {
+    filter: blur(5px);
+}
+
+.blur {
+    filter: blur(25px);
+}
+
+.blur-more {
+    filter: blur(100px);
+}
