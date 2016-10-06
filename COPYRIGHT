@@ -311,3 +311,14 @@ public/src/img/gay.gif
 public/src/img/orgazmo.gif
     - Source URL http://www.bradfitz.com/reviews/img/orgazmo.gif
     - Promotional image from the original Orgazmo movie website, https://web.archive.org/web/20011127225447/http://www.cluborgazmo.com/
+
+public/src/img/clippy.png
+    - Source URL http://joke-battles.wikia.com/wiki/File:Clippy.png
+    - Originally created by Microsoft, but now it's just an internet joke, right?
+
+public/src/img/icons/win-xp-alert.png
+public/src/img/icons/win-xp-error.png
+public/src/img/icons/win-xp-info.png
+public/src/img/icons/win-xp-question.png
+    - Source URL http://www.iconlibraryx.com/resources/images/windows-xp-icons.png
+    - Probably technically still owned by Microsoft. Please don't sue me, it's just a social experiment bro
