@@ -206,6 +206,11 @@ var hover =
                     {
                         // Move element to the bottom layer
                         $(hover.element).style({'z-index': 0});
+
+                        // Move element to the top of the workspace so other elements on layer 0 will overlap it
+                        var workspace = $('.workspace').el[0];
+                        workspace.insertBefore(hover.element, workspace.firstChild);
+
                         storage.update(hover.element);
                     }
                 }
