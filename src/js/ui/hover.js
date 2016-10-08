@@ -48,18 +48,28 @@ var hover =
                 element = $(this).parents('.icon').el[0];
             }
 
-            // Update the menu currently on the page
-            $('.hover-menu .icon.active').removeClass('active');
-            $(element).addClass('active');
+            // If this tool is already active
+            if(hover.tool == $(element).data('tool'))
+            {
+                // Trigger tool behavior
+                $(hover.template).trigger('mousedown');
+            }
+            // Otherwise, enable this tool
+            else
+            {
+                // Update the menu currently on the page
+                $('.hover-menu .icon.active').removeClass('active');
+                $(element).addClass('active');
 
-            hover.tool = $(element).data('tool');
+                hover.tool = $(element).data('tool');
 
-            // Update the saved menu template
-            $(hover.baseTemplate).find('.icon.active').removeClass('active');
-            $(hover.baseTemplate).find('.icon[data-tool="'+hover.tool+'"]').addClass('active');
+                // Update the saved menu template
+                $(hover.baseTemplate).find('.icon.active').removeClass('active');
+                $(hover.baseTemplate).find('.icon[data-tool="'+hover.tool+'"]').addClass('active');
 
-            hover.initTools();
-            hover.showControls();
+                hover.initTools();
+                hover.showControls();
+            }
         });
 
         $('.workspace').on('click', '.hover-menu .play, .hover-menu .play *', function()
