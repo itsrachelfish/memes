@@ -73,6 +73,29 @@ var interactions =
             }
         });
 
+        // Removing items while in playback mode
+        $('body').on('mousedown', '.content', function(event)
+        {
+            // If we're currently in playback mode
+            if(storage.isPlaying())
+            {
+                // If right click was pressed
+                if(event.buttons == 2)
+                {
+                    // If ctrl is also pressed
+                    if(helper.pressed.control)
+                    {
+                        explode(this);
+                    }
+                    else
+                    {
+                        // Delete the object (but don't save)
+                        $(this).remove();
+                    }
+                }
+            }
+        });
+
         // Random exploding things
         $('body').on('mousedown touchstart', '.bomb', function(event)
         {

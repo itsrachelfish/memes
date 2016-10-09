@@ -781,6 +781,11 @@ var storage =
                 this.pause();
             });
         }
+    },
+
+    isPlaying: function()
+    {
+        return playing;
     }
 };
 
