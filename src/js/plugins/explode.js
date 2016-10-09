@@ -18,27 +18,29 @@ function explode(element)
 {
     // Save the size and position of the current element
     var size = $(element).size();
-    var position = $(element).position();
 
     // Increase the size of the explosion a little bit
     size.width += 50;
     size.height += 50;
-    position.top -= 25;
-    position.left -= 25;
+
+    // Adjust the translated position
+    var transform = JSON.parse(JSON.stringify(element.transform));
+
+    transform.translate[0] = (parseInt(transform.translate[0]) - 25) + 'px';
+    transform.translate[1] = (parseInt(transform.translate[1]) - 25) + 'px';
 
     // Create an image to overlay the explosion over the current element
     var image = document.createElement('img');
     var options =
     {
         'position': 'absolute',
-        'top': position.top + 'px',
-        'left': position.left + 'px',
         'width': size.width + 'px',
         'height': size.height + 'px',
         'z-index': $(element).style('z-index')
     };
 
     $(image).style(options);
+    $(image).transform(transform);
     $(image).addClass('bomb explosion');
 
     // Generate a random explosion image

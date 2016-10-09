@@ -96,6 +96,36 @@ var interactions =
             }
         });
 
+        // Goto buttons
+        $('body').on('mousedown touchstart', '.goto', function(event)
+        {
+            // Check if the element has a unique ID
+            var id = $(event.target).attr('id');
+            var object = storage.getObject(id);
+
+            // Now make sure it actually exists in the project's save data
+            if(object !== undefined)
+            {
+                // Subtract 1 from the requested slide due to 0-indexing
+                var slide = parseInt(object.goto) - 1;
+
+                // Check if there should be any delay on this element
+                var delay = parseFloat($(event.target).style('animation-delay'));
+
+                if(delay)
+                {
+                    setTimeout(function()
+                    {
+                        storage.slide.goto(slide);
+                    }, delay * 1000);
+                }
+                else
+                {
+                    storage.slide.goto(slide);
+                }
+            }
+        });
+
         // Random exploding things
         $('body').on('mousedown touchstart', '.bomb', function(event)
         {
@@ -111,22 +141,6 @@ var interactions =
             }
 
             explode(this);
-        });
-
-        // Goto buttons
-        $('body').on('mousedown touchstart', '.goto', function(event)
-        {
-            // Check if the element has a unique ID
-            var id = $(event.target).attr('id');
-            var object = storage.getObject(id);
-
-            // Now make sure it actually exists in the project's save data
-            if(object !== undefined)
-            {
-                // Subtract 1 from the requested slide due to 0-indexing
-                var slide = parseInt(object.goto) - 1;
-                storage.slide.goto(slide);
-            }
         });
 
         $('body').on('contextmenu', function(event)
