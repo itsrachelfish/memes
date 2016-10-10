@@ -184,6 +184,35 @@ var storage =
         var id = $(element).attr('id') || helper.randomString();
         $(element).attr('id', id);
 
+        // Check if this element exists on multiple slides
+        var count = 0;
+
+        project.data.slides.forEach(function(slide)
+        {
+            if(slide[id] !== undefined)
+            {
+                count++;
+            }
+        });
+
+        // If it does, display a warning message
+        if(count > 1)
+        {
+            var confirmed = confirm("This object exists across multiple slides. Using the edit tool will modify the object on every slide. Click 'OK' if this is what you want to do, or 'Cancel' to create a new copy on this slide.");
+
+            if(!confirmed)
+            {
+                // Delete original object from this slide
+                delete project.data.slides[project.data.slide][id];
+
+                // Genereate a new ID for this object
+                id = helper.randomString();
+                $(element).attr('id', id);
+
+                // Continue saving as normal...
+            }
+        }
+
         // Remove slide-specific data from saved options
         delete options.transform;
         delete options.layer;

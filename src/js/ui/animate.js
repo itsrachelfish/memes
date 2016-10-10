@@ -146,7 +146,6 @@ var animate =
             // If the frame has changed and there is more than one frame
             if(animate.frame != $(this).value())
             {
-
                 // Set the current time of the animation to match the value of the slider
                 animate.frame = parseInt($(this).value());
                 animate.update();
@@ -274,6 +273,10 @@ var animate =
     // Update animation element with the values of the current frame
     update: function()
     {
+        // Reset transform options between frames
+        animate.element.transform = {};
+
+        // Update animate elemenet with saved transform options
         var frame = animate.frames[animate.frame];
         $(animate.element).transform(frame.basic);
     },
@@ -332,9 +335,10 @@ var animate =
         if(animate.animation)
         {
             animate.animation.cancel();
-            helper.hover.enabled = true;
-            animate.playing = false;
         }
+
+        helper.hover.enabled = true;
+        animate.playing = false;
     },
 
     // Display menu options based on the current animation state
