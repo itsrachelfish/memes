@@ -146,6 +146,7 @@ var tools =
                 // Misc options
                 $(form).find('input[name="class"]').value(object.class);
                 $(form).find('input[name="goto"]').value(object.goto);
+                $(form).find('input[name="layer"]').value(object.layer);
 
                 // Options specific to audio and video elements
                 if(object.type == 'audio' || object.type == 'video')
@@ -187,6 +188,7 @@ var tools =
                 // Misc options
                 $(form).find('input[name="class"]').value(object.class);
                 $(form).find('input[name="goto"]').value(object.goto);
+                $(form).find('input[name="layer"]').value(object.layer);
 
                 overlay.open('.headline');
             }
@@ -215,6 +217,7 @@ var tools =
                 // Misc options
                 $(form).find('input[name="class"]').value(object.class);
                 $(form).find('input[name="goto"]').value(object.goto);
+                $(form).find('input[name="layer"]').value(object.layer);
 
                 overlay.open('.text');
             }

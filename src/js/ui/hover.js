@@ -52,7 +52,10 @@ var hover =
             if(hover.tool == $(element).data('tool'))
             {
                 // Trigger tool behavior
-                $(hover.template).trigger('mousedown');
+                if(hover.tool != 'move' && hover.tool != 'transform')
+                {
+                    $(hover.template).trigger('mousedown');
+                }
             }
             // Otherwise, enable this tool
             else

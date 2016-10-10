@@ -29,7 +29,7 @@ var templates =
 
             if(src)
             {
-                $(this).load('templates/' + src, function()
+                $(this).load('templates/' + src + '?' + Math.random(), function()
                 {
                     // If more templates were loaded inside the current template
                     if($(template).find('.template').el.length > 0)

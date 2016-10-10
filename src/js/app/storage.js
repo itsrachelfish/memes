@@ -776,7 +776,7 @@ var storage =
 
         stop: function()
         {
-            $('.workspace audio, .workspace .video').each(function()
+            $('.workspace audio, .workspace video').each(function()
             {
                 this.pause();
             });
