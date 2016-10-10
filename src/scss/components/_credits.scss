@@ -10,12 +10,7 @@
     text-align: center;
 
     .credits {
-        height: 100%;
-
-        &.scroll {
-            transform:translateY(100%);
-            animation: scroll 20s linear;
-        }
+        margin-top: 100vh;
     }
 
     .title {

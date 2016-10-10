@@ -3,6 +3,7 @@ var storage = require('../app/storage');
 
 var credits =
 {
+    objects: 0,
     template: false,
 
     populate: function()
@@ -10,13 +11,16 @@ var credits =
         var data = storage.get();
         var sources = document.createDocumentFragment();
 
-        $('.credits .title').text(data.title);
-        $('.credits .author').text(data.author);
+        $('.credits-overlay .title').text(data.title);
+        $('.credits-overlay .author').text(data.author);
 
         if(!credits.template)
         {
-            credits.template = $('.credits .source').clone();
+            credits.template = $('.credits-overlay .source').clone();
         }
+
+        // Reset objects count
+        credits.objects = 0;
 
         Object.keys(data.objects).forEach(function(id)
         {
@@ -46,25 +50,45 @@ var credits =
                 $(template).find('.license').text(license);
 
                 sources.appendChild(template);
+                credits.objects++;
             }
         });
 
-        $('.credits .sources').html('');
-        $('.credits .sources').el[0].appendChild(sources);
+        $('.credits-overlay .sources').html('');
+        $('.credits-overlay .sources').el[0].appendChild(sources);
     },
 
     show: function()
     {
-        credits.populate();
-        
         $('.credits-overlay').removeClass('hidden');
-        $('.credits').addClass('scroll');
+
+        credits.populate();
+        var duration = (credits.objects + 10) + 's';
+        var height = (parseInt($('.credits-overlay .credits').height()) + (parseInt($(window).height()) * 2)) * -1;
+
+        var options =
+        {
+            'transition': 'all ' + duration + ' linear',
+            'transform': 'translateY(' + height + 'px)'
+        };
+
+        $('.credits-overlay .credits').style(options);
     },
 
     hide: function()
     {
-        $('.credits-overlay').addClass('hidden');
-        $('.credits').removeClass('scroll');
+        var options =
+        {
+            'transition': 'all 0.01s linear',
+            'transform': 'translateY(0px)'
+        };
+
+        $('.credits-overlay .credits').style(options);
+
+        setTimeout(function()
+        {
+            $('.credits-overlay').addClass('hidden');
+        }, 10);
     },
 };
 

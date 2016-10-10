@@ -664,10 +664,21 @@ var storage =
                 index = 0;
             }
 
-            // If the index is higher than the last slide, use the last slide
+            // If the index is higher than the last slide
             else if(index >= project.data.slides.length)
             {
-                index = project.data.slides.length - 1;
+                // Are we in playback mode?
+                if(playing)
+                {
+                    // Play the credits
+                    $('.menu .credits').trigger('click');
+                    return;
+                }
+                // Otherwise, use the last slide
+                else
+                {
+                    index = project.data.slides.length - 1;
+                }
             }
 
             project.data.slide = index;

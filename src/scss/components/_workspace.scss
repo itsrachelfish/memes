@@ -30,6 +30,22 @@
             padding: 1em;
             color: #fff;
         }
+
+        &.white {
+            background-color: #fff;
+
+            .title {
+                color: #000;
+            }
+        }
+
+        &.clear {
+            background-color: inherit;
+
+            .title {
+                color: #000;
+            }
+        }
     }
 
     &.highlight-content {
