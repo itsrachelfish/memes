@@ -1,6 +1,7 @@
 var $ = require('wetfish-basic');
 var storage = require('../app/storage');
 var helper = require('../app/helper');
+var hover = require('./hover');
 
 var animate =
 {
@@ -128,7 +129,7 @@ var animate =
             animate.frame--;
 
             $('#frame').attr('max', animate.frames.length - 1);
-            $('#frame').value(animate.frame);
+            $('#frame').value(animate.frame).trigger('change');
 
             animate.update();
             animate.persist();
@@ -163,6 +164,7 @@ var animate =
         {
             if(this.checked)
             {
+                hover.stop();
                 animate.play();
             }
             else
@@ -237,6 +239,8 @@ var animate =
         {
             $('.animate .animations').addClass('hidden');
         }
+
+        hover.stop();
     },
 
     // Save current transform data
@@ -273,6 +277,8 @@ var animate =
     // Update animation element with the values of the current frame
     update: function()
     {
+        hover.stop();
+
         // Reset transform options between frames
         animate.element.transform = {};
 
