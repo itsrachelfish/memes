@@ -154,6 +154,8 @@ var slides =
                 $(template).addClass('active');
             }
 
+            $(template).attr('slide', index);
+
             var objects = 0;
 
             for(var property in slide)
@@ -194,8 +196,8 @@ var slides =
     click: function(event)
     {
         // Switch the slide to whichever one was clicked on
-        var index = $(this).index();
-        storage.slide.goto(index);
+        var slide = $(this).attr('slide');
+        storage.slide.goto(slide);
     },
 
     edit: function(event)
