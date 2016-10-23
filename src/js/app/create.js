@@ -47,6 +47,10 @@ var create =
         // If any transform options were passed
         if(options.transform)
         {
+            // Make sure any previously set transforms are cleared
+            element.transform = {};
+
+            // Set passed transform options
             $(element).transform(options.transform);
         }
         // Otherwise default to centering the new element in the middle of the page

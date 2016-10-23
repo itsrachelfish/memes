@@ -381,6 +381,10 @@ var animate =
         helper.storage.update = true;
 
         $('.menu .animate .element').text(animate.defaultText);
+
+        // Reload original project state from storage
+        hover.stop();
+        storage.load();
     }
 };
 
