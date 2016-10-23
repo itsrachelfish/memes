@@ -151,7 +151,7 @@ var tools =
                 // Options specific to audio and video elements
                 if(object.type == 'audio' || object.type == 'video')
                 {
-                    $(form).find('input[name="volume"]').value(object.volume);
+                    $(form).find('input[name="volume"]').value(object.volume).trigger('change');
                     $(form).find('input[name="controls"]').prop('checked', object.controls);
                     $(form).find('input[name="autoplay"]').prop('checked', object.autoplay);
                     $(form).find('input[name="loop"]').prop('checked', object.loop);
@@ -179,11 +179,11 @@ var tools =
                 $(form).find('input[name="text"]').value(object.text);
                 $(form).find('input[name="text-color"]').value(object.color);
                 $(form).find('input[name="text-image"]').value(object.image);
-                $(form).find('input[name="text-size"]').value(object.size);
+                $(form).find('input[name="text-size"]').value(object.size).trigger('change');
                 $(form).find('input[name="border"]').prop('checked', object.border.enabled).trigger('change', {bubbles: true});
                 $(form).find('input[name="border-color"]').value(object.border.color);
                 $(form).find('input[name="border-image"]').value(object.border.image);
-                $(form).find('input[name="border-size"]').value(object.border.size);
+                $(form).find('input[name="border-size"]').value(object.border.size).trigger('change');
 
                 // Misc options
                 $(form).find('input[name="class"]').value(object.class);
@@ -211,8 +211,8 @@ var tools =
                 $(form).find('textarea[name="text"]').value(object.text);
                 $(form).find('input[name="text-color"]').value(object.color);
                 $(form).find('input[name="text-font"]').value(object.font);
-                $(form).find('input[name="text-size"]').value(object.size);
-                $(form).find('input[name="text-height"]').value(object.height);
+                $(form).find('input[name="text-size"]').value(object.size).trigger('change');
+                $(form).find('input[name="text-height"]').value(object.height).trigger('change');
 
                 // Misc options
                 $(form).find('input[name="class"]').value(object.class);

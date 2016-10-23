@@ -128,3 +128,12 @@ button.gray {
 .icon {
     display: inline-block;
 }
+
+.range {
+    display: flex;
+
+    .range-value {
+        margin-left: 0.5em;
+        color: #aaa;
+    }
+}

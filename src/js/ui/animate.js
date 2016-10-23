@@ -79,7 +79,7 @@ var animate =
 
                 $('.animation-selected').removeClass('hidden');
 
-                $('#frame').value(0);
+                $('#frame').value(0).trigger('change');
                 $('#frame').attr('max', animate.frames.length - 1);
 
                 if(animate.object.animation[animate.name].iterations == 'Infinity')
@@ -116,7 +116,7 @@ var animate =
             animate.frame++;
 
             $('#frame').attr('max', animate.frames.length - 1);
-            $('#frame').value(animate.frame);
+            $('#frame').value(animate.frame).trigger('change');
 
             animate.persist();
         });

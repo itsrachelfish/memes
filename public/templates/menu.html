@@ -74,12 +74,20 @@
 
                     <div>
                         <label for="duration">Duration</label>
-                        <input name="duration" id="duration" type="range" min="100" max="60000" step="1" value="1000">
+
+                        <div class="range">
+                            <input name="duration" id="duration" type="range" min="100" max="60000" step="1" value="1000">
+                            <span class="range-value"></span>
+                        </div>
                     </div>
 
                     <div>
                         <label for="frame">Frames</label>
-                        <input name="frame" id="frame" type="range" min="0" max="1" step="1" value="0">
+
+                        <div class="range">
+                            <input name="frame" id="frame" type="range" min="0" max="1" step="1" value="0">
+                            <span class="range-value"></span>
+                        </div>
                     </div>
 
                     <div class="grid-row">

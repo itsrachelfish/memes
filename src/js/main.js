@@ -13,6 +13,7 @@ var menu = require('./ui/menu');
 var overlay = require('./ui/overlay');
 var interact = require('./ui/interactions');
 var hover = require('./ui/hover');
+var ranges = require('./ui/ranges');
 var config = require('./config');
 
 $(document).ready(function()
@@ -26,6 +27,7 @@ $(document).ready(function()
         overlay.init();
         interact.init();
         hover.init();
+        ranges.init();
 
         // Misc stuff
         var explosion = $('.preload .explosion').el[0];
