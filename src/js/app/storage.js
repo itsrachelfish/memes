@@ -344,6 +344,12 @@ var storage =
                     {
                         slide[id].animations.forEach(function(name)
                         {
+                            // Make sure this animation isn't already playing
+                            if($(element).hasClass('animating'))
+                            {
+                                return;
+                            }
+
                             var frames = [];
                             var animation = object.animation[name];
 
@@ -360,20 +366,46 @@ var storage =
                             }
 
                             $(element).addClass('animating');
-                            animations.push({'element': element, 'animation': element.animate({'transform': frames}, {'duration': animation.duration, 'iterations': iterations, 'fill': 'forwards'})});
+                            animations.push({'element': element, 'id': id, 'name': name, 'animation': element.animate({'transform': frames}, {'duration': animation.duration, 'iterations': iterations, 'fill': 'forwards'})});
                         });
                     }
                 }
             }
         },
 
-        stop: function()
+        stop: function(options)
         {
-            // Loop through all animations and cancel them
-            animations.forEach(function(saved)
+            var keep = {};
+
+            // The keep playing option keeps animations playing that exist on the next slide
+            if(options && options.keepPlaying && options.nextSlide !== undefined)
             {
+                // Loop through all animations on the next slide to build a map of which ones to keep
+                var slide = project.data.slides[options.nextSlide];
+
+                for(var id in slide)
+                {
+                    if(slide[id].animations && slide[id].animations.length)
+                    {
+                        keep[id] = slide[id].animations;
+                    }
+                }
+            }
+
+            // Loop through all animations and cancel them
+            animations.forEach(function(saved, index)
+            {
+                // Should this animation be kept? Return!
+                if(keep[saved.id] && keep[saved.id].indexOf(saved.name) > -1)
+                {
+                    return;
+                }
+
                 $(saved.element).removeClass('animating');
                 saved.animation.cancel();
+
+                // Remove this animation from the list
+                animations.splice(index, 1);
             });
         },
 
@@ -756,7 +788,7 @@ var storage =
                         }
 
                         delete timeout.nextSlide;
-                        storage.animation.stop();
+                        storage.animation.stop({'keepPlaying': true, 'nextSlide': next});
                         storage.slide.goto(next);
 
                     }, slide.autoplay.duration * 1000);
