@@ -71,7 +71,18 @@ var create =
         // Custom classes
         if(options.class)
         {
+            // If this element already had custom classes set
+            var customClasses = $(element).data('class')
+
+            if(customClasses)
+            {
+                // Remove them before adding new ones
+                $(element).removeClass(customClasses);
+            }
+
+            // Add new classes and save them for later
             $(element).addClass(options.class);
+            $(element).data('class', options.class);
         }
  
         $(element).addClass('content');
