@@ -82,3 +82,21 @@
 .blur-more {
     filter: blur(100px);
 }
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.blink-fast {
+    animation: blink 0.5s steps(1, start) infinite;
+}
+
+.blink {
+    animation: blink 1s steps(1, start) infinite;
+}
+
+.blink-slow {
+    animation: blink 2.5s steps(1, start) infinite;
+}
