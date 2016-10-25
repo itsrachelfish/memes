@@ -250,6 +250,8 @@ var create =
 
                 headline.setText(options.text);
                 headline.setOptions(options);
+
+                create.element(element, options);
             }
         }
         else
