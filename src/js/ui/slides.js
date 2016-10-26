@@ -43,13 +43,16 @@ var slides =
 
         $('.slides .create').on('click', function()
         {
+            var slide = parseInt(storage.get('slide'));
             storage.slide.create();
+            storage.slide.goto(slide + 1);
         });
 
         $('.slides .copy').on('click', function()
         {
             var slide = parseInt(storage.get('slide'));
             storage.slide.copy(slide);
+            storage.slide.goto(slide + 1);
         });
 
         $('.slides .filter').on('click', function()

@@ -627,6 +627,11 @@ var storage =
                 // Remove the original slide
                 project.data.slides.splice(index, 1);
             }
+            else
+            {
+                // If the slide is not being removed, remove the slide description
+                delete slide.desc;
+            }
 
             // Create a new slide from the saved data
             project.data.slides.splice(destination, 0, slide);
