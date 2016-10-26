@@ -18,16 +18,11 @@ function explode(element)
 {
     // Save the size and position of the current element
     var size = $(element).size();
+    var transform = {};
 
     // Increase the size of the explosion a little bit
     size.width += 50;
     size.height += 50;
-
-    // Adjust the translated position
-    var transform = JSON.parse(JSON.stringify(element.transform));
-
-    transform.translate[0] = (parseInt(transform.translate[0]) - 25) + 'px';
-    transform.translate[1] = (parseInt(transform.translate[1]) - 25) + 'px';
 
     // Create an image to overlay the explosion over the current element
     var image = document.createElement('img');
@@ -38,6 +33,24 @@ function explode(element)
         'height': size.height + 'px',
         'z-index': $(element).style('z-index')
     };
+
+    // Check if this element has been transformed
+    if(element.transform)
+    {
+        // Adjust the translated position
+        transform = JSON.parse(JSON.stringify(element.transform));
+
+        transform.translate[0] = (parseInt(transform.translate[0]) - 25) + 'px';
+        transform.translate[1] = (parseInt(transform.translate[1]) - 25) + 'px';
+    }
+    else
+    {
+        // If no transforms exist, fallback to using position
+        var position = $(element).position();
+        transform.translate = [];
+        transform.translate[0] = (parseInt(position.left) - 25) + 'px';
+        transform.translate[1] = (parseInt(position.top) - 25) + 'px';
+    }
 
     $(image).style(options);
     $(image).transform(transform);
