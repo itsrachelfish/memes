@@ -21,11 +21,11 @@ var slides =
         $('.slide-edit').on('overlay-opened', function()
         {
             // Populate modal title
-            $('.slide-edit .number').text('' + slides.editing);
+            $('.slide-edit .number').text('' + (slides.editing + 1));
 
             // Populate form content
             var project = storage.get();
-            var slide = project.slides[slides.editing - 1];
+            var slide = project.slides[slides.editing];
             var form = '.slide-edit form';
 
             // Make sure default values are set
@@ -113,6 +113,7 @@ var slides =
             var input = helper.serialize(this);
             var options =
             {
+                slide: slides.editing,
                 desc: input['desc'],
                 autoplay:
                 {
@@ -206,8 +207,7 @@ var slides =
     edit: function(event)
     {
         event.stopPropagation();
-
-        slides.editing = $(event.target).parents('.dragon').index() + 1;
+        slides.editing = parseInt($(this).parents('.slide').attr('slide'));
 
         overlay.close('.slides');
         overlay.open('.slide-edit');

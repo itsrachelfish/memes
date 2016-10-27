@@ -646,19 +646,28 @@ var storage =
         // Save slide options
         save: function(options)
         {
+            // Use the current slide by default
+            var slide = project.data.slide;
+
+            // Unless a specific slide was passed
+            if(options.slide !== undefined)
+            {
+                slide = parseInt(options.slide);
+            }
+
             if(typeof options.desc === "string")
             {
-                project.data.slides[project.data.slide].desc = options.desc;
+                project.data.slides[slide].desc = options.desc;
             }
 
             if(typeof options.autoplay === "object")
             {
-                project.data.slides[project.data.slide].autoplay = options.autoplay;
+                project.data.slides[slide].autoplay = options.autoplay;
             }
 
             if(typeof options.transition === "object")
             {
-                project.data.slides[project.data.slide].transition = options.transition;
+                project.data.slides[slide].transition = options.transition;
             }
 
             storage.persist();
