@@ -768,24 +768,24 @@ var storage =
                 // Check if the current slide should play
                 var slide = project.data.slides[project.data.slide];
 
+                if(slide.transition && slide.transition.enabled)
+                {
+                    var transitionDuration = parseFloat(slide.transition.duration);
+
+                    if(isNaN(transitionDuration))
+                    {
+                        transitionDuration = 0.3;
+                    }
+
+                    $('.content').style({'transition': 'all ' + transitionDuration + 's'});
+                }
+                else
+                {
+                    $('.content').style({'transition': 'none'});
+                }
+
                 if(slide.autoplay && slide.autoplay.enabled)
                 {
-                    if(slide.transition.enabled)
-                    {
-                        var transitionDuration = parseFloat(slide.transition.duration);
-
-                        if(isNaN(transitionDuration))
-                        {
-                            transitionDuration = 0.3;
-                        }
-
-                        $('.content').style({'transition': 'all ' + transitionDuration + 's'});
-                    }
-                    else
-                    {
-                        $('.content').style({'transition': 'none'});
-                    }
-
                     timeout.nextSlide = setTimeout(function()
                     {
                         var next = parseInt(slide.autoplay.goto);

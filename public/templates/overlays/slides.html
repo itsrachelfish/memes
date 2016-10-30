@@ -46,11 +46,11 @@
                 <input name="autoplay" type="checkbox" class="autoplay"> <span class="label-body">Autoplay this slide</span>
             </label>
 
-            <div class="use-autoplay hidden">
-                <label>
-                    <input name="transition" type="checkbox" class="transition"> <span class="label-body">Transition smoothly to next slide</span>
-                </label>
+            <label>
+                <input name="transition" type="checkbox" class="transition"> <span class="label-body">Transition smoothly to next slide</span>
+            </label>
 
+            <div class="use-autoplay hidden">
                 <div class="twelve columns">
                     <label for="slide-duration">Slide Duration</label>
                     <input name="duration" class="u-full-width" id="slide-duration" type="number" step="0.01" placeholder="How long before going to the next slide (in seconds)">
@@ -60,12 +60,12 @@
                     <label for="slide-goto">Next slide</label>
                     <input name="goto" class="u-full-width" id="slide-goto" type="number" placeholder="Optional. Enter a slide number to go to after the duration">
                 </div>
+            </div>
 
-                <div class="use-transition hidden">
-                    <div class="twelve columns">
-                        <label for="slide-transition-duration">Transition duration</label>
-                        <input name="transition-duration" class="u-full-width" id="slide-transition-duration" type="number" placeholder="Optional. Duration of the animation between frames (defaults to 0.3 seconds)">
-                    </div>
+            <div class="use-transition hidden">
+                <div class="twelve columns">
+                    <label for="slide-transition-duration">Transition duration</label>
+                    <input name="transition-duration" class="u-full-width" id="slide-transition-duration" type="number" placeholder="Optional. Duration of the animation between frames (defaults to 0.3 seconds)">
                 </div>
             </div>
         </div>
