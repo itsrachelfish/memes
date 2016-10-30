@@ -765,24 +765,11 @@ var storage =
                 storage.animation.play();
                 storage.media.play();
 
-                // Check if the current slide should play
+                // Set transition options for all content on the current slide
+                storage.slide.transition('.content');
+
+                // Check if the current slide should autoplay
                 var slide = project.data.slides[project.data.slide];
-
-                if(slide.transition && slide.transition.enabled)
-                {
-                    var transitionDuration = parseFloat(slide.transition.duration);
-
-                    if(isNaN(transitionDuration))
-                    {
-                        transitionDuration = 0.3;
-                    }
-
-                    $('.content').style({'transition': 'all ' + transitionDuration + 's'});
-                }
-                else
-                {
-                    $('.content').style({'transition': 'none'});
-                }
 
                 if(slide.autoplay && slide.autoplay.enabled)
                 {
@@ -807,6 +794,38 @@ var storage =
 
                     }, slide.autoplay.duration * 1000);
                 }
+            }
+        },
+
+        // Helper function to set the transition state of objects in the current slide
+        transition: function(selector)
+        {
+            // Check if the current slide should play
+            var slide = project.data.slides[project.data.slide];
+
+            if(slide.transition && slide.transition.enabled)
+            {
+                var transitionDuration = parseFloat(slide.transition.duration);
+
+                if(isNaN(transitionDuration))
+                {
+                    transitionDuration = 0.3;
+                }
+
+                $(selector).addClass('transitioning');
+                $(selector).style({'transition': 'all ' + transitionDuration + 's'});
+            }
+            else
+            {
+                // Loop through all content objects
+                $(selector).each(function()
+                {
+                    // Only set transition none if this element is not currently transitioning
+                    if(!$(this).hasClass('transitioning'))
+                    {
+                        $(this).style({'transition': 'none'});
+                    }
+                });
             }
         },
 

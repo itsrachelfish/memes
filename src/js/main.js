@@ -32,5 +32,11 @@ $(document).ready(function()
         // Misc stuff
         var explosion = $('.preload .explosion').el[0];
         pool.init(explosion, 'explosion', 16);
+
+        $('body').on('transitionend', '.transitioning', function()
+        {
+            $(this).removeClass('transitioning');
+            storage.slide.transition(this);
+        });
     });
 });
