@@ -17,7 +17,7 @@ var keys =
     16: 'shift',
     17: 'control',
     18: 'alt',
-    20: 'caps',
+    20: 'capslock',
     27: 'escape',
     37: 'arrowleft',
     38: 'arrowup',
@@ -158,7 +158,16 @@ var interactions =
         $('body').on('keydown', function(event)
         {
             var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
-            helper.pressed[key] = true;
+
+            // Special case to check for capslock
+            if(key == 'capslock')
+            {
+                helper.pressed.capslock = event.getModifierState('CapsLock');
+            }
+            else
+            {
+                helper.pressed[key] = true;
+            }
 
             // Keyboard shortcuts that trigger when a user presses escape
             if(key == 'escape')
@@ -195,7 +204,16 @@ var interactions =
         $('body').on('keyup', function(event)
         {
             var key = (event.key) ? event.key.toLowerCase() : keys[event.which];
-            delete helper.pressed[key];
+
+            // Special case for capslock
+            if(key == 'capslock')
+            {
+                helper.pressed.capslock = event.getModifierState('CapsLock');
+            }
+            else
+            {
+                delete helper.pressed[key];
+            }
         });
 
         $('body').on('mouseleave', function(event)
