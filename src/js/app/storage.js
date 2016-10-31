@@ -809,6 +809,8 @@ var storage =
 
                     }, slide.autoplay.duration * 1000);
                 }
+
+                $('.workspace').trigger('play');
             }
         },
 
@@ -856,6 +858,7 @@ var storage =
                 storage.animation.stop();
                 storage.media.stop();
 
+                $('.workspace').trigger('pause');
                 $('.content').style({'transition': 'none'});
             }
         },
