@@ -269,7 +269,22 @@ var storage =
                 data.animations = project.data.slides[slide][id].animations;
             }
 
-            project.data.slides[slide][id] = data;
+            // If capslock is active, update this element on all slides
+            if(helper.pressed.capslock)
+            {
+                project.data.slides.forEach(function(slide)
+                {
+                    if(slide[id])
+                    {
+                        slide[id] = data;
+                    }
+                });
+            }
+            else
+            {
+                project.data.slides[slide][id] = data;
+            }
+
             storage.persist();
         }
 
