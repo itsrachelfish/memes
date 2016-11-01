@@ -36,6 +36,14 @@ var effects =
         {
             $('.workspace .countdown').each(function()
             {
+                var id = $(this).attr('id');
+
+                // If a timeout is already set, skip this element
+                if(timeouts[id])
+                {
+                    return;
+                }
+
                 var classes = this.className.split(' ');
                 var duration = 0;
                 var modifier =
@@ -70,6 +78,7 @@ var effects =
             Object.keys(timeouts).forEach(function(timeout)
             {
                 clearTimeout(timeouts[timeout]);
+                delete timeouts[timeout];
             });
         },
 
