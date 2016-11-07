@@ -124,6 +124,12 @@ var animate =
 
         $('.animate .delete-frame').on('click', function()
         {
+            // Prevent deleting the last frame
+            if(animate.frames.length == 1)
+            {
+                return;
+            }
+
             // Delete the current frame
             animate.frames.splice(animate.frame, 1);
             animate.frame--;
