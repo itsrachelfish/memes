@@ -18,6 +18,19 @@ var overlay =
             }
         });
 
+        $('.overlay .close').on('click', function()
+        {
+            overlay.close();
+
+            // If an overlay should be opened after this one closes
+            var openAfter = $(this).data('open');
+
+            if(openAfter)
+            {
+                overlay.open(openAfter);
+            }
+        });
+
         $('.overlay .toggle').on('click', function()
         {
             var text = this.textContent;
