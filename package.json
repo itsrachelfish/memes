@@ -10,6 +10,10 @@
     "web-animations-js": "^2.2.2",
     "wetfish-basic": "github:wetfish/basic"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsrachelfish/memes.git"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-sass": "^2.3.1",
