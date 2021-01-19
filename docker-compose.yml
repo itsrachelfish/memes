@@ -1,0 +1,26 @@
+version: '3'
+services:
+
+  # Uses npm install + webpack to create a shared volume that nginx calls from. 
+  memes:
+    image: fishnet/memes
+    container_name: memes-files
+    volumes:
+      - memes:/data/node_modules
+
+  webserver:
+    image: nginx:alpine
+    container_name: memes-nginx
+    restart: unless-stopped
+    ports: 
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - memes:/var/www/node_modules
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - memes
+
+volumes:
+  memes:
+    driver: local
