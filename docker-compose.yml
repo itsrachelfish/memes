@@ -6,7 +6,7 @@ services:
     image: fishnet/memes
     container_name: memes-files
     volumes:
-      - memes:/data/node_modules
+      - memes:/data
 
   webserver:
     image: nginx:alpine
@@ -15,8 +15,8 @@ services:
     ports: 
       - "80:80"
     volumes:
-      - ./:/var/www
-      - memes:/var/www/node_modules
+      - ./src:/var/www/src
+      - memes:/var/www
       - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - memes
