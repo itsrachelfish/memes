@@ -30,6 +30,7 @@ var scss =
 }
 
 gulp.task('default', ['scripts', 'scss', 'scss:watch']);
+gulp.task('fetch', ['scripts', 'scss']);
 gulp.task('scripts', scripts.compile);
 gulp.task('scss', scss.compile);
 gulp.task('scss:watch', scss.watch);
