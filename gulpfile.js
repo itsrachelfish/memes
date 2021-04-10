@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var webpack = require('gulp-webpack');
+var connect = require('gulp-connect');
 
 var scripts =
 {
@@ -29,8 +30,21 @@ var scss =
     }
 }
 
-gulp.task('default', ['scripts', 'scss', 'scss:watch']);
+var http =
+{
+    serve: function()
+    {
+        return connect.server({
+            root: 'public',
+            port: 8080,
+            host: '0.0.0.0',
+        });
+    }
+}
+
+gulp.task('default', ['scripts', 'scss', 'serve', 'scss:watch']);
 gulp.task('fetch', ['scripts', 'scss']);
 gulp.task('scripts', scripts.compile);
 gulp.task('scss', scss.compile);
 gulp.task('scss:watch', scss.watch);
+gulp.task('serve', http.serve);
