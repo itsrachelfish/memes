@@ -1,10 +1,9 @@
 FROM node:8-alpine
 
-RUN mkdir /data
-WORKDIR /data
+WORKDIR /app
 
-COPY . /data/
-COPY ./src/js/config.example.js /data/src/js/config.js
+COPY . /app
+COPY ./src/js/config.example.js /app/src/js/config.js
 
 RUN apk add --no-cache --virtual .gyp \
 	git \
@@ -16,4 +15,5 @@ RUN apk add --no-cache --virtual .gyp \
 	&& npm install --global gulp@3.9.1 \
 	&& npm link gulp
 
-CMD ["gulp"]
+EXPOSE 8080 
+ENTRYPOINT [ "gulp" ]

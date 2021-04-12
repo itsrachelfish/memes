@@ -17,6 +17,8 @@ Alternatively, if you are a nerd, you can clone this repository and run it from 
 
 There is a known bug which prevents font icons from appearing in Firefox when loading the project locally. To avoid this, you can run a webserver on your computer and set the ```public``` folder as your document root. 
 
+This now has Docker support! Simply run `docker-compose up` in the main directory
+
 ## Screenshots
 
 ![Meme Machine Screenshot](screenshots/meme-machine.jpg)
